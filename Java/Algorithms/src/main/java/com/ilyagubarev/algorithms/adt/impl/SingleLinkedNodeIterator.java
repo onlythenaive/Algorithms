@@ -13,31 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt;
+package com.ilyagubarev.algorithms.adt.impl;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Iterator implementation over list nodes.
+ * Iterator implementation for single linked list nodes.
  *
  * @see Iterator
  *
- * @version 1.01, 02 September 2013
+ * @version 1.02, 02 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-final class ListNodeIterator<E> implements Iterator<E> {
+final class SingleLinkedNodeIterator<E> implements Iterator<E> {
 
-    private ListNode<E> _current;
+    private SingleLinkedNode<E> _current;
 
     /**
-     * Creates a new instance of ListIterator.
+     * Creates a new instance of SingleLinkedNodeIterator.
      *
-     * @param first the first node in a list.
+     * @param start a starting node..
      */
-    public ListNodeIterator(ListNode<E> first) {
-        _current = first;
+    public SingleLinkedNodeIterator(SingleLinkedNode<E> start) {
+        _current = start;
     }
 
     @Override

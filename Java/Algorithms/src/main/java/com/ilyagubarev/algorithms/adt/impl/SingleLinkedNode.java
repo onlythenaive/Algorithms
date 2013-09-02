@@ -13,59 +13,66 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt;
+package com.ilyagubarev.algorithms.adt.impl;
+
+import java.io.Serializable;
 
 /**
- * Double linked implementation of a list node.
+ * Single linked node.
  *
- * @see ListNode
+ * @see Serializable
  *
- * @version 1.01, 02 September 2013
+ * @version 1.02, 02 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-final class DoubleLinkedNode<E> implements ListNode<E>{
+final class SingleLinkedNode<E> implements Serializable {
 
     private E _item;
-    private ListNode<E> _next;
-    private ListNode<E> _previous;
+    private SingleLinkedNode<E> _next;
 
     /**
-     * Creates a new instance of DoubleLinkedNode.
+     * Creates a new instance of SingleLinkedNode.
      *
-     * @param item contained item.
+     * @param item a contained item.
      */
-    public DoubleLinkedNode(E item) {
+    public SingleLinkedNode(E item) {
         _item = item;
     }
 
-    @Override
+    /**
+     * Gets a contained item.
+     *
+     * @return a contained item.
+     */
     public E getItem() {
         return _item;
     }
 
-    @Override
-    public ListNode<E> getNext() {
+    /**
+     * Gets a reference to the next node.
+     *
+     * @return the next node.
+     */
+    public SingleLinkedNode<E> getNext() {
         return _next;
     }
 
-    @Override
-    public ListNode<E> getPrevious() {
-        return _previous;
-    }
-
-    @Override
+    /**
+     * Sets a new contatined item.
+     *
+     * @param item a item to be contained.
+     */
     public void setItem(E item) {
         _item = item;
     }
 
-    @Override
-    public void setNext(ListNode<E> node) {
+    /**
+     * Sets a reference to the next node.
+     *
+     * @param node a node.
+     */
+    public void setNext(SingleLinkedNode<E> node) {
         _next = node;
-    }
-
-    @Override
-    public void setPrevious(ListNode<E> node) {
-        _previous = node;
     }
 }

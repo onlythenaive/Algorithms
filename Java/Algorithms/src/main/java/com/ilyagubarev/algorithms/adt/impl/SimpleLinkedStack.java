@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt;
+package com.ilyagubarev.algorithms.adt.impl;
 
 import java.util.Iterator;
 
+import com.ilyagubarev.algorithms.adt.Stack;
+
 /**
- * Simple implementation of Stack based on a linked list.
+ * Simple implementation of Stack based on linked nodes.
  *
  * @see Stack
  *
@@ -29,10 +31,10 @@ import java.util.Iterator;
 public final class SimpleLinkedStack<E> implements Stack<E> {
 
     private int _size;
-    private ListNode<E> _top;
+    private SingleLinkedNode<E> _top;
 
     /**
-     * Creates a new instance of SimpleStack.
+     * Creates a new instance of SimpleLinkedStack.
      */
     public SimpleLinkedStack() {
 
@@ -40,7 +42,7 @@ public final class SimpleLinkedStack<E> implements Stack<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new ListNodeIterator<E>(_top);
+        return new SingleLinkedNodeIterator<E>(_top);
     }
 
     @Override
@@ -62,7 +64,7 @@ public final class SimpleLinkedStack<E> implements Stack<E> {
     @Override
     public E pop() {
         throwExceptionIfEmpty();
-        ListNode<E> buffer = _top;
+        SingleLinkedNode<E> buffer = _top;
         _top = _top.getNext();
         --_size;
         return buffer.getItem();
@@ -70,7 +72,7 @@ public final class SimpleLinkedStack<E> implements Stack<E> {
 
     @Override
     public void push(E item) {
-        ListNode<E> buffer = _top;
+        SingleLinkedNode<E> buffer = _top;
         _top = new SingleLinkedNode<E>(item);
         _top.setNext(buffer);
         ++_size;
@@ -78,7 +80,7 @@ public final class SimpleLinkedStack<E> implements Stack<E> {
 
     @Override
     public String toString() {
-        return String.format("[simple stack: %d items]", _size);
+        return String.format("[simple linked stack: %d items]", _size);
     }        
 
     private void throwExceptionIfEmpty() {
