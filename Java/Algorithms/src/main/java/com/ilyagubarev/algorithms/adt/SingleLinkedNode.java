@@ -24,7 +24,7 @@ package com.ilyagubarev.algorithms.adt;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class SingleLinkedNode<E> implements ListNode<E> {
+final class SingleLinkedNode<E> implements ListNode<E> {
 
     private E _item;
     private ListNode<E> _next;

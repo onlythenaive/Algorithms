@@ -26,7 +26,7 @@ import java.io.Serializable;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface ListNode<E> extends Serializable {
+interface ListNode<E> extends Serializable {
 
     /**
      * Gets a contained item.
