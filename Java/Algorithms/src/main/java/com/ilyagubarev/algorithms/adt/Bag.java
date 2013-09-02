@@ -15,16 +15,43 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
+import java.io.Serializable;
+import java.util.Iterator;
+
 /**
- * 
+ * Simple collection not supporting items removal.
+ *
+ * @see Iterable
+ * @see Serializable
  *
  * @version 1.01, 02 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class Bag<E> {
+public final class Bag<E> implements Iterable<E>, Serializable {
 
+    private ListNode<E> _head;
+
+    /**
+     * Creates a new instance of Bag.
+     */
     public Bag() {
 
+    }
+
+    /**
+     * Adds a new item to the bag.
+     *
+     * @param item a new item.
+     */
+    public void add(E item) {
+        ListNode<E> buffer = _head;
+        _head = new SingleLinkedNode<E>(item);
+        _head.setNext(buffer);
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ListNodeIterator<E>(_head);
     }
 }
