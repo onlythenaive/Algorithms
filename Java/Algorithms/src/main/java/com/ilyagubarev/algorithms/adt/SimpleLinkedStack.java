@@ -15,20 +15,18 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
-import java.io.Serializable;
 import java.util.Iterator;
 
 /**
- * Simple FIFO policy collection.
+ * Simple implementation of Stack based on a linked list.
  *
- * @see Iterable
- * @see Serializable
+ * @see Stack
  *
  * @version 1.02, 02 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public class SimpleStack<E> implements Iterable<E>, Serializable {
+public final class SimpleLinkedStack<E> implements Stack<E> {
 
     private int _size;
     private ListNode<E> _top;
@@ -36,7 +34,7 @@ public class SimpleStack<E> implements Iterable<E>, Serializable {
     /**
      * Creates a new instance of SimpleStack.
      */
-    public SimpleStack() {
+    public SimpleLinkedStack() {
 
     }
 
@@ -45,41 +43,23 @@ public class SimpleStack<E> implements Iterable<E>, Serializable {
         return new ListNodeIterator<E>(_top);
     }
 
-    /**
-     * Gets current stack size.
-     *
-     * @return current size.
-     */
+    @Override
     public int getSize() {
         return _size;
     }
 
-    /**
-     * Checks if the stack is empty.
-     *
-     * @return true if the stack is empty.
-     */
+    @Override
     public boolean isEmpty() {
         return _size == 0;
     }
 
-    /**
-     * Gets top stack item.
-     *
-     * @return top stack item.
-     * @throws IllegalStateException if the stack is empty.
-     */
+    @Override
     public E peek() {
         throwExceptionIfEmpty();
         return _top.getItem();
     }
 
-    /**
-     * Gets top stack item and removes it from the stack.
-     *
-     * @return top stack item.
-     * @throws IllegalStateException if the stack is empty.
-     */
+    @Override
     public E pop() {
         throwExceptionIfEmpty();
         ListNode<E> buffer = _top;
@@ -88,11 +68,7 @@ public class SimpleStack<E> implements Iterable<E>, Serializable {
         return buffer.getItem();
     }
 
-    /**
-     * Pushes a new item to the stack.
-     *
-     * @param item an item to be pushed.
-     */
+    @Override
     public void push(E item) {
         ListNode<E> buffer = _top;
         _top = new SingleLinkedNode<E>(item);
