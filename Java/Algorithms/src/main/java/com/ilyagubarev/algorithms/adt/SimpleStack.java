@@ -16,34 +16,98 @@
 package com.ilyagubarev.algorithms.adt;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 /**
  * Simple FIFO policy collection.
  *
+ * @see Iterable
  * @see Serializable
  *
- * @version 1.01, 02 September 2013
+ * @version 1.02, 02 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleStack<E> implements Serializable {
+public class SimpleStack<E> implements Iterable<E>, Serializable {
+
+    private int _size;
+    private ListNode<E> _top;
 
     /**
-     * Creates a new instance of Stack.
+     * Creates a new instance of SimpleStack.
      */
     public SimpleStack() {
 
     }
 
+    @Override
+    public Iterator<E> iterator() {
+        return new ListNodeIterator<E>(_top);
+    }
+
+    /**
+     * Gets current stack size.
+     *
+     * @return current size.
+     */
+    public int getSize() {
+        return _size;
+    }
+
+    /**
+     * Checks if the stack is empty.
+     *
+     * @return true if the stack is empty.
+     */
+    public boolean isEmpty() {
+        return _size == 0;
+    }
+
+    /**
+     * Gets top stack item.
+     *
+     * @return top stack item.
+     * @throws IllegalStateException if the stack is empty.
+     */
     public E peek() {
-        throw new UnsupportedOperationException();
+        throwExceptionIfEmpty();
+        return _top.getItem();
     }
 
+    /**
+     * Gets top stack item and removes it from the stack.
+     *
+     * @return top stack item.
+     * @throws IllegalStateException if the stack is empty.
+     */
     public E pop() {
-        throw new UnsupportedOperationException();
+        throwExceptionIfEmpty();
+        ListNode<E> buffer = _top;
+        _top = _top.getNext();
+        --_size;
+        return buffer.getItem();
     }
 
+    /**
+     * Pushes a new item to the stack.
+     *
+     * @param item an item to be pushed.
+     */
     public void push(E item) {
-        throw new UnsupportedOperationException();
+        ListNode<E> buffer = _top;
+        _top = new SingleLinkedNode<E>(item);
+        _top.setNext(buffer);
+        ++_size;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[simple stack: %d items]", _size);
+    }        
+
+    private void throwExceptionIfEmpty() {
+        if (isEmpty()) {
+            throw new IllegalStateException("stack is empty");
+        }
     }
 }
