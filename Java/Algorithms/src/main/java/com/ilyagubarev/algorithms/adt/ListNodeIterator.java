@@ -27,7 +27,7 @@ import java.util.NoSuchElementException;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ListIterator<E> implements Iterator<E> {
+public final class ListNodeIterator<E> implements Iterator<E> {
 
     private ListNode<E> _current;
 
@@ -36,7 +36,7 @@ public final class ListIterator<E> implements Iterator<E> {
      *
      * @param first the first node in a list.
      */
-    public ListIterator(ListNode<E> first) {
+    public ListNodeIterator(ListNode<E> first) {
         _current = first;
     }
 
@@ -58,6 +58,6 @@ public final class ListIterator<E> implements Iterator<E> {
 
     @Override
     public void remove() {
-        throw new UnsupportedOperationException("removing is not supported");
+        throw new UnsupportedOperationException("removal is not supported");
     }
 }
