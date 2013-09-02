@@ -41,11 +41,6 @@ public final class SimpleLinkedStack<E> implements Stack<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
-        return new SingleLinkedNodeIterator<E>(_top);
-    }
-
-    @Override
     public int getSize() {
         return _size;
     }
@@ -53,6 +48,11 @@ public final class SimpleLinkedStack<E> implements Stack<E> {
     @Override
     public boolean isEmpty() {
         return _size == 0;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new SingleLinkedNodeIterator<E>(_top);
     }
 
     @Override
