@@ -14,6 +14,26 @@
     </description>
     <url>http://www.ilyagubarev.com/practice/algorithms</url>
 
+    <developers>
+        <developer>
+            <name>Ilya Gubarev</name>
+            <email>ilya.gubarev@gmail.com</email>
+            <url>http://www.ilyagubarev.com</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
