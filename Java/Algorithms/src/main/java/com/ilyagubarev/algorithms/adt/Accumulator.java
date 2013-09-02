@@ -28,14 +28,36 @@ import java.io.Serializable;
  */
 public class Accumulator implements Serializable {
 
+    /**
+     * Creates a new instance of Accumulator.
+     *
+     * @param id an identifier for the accumulator.
+     * @return a new instance of Accumulator.
+     * @throws IllegalArgumentException if id is null.
+     */
+    public static Accumulator create(String id) {
+        if (id == null) {
+            throw new IllegalArgumentException("accumulator id is null");
+        }
+        return new Accumulator(id);
+    }
+
+    private final String _id;
+
     private double _total;
     private int _size;
 
-    /**
-     * Creates a new instance of Accumulator.
-     */
-    public Accumulator() {
+    Accumulator(String id) {
+        _id = id;
+    }
 
+    /**
+     * Gets accumulator identifier.
+     *
+     * @return identifier.
+     */
+    public String getId() {
+        return _id;
     }
 
     /**
@@ -87,6 +109,6 @@ public class Accumulator implements Serializable {
         } else {
             state = String.format("%f on %d values", getAverage(), _size);
         }
-        return String.format("[accumulator: %s]", state);
+        return String.format("[%s accumulator: %s]", _id, state);
     }
 }
