@@ -15,33 +15,16 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
-import java.io.Serializable;
-
 /**
- * Common LIFO policy stack interface.
+ * LIFO policy collection common interface.
  *
- * @see Iterable
- * @see Serializable
+ * @see ItemsContainer
  *
- * @version 1.01, 02 September 2013
+ * @version 1.02, 03 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface ItemsStack<E> extends Iterable<E>, Serializable {
-
-    /**
-     * Gets current size of the stack.
-     *
-     * @return current size.
-     */
-    int getSize();
-
-    /**
-     * Checks if the stack is empty.
-     *
-     * @return true if the stack is empty.
-     */
-    boolean isEmpty();
+public interface ItemsStack<E> extends ItemsContainer<E> {
 
     /**
      * Gets the latest pushed item.

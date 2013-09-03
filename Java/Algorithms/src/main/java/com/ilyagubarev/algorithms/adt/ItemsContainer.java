@@ -15,21 +15,31 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
+import java.io.Serializable;
+
 /**
- * Adding-only collection common interface.
+ * Items container common interface.
  *
- * @see ItemsContainer
+ * @see Iterable
+ * @see Serializable
  *
- * @version 1.02, 03 September 2013
- * @since 02 September 2013
+ * @version 1.01, 03 September 2013
+ * @since 03 September 2013
  * @author Ilya Gubarev
  */
-public interface ItemsBag<E> extends ItemsContainer<E> {
-    
+public interface ItemsContainer<E> extends Iterable<E>, Serializable {
+
     /**
-     * Adds a new item to the bag.
+     * Gets current size of the container.
      *
-     * @param item an item to be added.
+     * @return current size.
      */
-    void add(E item);
+    int getSize();
+
+    /**
+     * Checks if the container is empty.
+     *
+     * @return true if the container is empty.
+     */
+    boolean isEmpty();    
 }
