@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt;
+package com.ilyagubarev.algorithms.adt.utils;
 
 import java.io.Serializable;
 
@@ -22,18 +22,18 @@ import java.io.Serializable;
  *
  * @see Serializable
  * 
- * @version 1.01, 02 September 2013
+ * @version 1.02, 03 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public class Accumulator implements Serializable {
+public final class Accumulator implements Serializable {
 
     /**
      * Creates a new instance of Accumulator.
      *
      * @param id an identifier for the accumulator.
      * @return a new instance of Accumulator.
-     * @throws IllegalArgumentException if id is null.
+     * @throws IllegalArgumentException if specified id is null.
      */
     public static Accumulator create(String id) {
         if (id == null) {
