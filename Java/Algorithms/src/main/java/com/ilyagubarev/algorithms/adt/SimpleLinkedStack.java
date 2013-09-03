@@ -17,21 +17,19 @@ package com.ilyagubarev.algorithms.adt;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.ItemsStack;
-
 /**
- * Simple implementation of Stack based on linked nodes.
+ * Simple stack implementation based on linked list.
  *
- * @see Stack
+ * @see ItemsStack
  *
- * @version 1.02, 02 September 2013
+ * @version 1.02, 03 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
 public final class SimpleLinkedStack<E> implements ItemsStack<E> {
 
     private int _size;
-    private SingleLinkedNode<E> _top;
+    private ListNode<E> _top;
 
     /**
      * Creates a new instance of SimpleLinkedStack.
@@ -52,7 +50,7 @@ public final class SimpleLinkedStack<E> implements ItemsStack<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new SingleLinkedNodeIterator<E>(_top);
+        return new ListNodeIterator<E>(_top);
     }
 
     @Override
@@ -64,7 +62,7 @@ public final class SimpleLinkedStack<E> implements ItemsStack<E> {
     @Override
     public E pop() {
         throwExceptionIfEmpty();
-        SingleLinkedNode<E> buffer = _top;
+        ListNode<E> buffer = _top;
         _top = _top.getNext();
         --_size;
         return buffer.getItem();
@@ -72,8 +70,8 @@ public final class SimpleLinkedStack<E> implements ItemsStack<E> {
 
     @Override
     public void push(E item) {
-        SingleLinkedNode<E> buffer = _top;
-        _top = new SingleLinkedNode<E>(item);
+        ListNode<E> buffer = _top;
+        _top = new ListNode<E>(item);
         _top.setNext(buffer);
         ++_size;
     }

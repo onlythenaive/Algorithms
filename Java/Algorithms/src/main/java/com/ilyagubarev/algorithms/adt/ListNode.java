@@ -18,41 +18,61 @@ package com.ilyagubarev.algorithms.adt;
 import java.io.Serializable;
 
 /**
- * Linked list node interface.
+ * Linked list node.
  *
  * @see Serializable
  *
- * @version 1.01, 03 September 2013
- * @since 03 September 2013
+ * @version 1.02, 03 September 2013
+ * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface ListNode<E> extends Serializable {
+public final class ListNode<E> implements Serializable {
+
+    private E _item;
+    private ListNode<E> _next;
+
+    /**
+     * Creates a new instance of ListNode.
+     *
+     * @param item a containing item.
+     */
+    public ListNode(E item) {
+        _item = item;
+    }
 
     /**
      * Gets a containing item.
      *
      * @return a contained item.
      */
-    E getItem();
+    public E getItem() {
+        return _item;
+    }
 
     /**
      * Gets a reference to the next node.
      *
      * @return the next node.
      */
-    ListNode<E> getNext();
+    public ListNode<E> getNext() {
+        return _next;
+    }
 
     /**
      * Sets a new containing item.
      *
      * @param item an item to be contained.
      */
-    void setItem(E item);
+    public void setItem(E item) {
+        _item = item;
+    }
 
     /**
      * Sets a reference to the next node.
      *
      * @param node the next node.
      */
-    void setNext(ListNode<E> node);
+    public void setNext(ListNode<E> node) {
+        _next = node;
+    }
 }

@@ -19,24 +19,24 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Iterator implementation for single linked list nodes.
+ * Linked list nodes iterator.
  *
  * @see Iterator
  *
- * @version 1.02, 02 September 2013
+ * @version 1.02, 03 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-final class SingleLinkedNodeIterator<E> implements Iterator<E> {
+public final class ListNodeIterator<E> implements Iterator<E> {
 
-    private SingleLinkedNode<E> _current;
+    private ListNode<E> _current;
 
     /**
-     * Creates a new instance of SingleLinkedNodeIterator.
+     * Creates a new instance of ListNodeIterator.
      *
-     * @param start a starting node..
+     * @param start a starting node.
      */
-    public SingleLinkedNodeIterator(SingleLinkedNode<E> start) {
+    public ListNodeIterator(ListNode<E> start) {
         _current = start;
     }
 
