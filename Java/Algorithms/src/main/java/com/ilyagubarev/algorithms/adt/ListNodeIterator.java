@@ -22,6 +22,7 @@ import java.util.NoSuchElementException;
  * Linked list nodes iterator.
  *
  * @see Iterator
+ * @see ListNode
  *
  * @version 1.02, 03 September 2013
  * @since 02 September 2013
@@ -35,6 +36,8 @@ public final class ListNodeIterator<E> implements Iterator<E> {
      * Creates a new instance of ListNodeIterator.
      *
      * @param start a starting node.
+     *
+     * @see ListNode
      */
     public ListNodeIterator(ListNode<E> start) {
         _current = start;

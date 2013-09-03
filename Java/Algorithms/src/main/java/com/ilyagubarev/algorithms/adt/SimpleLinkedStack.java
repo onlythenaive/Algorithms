@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt;
 import java.util.Iterator;
 
 /**
- * Simple stack implementation based on linked list.
+ * Simple ItemsStack implementation based on a linked list.
  *
  * @see ItemsStack
  *
