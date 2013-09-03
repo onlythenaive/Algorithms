@@ -63,4 +63,9 @@ public final class ListNodeIterator<E> implements Iterator<E> {
     public void remove() {
         throw new UnsupportedOperationException("removal is not supported");
     }
+
+    @Override
+    public String toString() {
+        return String.format("[list node iterator at %s]", _current);
+    }
 }
