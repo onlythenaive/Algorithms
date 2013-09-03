@@ -17,8 +17,8 @@ package com.ilyagubarev.algorithms.adt;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.Bag;
-import com.ilyagubarev.algorithms.adt.Stack;
+import com.ilyagubarev.algorithms.adt.ItemsBag;
+import com.ilyagubarev.algorithms.adt.ItemsStack;
 
 /**
  * Bag implementation based on simple linked stack.
@@ -30,9 +30,9 @@ import com.ilyagubarev.algorithms.adt.Stack;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleStackBasedBag<E> implements Bag<E> {
+public final class SimpleStackBasedBag<E> implements ItemsBag<E> {
 
-    private Stack<E> _stack;
+    private ItemsStack<E> _stack;
 
     /**
      * Creates a new instance of SimpleStackBasedBag

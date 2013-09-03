@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.adt;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.Stack;
+import com.ilyagubarev.algorithms.adt.ItemsStack;
 
 /**
  * Simple implementation of Stack based on linked nodes.
@@ -28,7 +28,7 @@ import com.ilyagubarev.algorithms.adt.Stack;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleLinkedStack<E> implements Stack<E> {
+public final class SimpleLinkedStack<E> implements ItemsStack<E> {
 
     private int _size;
     private SingleLinkedNode<E> _top;

@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt;
 import java.io.Serializable;
 
 /**
- * Common FIFO queue interface.
+ * Common adding-only collection interface.
  *
  * @see Iterable
  * @see Serializable
@@ -27,6 +27,26 @@ import java.io.Serializable;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface Queue<E> extends Iterable<E>, Serializable {
+public interface ItemsBag<E> extends Iterable<E>, Serializable {
+    
+    /**
+     * Gets current size of the bag.
+     *
+     * @return current size.
+     */
+    int getSize();
 
+    /**
+     * Checks if the bag is empty.
+     *
+     * @return true if the bag is empty.
+     */
+    boolean isEmpty();
+
+    /**
+     * Adds a new item to the bag.
+     *
+     * @param item an item to be added.
+     */
+    void add(E item);
 }

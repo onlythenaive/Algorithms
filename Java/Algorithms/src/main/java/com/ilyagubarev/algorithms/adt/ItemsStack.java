@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt;
 import java.io.Serializable;
 
 /**
- * Common LIFO stack interface.
+ * Common LIFO policy stack interface.
  *
  * @see Iterable
  * @see Serializable
@@ -27,7 +27,7 @@ import java.io.Serializable;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface Stack<E> extends Iterable<E>, Serializable {
+public interface ItemsStack<E> extends Iterable<E>, Serializable {
 
     /**
      * Gets current size of the stack.
