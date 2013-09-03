@@ -1,4 +1,4 @@
 Algorithms
 ==========
 
-Practice project
+Practice project based on R. Sedgewick and K. Wayne book.
