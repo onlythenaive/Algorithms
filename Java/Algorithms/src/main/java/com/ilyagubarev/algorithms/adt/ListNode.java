@@ -75,4 +75,9 @@ public final class ListNode<E> implements Serializable {
     public void setNext(ListNode<E> node) {
         _next = node;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[list node: %s]", _item);
+    }
 }
