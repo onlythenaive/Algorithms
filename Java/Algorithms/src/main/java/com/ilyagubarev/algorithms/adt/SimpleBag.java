@@ -56,4 +56,9 @@ public final class SimpleBag<E> implements ItemsBag<E> {
     public Iterator<E> iterator() {
         return _stack.iterator();
     }
+
+    @Override
+    public String toString() {
+        return String.format("[simple bag: %d items]", getSize());
+    } 
 }
