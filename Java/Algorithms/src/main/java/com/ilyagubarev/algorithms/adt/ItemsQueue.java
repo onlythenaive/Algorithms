@@ -26,4 +26,26 @@ package com.ilyagubarev.algorithms.adt;
  */
 public interface ItemsQueue<E> extends ItemsContainer<E> {
 
+    /**
+     * Gets the oldest item.
+     *
+     * @return the oldest item.
+     * @throws IllegalStateException if the queue is empty.
+     */
+    E dequeue();
+
+    /**
+     * Adds a new item to the queue.
+     *
+     * @param item an item to be enqueued.
+     */
+    void enqueue(E item);
+
+    /**
+     * Gets the oldest item and removes from the queue.
+     *
+     * @return the oldest item.
+     * @throws IllegalStateException if the queue is empty.
+     */
+    E poll();
 }
