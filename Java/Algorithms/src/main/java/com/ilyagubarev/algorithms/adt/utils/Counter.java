@@ -51,9 +51,9 @@ public class Counter implements Serializable {
     }
 
     /**
-     * Gets counter identifier.
+     * Gets an identifier of the counter.
      *
-     * @return identifier.
+     * @return counter identifier.
      */
     public String getId() {
         return _id;

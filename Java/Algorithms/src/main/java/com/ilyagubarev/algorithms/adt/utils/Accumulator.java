@@ -53,9 +53,9 @@ public class Accumulator implements Serializable {
     }
 
     /**
-     * Gets accumulator identifier.
+     * Gets an identifier of the accumulator.
      *
-     * @return identifier.
+     * @return accumulator identifier.
      */
     public String getId() {
         return _id;
@@ -64,7 +64,7 @@ public class Accumulator implements Serializable {
     /**
      * Gets an average value.
      *
-     * @return average value.
+     * @return an average value.
      * @throws IllegalStateException if the accumulator is empty.
      */
     public double getAverage() {
@@ -95,7 +95,7 @@ public class Accumulator implements Serializable {
     /**
      * Adds specified numeric value to the accumulator.
      *
-     * @param value numeric value.
+     * @param value a numeric value.
      */
     public void add(double value) {
         _total += value;
