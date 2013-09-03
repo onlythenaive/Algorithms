@@ -39,7 +39,7 @@ public class Accumulator implements Serializable {
         if (id == null) {
             throw new IllegalArgumentException("accumulator id is null");
         }
-        return new Accumulator(id, new Counter(id));
+        return new Accumulator(id, Counter.create(id));
     }
 
     private final String _id;
