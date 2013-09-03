@@ -21,12 +21,12 @@ import java.io.Serializable;
  * Simple numeric accumulator.
  *
  * @see Serializable
- * 
+ *
  * @version 1.02, 03 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class Accumulator implements Serializable {
+public class Accumulator implements Serializable {
 
     /**
      * Creates a new instance of Accumulator.
@@ -39,16 +39,17 @@ public final class Accumulator implements Serializable {
         if (id == null) {
             throw new IllegalArgumentException("accumulator id is null");
         }
-        return new Accumulator(id);
+        return new Accumulator(id, new Counter(id));
     }
 
     private final String _id;
+    private final Counter _values;
 
     private double _total;
-    private int _size;
 
-    Accumulator(String id) {
+    Accumulator(String id, Counter values) {
         _id = id;
+        _values = values;
     }
 
     /**
@@ -70,7 +71,7 @@ public final class Accumulator implements Serializable {
         if (isEmpty()) {
             throw new IllegalStateException("accumulator is empty");
         }
-        return _total / _size;
+        return _total / getSize();
     }
 
     /**
@@ -79,7 +80,7 @@ public final class Accumulator implements Serializable {
      * @return accumulator size.
      */
     public int getSize() {
-        return _size;
+        return _values.getValue();
     }
 
     /**
@@ -88,7 +89,7 @@ public final class Accumulator implements Serializable {
      * @return true if the accumulator is empty.
      */
     public boolean isEmpty() {
-        return _size == 0;
+        return getSize() == 0;
     }
 
     /**
@@ -98,7 +99,7 @@ public final class Accumulator implements Serializable {
      */
     public void add(double value) {
         _total += value;
-        ++_size;
+        _values.increment();
     }
 
     @Override
@@ -107,7 +108,7 @@ public final class Accumulator implements Serializable {
         if (isEmpty()) {
             state = "empty";
         } else {
-            state = String.format("%f on %d values", getAverage(), _size);
+            state = String.format("%f on %d values", getAverage(), getSize());
         }
         return String.format("[%s accumulator: %s]", _id, state);
     }
