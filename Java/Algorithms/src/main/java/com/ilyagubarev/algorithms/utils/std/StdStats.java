@@ -1,4 +1,4 @@
-package com.ilyagubarev.algorithms.utils;
+package com.ilyagubarev.algorithms.utils.std;
 
 /*************************************************************************
  *  Compilation:  javac StdStats.java

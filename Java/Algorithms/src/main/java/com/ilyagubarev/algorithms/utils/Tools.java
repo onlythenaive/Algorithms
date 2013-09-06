@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.sorting.tools;
+package com.ilyagubarev.algorithms.utils;
 
 /**
  * Sorting service tools.
@@ -22,7 +22,7 @@ package com.ilyagubarev.algorithms.sorting.tools;
  * @since 06 September 2013
  * @author Ilya Gubarev
  */
-public final class SortingHelper {
+public final class Tools {
 
     /**
      * Exchanges array object with specified indeces with each other.
@@ -50,7 +50,7 @@ public final class SortingHelper {
         return subject.compareTo(sample) < 0;
     }
 
-    private SortingHelper() {
+    private Tools() {
 
     }
 }

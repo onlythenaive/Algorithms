@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.analysis;
 
-import com.ilyagubarev.algorithms.utils.StdDraw;
+import com.ilyagubarev.algorithms.utils.std.StdDraw;
 
 /**
  * Visual numeric accumulator.
