@@ -25,12 +25,26 @@ package com.ilyagubarev.algorithms.sorting.tools;
 public final class SortingHelper {
 
     /**
+     * Exchanges array object with specified indeces with each other.
+     *
+     * @param array an array with objects to be exchanged.
+     * @param first the first index.
+     * @param second the second index.
+     * @throws ArrayIndexOutOfBoundsException if indeces are illegal.
+     */
+    public static void exchange(Object[] array, int first, int second) {
+        Object buffer = array[first];
+        array[first] = array[second];
+        array[second] = buffer;
+    }
+
+    /**
      * Checks if one comparable object is less than another.
      *
      * @param subject an object to be tested.
      * @param sample a sample object.
      * @return true if the subject is less than the sample.
-     * @throws IllegalArgumentException if the objects are incomparable.
+     * @throws ClassCastException if the objects are incomparable.
      */
     public static boolean isLess(Comparable subject, Comparable sample) {
         return subject.compareTo(sample) < 0;
