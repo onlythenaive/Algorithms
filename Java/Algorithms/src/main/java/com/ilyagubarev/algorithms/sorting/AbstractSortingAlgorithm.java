@@ -13,26 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.utils;
+package com.ilyagubarev.algorithms.sorting;
 
 /**
- * Sorting service tools.
+ * Sorting algorithm common implementation.
  *
- * @version 1.01, 06 September 2013
- * @since 06 September 2013
+ * @see SortingAlgorithm
+ *
+ * @version 1.01, 07 September 2013
+ * @since 07 September 2013
  * @author Ilya Gubarev
  */
-public final class Tools {
+public abstract class AbstractSortingAlgorithm implements SortingAlgorithm {
 
     /**
-     * Exchanges array object with specified indeces with each other.
+     * Exchanges array objects of specified indeces with each other.
      *
      * @param array an array with objects to be exchanged.
-     * @param first the first index.
-     * @param second the second index.
+     * @param first the first object index.
+     * @param second the second object index.
      * @throws ArrayIndexOutOfBoundsException if indeces are illegal.
      */
-    public static void exchange(Object[] array, int first, int second) {
+    protected void exchange(Object[] array, int first, int second) {
         Object buffer = array[first];
         array[first] = array[second];
         array[second] = buffer;
@@ -46,11 +48,7 @@ public final class Tools {
      * @return true if the subject is less than the sample.
      * @throws ClassCastException if the objects are incomparable.
      */
-    public static boolean isLess(Comparable subject, Comparable sample) {
+    protected boolean isLess(Comparable subject, Comparable sample) {
         return subject.compareTo(sample) < 0;
-    }
-
-    private Tools() {
-
     }
 }

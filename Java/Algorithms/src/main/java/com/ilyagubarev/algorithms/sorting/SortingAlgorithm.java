@@ -32,6 +32,8 @@ public interface SortingAlgorithm {
      * @param array an array to be sorted.
      * @param comparisons counter of comparisons.
      * @param exchanges counter of item exchanges.
+     *
+     * @see Counter
      */
     void sort(Comparable[] array, Counter comparisons, Counter exchanges);
 }
