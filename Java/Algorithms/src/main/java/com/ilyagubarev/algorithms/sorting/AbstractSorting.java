@@ -18,13 +18,13 @@ package com.ilyagubarev.algorithms.sorting;
 /**
  * Sorting algorithm common implementation.
  *
- * @see SortingAlgorithm
+ * @see Sorting
  *
  * @version 1.01, 07 September 2013
  * @since 07 September 2013
  * @author Ilya Gubarev
  */
-public abstract class AbstractSortingAlgorithm implements SortingAlgorithm {
+public abstract class AbstractSorting implements Sorting {
 
     /**
      * Exchanges array objects of specified indeces with each other.

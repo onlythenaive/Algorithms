@@ -18,28 +18,22 @@ package com.ilyagubarev.algorithms.sorting;
 import com.ilyagubarev.algorithms.adt.analysis.Counter;
 
 /**
- * Selection sort algorithm implementation.
- *
- * @see AbstractSortingAlgorithm
+ * Sorting algorithm common interface.
  *
  * @version 1.01, 07 September 2013
  * @since 07 September 2013
  * @author Ilya Gubarev
  */
-public final class SelectionAlgorithm extends AbstractSortingAlgorithm {
+public interface Sorting {
 
-    @Override
-    public void sort(Comparable[] array, Counter tests, Counter exchanges) {
-        for (int pivot = 0; pivot < array.length; ++pivot) {
-            int min = pivot;
-            for (int i = pivot + 1; i < array.length; ++i) {
-                tests.increment();
-                if (isLess(array[i], array[min])) {
-                    min = i;
-                }
-            }
-            exchanges.increment();
-            exchange(array, pivot, min);
-        }
-    }
+    /**
+     * Sorts specified array in a natural order.
+     *
+     * @param array an array to be sorted.
+     * @param tests counter of comparisons.
+     * @param exchanges counter of item exchanges.
+     *
+     * @see Counter
+     */
+    void sort(Comparable[] array, Counter tests, Counter exchanges);
 }
