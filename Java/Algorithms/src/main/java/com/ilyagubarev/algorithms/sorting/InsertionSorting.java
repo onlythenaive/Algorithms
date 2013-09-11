@@ -15,10 +15,27 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
+import com.ilyagubarev.algorithms.adt.analysis.Counter;
+
 /**
+ * Insertion sorting algorithm implementation.
  *
+ * @see AbstractSorting
+ *
+ * @version 1.01, 11 September 2013
+ * @since 11 September 2013
  * @author Ilya Gubarev
  */
-public class InsertionSorting {
-    
+public final class InsertionSorting extends AbstractSorting {
+
+    @Override
+    public void sort(Comparable[] array, Counter tests, Counter exchanges) {
+        for (int pivot = 1; pivot < array.length; ++pivot) {
+            int i = pivot - 1;
+            while ((i >= 0) && (isLess(pivot, i, tests))) {
+                exchange(array, pivot, i, exchanges);
+                --i;
+            }
+        }
+    }
 }
