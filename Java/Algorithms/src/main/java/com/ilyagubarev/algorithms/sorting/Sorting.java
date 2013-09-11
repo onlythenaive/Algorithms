@@ -30,8 +30,8 @@ public interface Sorting {
      * Sorts specified array in a natural order.
      *
      * @param array an array to be sorted.
-     * @param tests counter of comparisons.
-     * @param exchanges counter of item exchanges.
+     * @param tests a counter of test operations.
+     * @param exchanges a counter of item exchanging operations.
      *
      * @see Counter
      */

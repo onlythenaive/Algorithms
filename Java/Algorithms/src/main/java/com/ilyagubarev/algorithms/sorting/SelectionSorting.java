@@ -22,7 +22,7 @@ import com.ilyagubarev.algorithms.adt.analysis.Counter;
  *
  * @see AbstractSorting
  *
- * @version 1.01, 07 September 2013
+ * @version 1.02, 11 September 2013
  * @since 07 September 2013
  * @author Ilya Gubarev
  */
@@ -33,13 +33,11 @@ public final class SelectionSorting extends AbstractSorting {
         for (int pivot = 0; pivot < array.length; ++pivot) {
             int min = pivot;
             for (int i = pivot + 1; i < array.length; ++i) {
-                tests.increment();
-                if (isLess(array[i], array[min])) {
+                if (isLess(array[i], array[min], tests)) {
                     min = i;
                 }
             }
-            exchanges.increment();
-            exchange(array, pivot, min);
+            exchange(array, pivot, min, exchanges);
         }
     }
 }

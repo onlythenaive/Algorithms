@@ -15,12 +15,14 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
+import com.ilyagubarev.algorithms.adt.analysis.Counter;
+
 /**
  * Sorting algorithm common implementation.
  *
  * @see Sorting
  *
- * @version 1.01, 07 September 2013
+ * @version 1.02, 11 September 2013
  * @since 07 September 2013
  * @author Ilya Gubarev
  */
@@ -32,9 +34,13 @@ public abstract class AbstractSorting implements Sorting {
      * @param array an array with objects to be exchanged.
      * @param first the first object index.
      * @param second the second object index.
-     * @throws ArrayIndexOutOfBoundsException if indeces are illegal.
+     * @param c a counter.
+     * @throws ArrayIndexOutOfBoundsException if the indeces are illegal.
+     *
+     * @see Counter
      */
-    protected void exchange(Object[] array, int first, int second) {
+    protected void exchange(Object[] array, int first, int second, Counter c) {
+        c.increment();
         Object buffer = array[first];
         array[first] = array[second];
         array[second] = buffer;
@@ -45,10 +51,14 @@ public abstract class AbstractSorting implements Sorting {
      *
      * @param subject an object to be tested.
      * @param sample a sample object.
+     * @param c a counter.
      * @return true if the subject is less than the sample.
      * @throws ClassCastException if the objects are incomparable.
+     *
+     * @see Counter
      */
-    protected boolean isLess(Comparable subject, Comparable sample) {
+    protected boolean isLess(Comparable subject, Comparable sample, Counter c) {
+        c.increment();
         return subject.compareTo(sample) < 0;
     }
 }
