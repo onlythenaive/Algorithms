@@ -27,7 +27,7 @@ import java.util.Random;
 public final class ArraysHelper {
 
     /**
-     * Populates specified array with random items.
+     * Populates specified array with random integers.
      *
      * @param array an array to be populated.
      */
@@ -35,6 +35,19 @@ public final class ArraysHelper {
         Random random = new Random();
         for (int i = 0; i < array.length; ++i) {
             array[i] = random.nextInt();
+        }
+    }
+
+    /**
+     * Populates specified array with random integers (0 <= x < maxValue).
+     *
+     * @param array an array to be populated.
+     * @param maxValue a max value of random integers (exclusive).
+     */
+    public static void populate(Integer[] array, int maxValue) {
+        Random random = new Random();
+        for (int i = 0; i < array.length; ++i) {
+            array[i] = random.nextInt(maxValue);
         }
     }
 
