@@ -33,7 +33,7 @@ public final class SelectionSorting extends AbstractSorting {
         for (int pivot = 0; pivot < array.length; ++pivot) {
             int min = pivot;
             for (int i = pivot + 1; i < array.length; ++i) {
-                if (isLess(array[i], array[min], tests)) {
+                if (isLess(array, i, min, tests)) {
                     min = i;
                 }
             }

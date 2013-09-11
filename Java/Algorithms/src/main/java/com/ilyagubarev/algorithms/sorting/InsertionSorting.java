@@ -31,9 +31,9 @@ public final class InsertionSorting extends AbstractSorting {
     @Override
     public void sort(Comparable[] array, Counter tests, Counter exchanges) {
         for (int pivot = 1; pivot < array.length; ++pivot) {
-            int i = pivot - 1;
-            while ((i >= 0) && (isLess(pivot, i, tests))) {
-                exchange(array, pivot, i, exchanges);
+            int i = pivot;
+            while ((i > 0) && (isLess(array, i, i - 1, tests))) {
+                exchange(array, i, i - 1, exchanges);
                 --i;
             }
         }

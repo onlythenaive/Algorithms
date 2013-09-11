@@ -29,36 +29,39 @@ import com.ilyagubarev.algorithms.adt.analysis.Counter;
 public abstract class AbstractSorting implements Sorting {
 
     /**
-     * Exchanges array objects of specified indeces with each other.
+     * Exchanges a couple of array items of specified indeces with each other.
      *
-     * @param array an array with objects to be exchanged.
-     * @param first the first object index.
-     * @param second the second object index.
-     * @param c a counter.
-     * @throws ArrayIndexOutOfBoundsException if the indeces are illegal.
+     * @param array an array with the objects to be exchanged.
+     * @param firstIndex an index of the first object.
+     * @param secondIndex an index of the second object.
+     * @param counter a counter to register the operation.
+     * @throws RuntimeException if the indeces are illegal.
      *
      * @see Counter
      */
-    protected void exchange(Object[] array, int first, int second, Counter c) {
-        c.increment();
-        Object buffer = array[first];
-        array[first] = array[second];
-        array[second] = buffer;
+    protected void exchange(Object[] array, int firstIndex, int secondIndex,
+            Counter counter) {
+        counter.increment();
+        Object buffer = array[firstIndex];
+        array[firstIndex] = array[secondIndex];
+        array[secondIndex] = buffer;
     }
 
     /**
-     * Checks if one comparable object is less than another.
+     * Checks if one array item is less than another.
      *
-     * @param subject an object to be tested.
-     * @param sample a sample object.
-     * @param c a counter.
+     * @param subjectIndex an index of a subject to be tested.
+     * @param sampleIndex an index of a sample object.
+     * @param counter a counter to register the operation.
      * @return true if the subject is less than the sample.
      * @throws ClassCastException if the objects are incomparable.
+     * @throws RuntimeException if the indeces are illegal.
      *
      * @see Counter
      */
-    protected boolean isLess(Comparable subject, Comparable sample, Counter c) {
-        c.increment();
-        return subject.compareTo(sample) < 0;
+    protected boolean isLess(Comparable[] array, int subjectIndex,
+            int sampleIndex, Counter counter) {
+        counter.increment();
+        return array[subjectIndex].compareTo(array[sampleIndex]) < 0;
     }
 }
