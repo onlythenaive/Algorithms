@@ -28,7 +28,7 @@ public abstract class GapProvider {
 
     private int _current;
     private boolean _inited;
-    private List<Integer> _gaps;
+    private List<Integer> _sequence;
 
     protected GapProvider() {
 
@@ -43,10 +43,10 @@ public abstract class GapProvider {
         if (!_inited) {
             throw new IllegalStateException("provider is not inited");
         }
-        if (_current == _gaps.size()) {
+        if (_current == _sequence.size()) {
             throw new IllegalStateException("out of gaps");
         }
-        return _gaps.get(_current++);
+        return _sequence.get(_current++);
     }
 
     /**
@@ -60,11 +60,11 @@ public abstract class GapProvider {
         if (n < 1) {
             throw new IllegalArgumentException("total amount is not positive");
         }
-        List<Integer> gaps = getGaps(n);
-        if (gaps.size() < 1) {
+        List<Integer> sequence = getSequence(n);
+        if (sequence.size() < 1) {
             throw new IllegalStateException("no gaps are generated");
         }
-        _gaps = gaps;
+        _sequence = sequence;
         _current = 0;
         _inited = true;
     }
@@ -73,7 +73,7 @@ public abstract class GapProvider {
      * Gets a list of values to be used as gaps (f.e. "N/2", "N/4", ..., "1").
      *
      * @param n total amount of items to be sorted.
-     * @return a list of gap values.
+     * @return a sequence of gap values.
      */
-    protected abstract List<Integer> getGaps(int n);
+    protected abstract List<Integer> getSequence(int n);
 }
