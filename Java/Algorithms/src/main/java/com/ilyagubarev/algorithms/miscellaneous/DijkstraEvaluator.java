@@ -23,19 +23,27 @@ import com.ilyagubarev.algorithms.adt.SimpleLinkedStack;
 import com.ilyagubarev.algorithms.utils.SourceTokenizer;
 
 /**
+ * Simple arithmetic expression evaluator.
+ * Based on E. Dijkstra "double stack" algorithm. The expression must be
+ * fully braced and each bracet, operand or operator must be spaced from
+ * another, for example: "( ( 1 + 2.5 ) / 4 )". Only four basic
+ * operators ("+", "-", "*", "/") are allowed. 
  *
+ * @version 1.02, 11 September 2013
+ * @since September 2013
  * @author Ilya Gubarev.
  */
-public class DijkstraEvaluator {
+public final class DijkstraEvaluator {
 
     /**
-     * Creates a new instance of DijkstraEvaluator.
+     * Evaluates the result of a source expression.
+     *
+     * @param expression a source expression.
+     * @return expression evaluation result.
+     * @throws IOException if error occured while reading the expression.
+     * @throws RuntimeException if the expression is malformed.
      */
-    public DijkstraEvaluator() {
-        
-    }
-
-    public double eval(Reader expression) throws IOException {
+    public static double eval(Reader expression) throws IOException {
         ItemsStack<Double> operands = new SimpleLinkedStack<Double>();
         ItemsStack<String> operators = new SimpleLinkedStack<String>();
         SourceTokenizer tokenizer = SourceTokenizer.create(expression, ' ');
@@ -55,14 +63,13 @@ public class DijkstraEvaluator {
                 } else if (operator.equals("/")) {
                     result = op1 / op2;
                 } else {
-                    throw new UnsupportedOperationException("unsupported operator");
+                    throw new RuntimeException("unsupported operator");
                 }
                 operands.push(result);
-            } else if (isOperator(token)) {
+            } else if ((token.equals("+")) || (token.equals("-"))
+                    || (token.equals("*")) || (token.equals("/"))) {
                 operators.push(token);
-            } else if (token.equals("(")) {
-                
-            } else {
+            } else if (!token.equals("(")) {
                 operands.push(Double.valueOf(token));
             }
         }
@@ -72,7 +79,7 @@ public class DijkstraEvaluator {
         return operands.pop();
     }
 
-    private boolean isOperator(String token) {
-        return (token.equals("+")) || (token.equals("-")) || (token.equals("/")) || (token.equals("*"));
+    private DijkstraEvaluator() {
+
     }
 }
