@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.sorting;
 import com.ilyagubarev.algorithms.adt.analysis.Counter;
 
 /**
- * Shell sorting algorithm implementation
+ * Donald Shell method sorting algorithm implementation.
  *
  * @see AbstractSorting
  *
@@ -26,7 +26,26 @@ import com.ilyagubarev.algorithms.adt.analysis.Counter;
  * @since 11 September 2013
  * @author Ilya Gubarev
  */
-public class ShellSorting extends AbstractSorting {
+public final class ShellSorting extends AbstractSorting {
+
+    /**
+     * Creates a new instance of ShellSorting with specified gap provider.
+     *
+     * @param provider gap value provider.
+     * @return a new instance of ShellSorting.
+     */
+    public static ShellSorting create(Object provider) {
+        if (provider == null) {
+            throw new NullPointerException("gaps provider is null");
+        }
+        return new ShellSorting(provider);
+    }
+
+    private final Object _provider;
+
+    private ShellSorting(Object provider) {
+        _provider = provider;
+    }
 
     @Override
     public void sort(Comparable[] array, Counter tests, Counter exchanges) {
