@@ -79,7 +79,7 @@ public class Accumulator implements Serializable {
      * 
      * @return accumulator size.
      */
-    public int getSize() {
+    public long getSize() {
         return _values.getValue();
     }
 

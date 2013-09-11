@@ -44,7 +44,7 @@ public class Counter implements Serializable {
 
     private final String _id;
 
-    private int _value;
+    private long _value;
 
     Counter(String id) {
         _id = id;
@@ -64,7 +64,7 @@ public class Counter implements Serializable {
      *
      * @return current value.
      */
-    public int getValue() {
+    public long getValue() {
         return _value;
     }
 
