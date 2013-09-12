@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.adt.analysis;
 
+import com.ilyagubarev.algorithms.adt.tools.Counter;
+
 /**
  *
  * @author gubarev
@@ -41,10 +43,10 @@ public class AuxMemory {
             throw new NullPointerException("identifier is null");
         }
         _id = id;
-        _allocations = new Counter(id);
-        _reads = new Counter(id);
-        _writes = new Counter(id);
-        _tests = new Counter(id);        
+        _allocations = new Counter();
+        _reads = new Counter();
+        _writes = new Counter();
+        _tests = new Counter();        
     }
 
     public void allocate(int size) {

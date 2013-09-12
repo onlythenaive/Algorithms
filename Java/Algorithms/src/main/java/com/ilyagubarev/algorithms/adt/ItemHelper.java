@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
-import com.ilyagubarev.algorithms.adt.analysis.Counter;
+import com.ilyagubarev.algorithms.adt.tools.Counter;
 
 /**
  * Item utility methods provider. 
@@ -33,8 +33,8 @@ public final class ItemHelper {
      * Creates a new instance of ItemHelper.
      */
     public ItemHelper() {
-        _hashings = new Counter("");
-        _tests = new Counter("");
+        _hashings = new Counter();
+        _tests = new Counter();
     }
 
     /**

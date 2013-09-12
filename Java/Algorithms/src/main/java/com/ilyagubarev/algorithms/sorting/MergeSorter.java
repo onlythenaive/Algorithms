@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.sorting;
 
 import com.ilyagubarev.algorithms.adt.analysis.Array;
 import com.ilyagubarev.algorithms.adt.analysis.AuxMemory;
-import com.ilyagubarev.algorithms.adt.analysis.Counter;
+import com.ilyagubarev.algorithms.adt.tools.Counter;
 
 /**
  * "Divide & merge" method sorting algorithm implementation.

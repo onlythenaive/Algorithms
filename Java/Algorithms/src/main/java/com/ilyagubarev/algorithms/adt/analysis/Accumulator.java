@@ -15,6 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.analysis;
 
+import com.ilyagubarev.algorithms.adt.tools.Counter;
 import java.io.Serializable;
 
 /**
@@ -43,7 +44,7 @@ public class Accumulator implements Serializable {
             throw new NullPointerException("accumulator id is null");
         }
         _id = id;
-        _values = new Counter(id);
+        _values = new Counter();
     }
 
     /**

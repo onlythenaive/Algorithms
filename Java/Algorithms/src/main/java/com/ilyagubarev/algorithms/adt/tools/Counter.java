@@ -13,44 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt.analysis;
-
-import java.io.Serializable;
+package com.ilyagubarev.algorithms.adt.tools;
 
 /**
  * Simple counter.
- *
- * @see Serializable
  * 
- * @version 1.02, 12 September 2013
+ * @version 1.03, 13 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public class Counter implements Serializable {
+public final class Counter {
 
-    private final String _id;
+    /**
+     * Callback delegate for the increment operation.
+     */
+    public static interface IncrementDelegate {
+
+        /**
+         * Actions to be performed after counter value is incremented.
+         *
+         * @param value counter incremented value.
+         */
+        void execute(long value);
+    }
+
+    private final IncrementDelegate _incrementDelegate;
 
     private long _value;
 
     /**
      * Creates a new instance of Counter.
-     *
-     * @param id counter identifier.
      */
-    public Counter(String id) {
-        if (id == null) {
-            throw new NullPointerException("id is null");
-        }
-        _id = id;
+    public Counter() {
+        this(null);
     }
 
     /**
-     * Gets an identifier of the counter.
+     * Creates a new instance of Counter.
      *
-     * @return counter identifier.
+     * @param incrementDelegate a delegate instance for post-increment.
+     *
+     * @see IncrementDelegate
      */
-    public final String getId() {
-        return _id;
+    public Counter(IncrementDelegate incrementDelegate) {
+        _incrementDelegate = incrementDelegate;
     }
 
     /**
@@ -58,27 +64,17 @@ public class Counter implements Serializable {
      *
      * @return current value.
      */
-    public final long getValue() {
+    public long getValue() {
         return _value;
     }
 
     /**
      * Increments counter value by one.
      */
-    public final void increment() {
+    public void increment() {
         ++_value;
-        onIncrement();
-    }
-
-    @Override
-    public String toString() {
-        return String.format("[counter (%s): %d]", _id, _value);
-    }
-
-    /**
-     * Action on increment.
-     */
-    protected void onIncrement() {
-
+        if (_incrementDelegate != null) {
+            _incrementDelegate.execute(_value);
+        }
     }
 }

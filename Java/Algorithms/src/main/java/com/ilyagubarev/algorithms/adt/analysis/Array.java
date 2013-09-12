@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.adt.analysis;
 
+import com.ilyagubarev.algorithms.adt.tools.Counter;
+
 /**
  * Comparable items array model for sorting methods analysis.
  *
@@ -45,9 +47,9 @@ public class Array {
         }
         _id = id;
         _source = source;
-        _reads = new Counter(id);
-        _writes = new Counter(id);
-        _tests = new Counter(id);
+        _reads = new Counter();
+        _writes = new Counter();
+        _tests = new Counter();
     }
 
     /**
