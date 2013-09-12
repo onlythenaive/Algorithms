@@ -38,15 +38,25 @@ public abstract class GapProvider {
      * Gets the next gap value.
      *
      * @return gap value.
+     * @throws IllegalStateException if the provider is not inited or empty.
      */
     public final int getNext() {
-        if (!_inited) {
-            throw new IllegalStateException("provider is not inited");
-        }
-        if (_current == _sequence.size()) {
+        throwExceptionIfNotInited();
+        if (isEmpty()) {
             throw new IllegalStateException("out of gaps");
         }
         return _sequence.get(_current++);
+    }
+
+    /**
+     * Checks if the provider is out of gaps.
+     *
+     * @return true if the provider is out of gaps.
+     * @throws IllegalStateException if the provider is not inited.
+     */
+    public final boolean isEmpty() {
+        throwExceptionIfNotInited();
+        return _current == _sequence.size();
     }
 
     /**
@@ -76,4 +86,10 @@ public abstract class GapProvider {
      * @return a sequence of gap values.
      */
     protected abstract List<Integer> getSequence(int n);
+
+    private void throwExceptionIfNotInited() {
+        if (!_inited) {
+            throw new IllegalStateException("provider is not inited");
+        }
+    }
 }
