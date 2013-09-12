@@ -22,31 +22,25 @@ import java.io.Serializable;
  *
  * @see Serializable
  * 
- * @version 1.01, 02 September 2013
+ * @version 1.02, 12 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
 public class Counter implements Serializable {
 
-    /**
-     * Creates a new instance of Counter.
-     *
-     * @param id counter identifier.
-     * @return a new instance of Counter.
-     * @throws IllegalArgumentException if specified id is null.
-     */
-    public static Counter create(String id) {
-        if (id == null) {
-            throw new IllegalArgumentException("counter id is null");
-        }
-        return new Counter(id);
-    }
-
     private final String _id;
 
     private long _value;
 
-    Counter(String id) {
+    /**
+     * Creates a new instance of Counter.
+     *
+     * @param id counter identifier.
+     */
+    public Counter(String id) {
+        if (id == null) {
+            throw new NullPointerException("id is null");
+        }
         _id = id;
     }
 
@@ -55,7 +49,7 @@ public class Counter implements Serializable {
      *
      * @return counter identifier.
      */
-    public String getId() {
+    public final String getId() {
         return _id;
     }
 
@@ -64,19 +58,27 @@ public class Counter implements Serializable {
      *
      * @return current value.
      */
-    public long getValue() {
+    public final long getValue() {
         return _value;
     }
 
     /**
      * Increments counter value by one.
      */
-    public void increment() {
+    public final void increment() {
         ++_value;
+        onIncrement();
     }
 
     @Override
     public String toString() {
-        return String.format("[%s counter: %d]", _id, _value);
+        return String.format("[counter (%s): %d]", _id, _value);
+    }
+
+    /**
+     * Action on increment.
+     */
+    protected void onIncrement() {
+
     }
 }
