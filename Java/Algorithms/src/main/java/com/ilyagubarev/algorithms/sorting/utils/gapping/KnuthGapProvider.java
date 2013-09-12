@@ -15,10 +15,11 @@
  */
 package com.ilyagubarev.algorithms.sorting.utils.gapping;
 
-import com.ilyagubarev.algorithms.adt.ItemsStack;
-import com.ilyagubarev.algorithms.adt.SimpleLinkedStack;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.ilyagubarev.algorithms.adt.ItemsStack;
+import com.ilyagubarev.algorithms.adt.SimpleLinkedStack;
 
 /**
  * Gap value provider based on Donald Knuth sequence.
@@ -34,11 +35,11 @@ public final class KnuthGapProvider extends GapProvider {
     @Override
     protected List<Integer> getSequence(int n) {
         ItemsStack<Integer> reversed = new SimpleLinkedStack<Integer>();
-        int gap;
+        int gap = 1;
         int k = 1;
         do {
-            gap = ((int) Math.pow(3, k) - 1) / 2;
             reversed.push(gap);
+            gap = ((int) Math.pow(3, ++k) - 1) / 2;
         } while (gap <= n / 3);
         List<Integer> result = new LinkedList<Integer>();
         while (!reversed.isEmpty()) {
