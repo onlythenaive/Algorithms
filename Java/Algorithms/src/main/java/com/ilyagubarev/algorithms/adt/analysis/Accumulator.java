@@ -105,7 +105,7 @@ public class Accumulator implements Serializable {
         } else {
             state = String.format("%f on %d values", getAverage(), getSize());
         }
-        return String.format("[%s accumulator: %s]", _id, state);
+        return String.format("[accumulator (%s): %s]", _id, state);
     }
 
     /**
