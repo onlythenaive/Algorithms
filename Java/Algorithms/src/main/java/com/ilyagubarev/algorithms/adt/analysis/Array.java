@@ -16,13 +16,13 @@
 package com.ilyagubarev.algorithms.adt.analysis;
 
 /**
- * Comparable items array analyser.
+ * Comparable items array model for sorting methods analysis.
  *
- * @version 1.01, 12 September 2013
+ * @version 1.02, 12 September 2013
  * @since 12 September 2013
  * @author Ilya Gubarev
  */
-public final class Array {
+public class Array {
 
     private final String _id;
     private final Comparable[] _source;
@@ -51,45 +51,45 @@ public final class Array {
     }
 
     /**
-     * 
+     * Gets array model identifier.
      *
-     * @return 
+     * @return identifier.
      */
     public String getId() {
         return _id;
     }
 
     /**
-     * 
+     * Gets total amount of items in the array model.
      *
-     * @return 
+     * @return total amount of items.
      */
     public int getSize() {
         return _source.length;
     }
 
     /**
-     * 
+     * Gets total amount of read operations on the array model.
      *
-     * @return 
+     * @return total amount of read operations.
      */
     public long getReadsCount() {
         return _reads.getValue();
     }
 
     /**
-     * 
+     * Gets total amount of write operations on the array model.
      *
-     * @return 
+     * @return total amount of write operations.
      */
     public long getWritesCount() {
         return _writes.getValue();
     }
 
     /**
-     * 
+     * Gets total amount of comparisons operations on the array model.
      *
-     * @return 
+     * @return total amount of write operations.
      */
     public long getTestsCount() {
         return _tests.getValue();
