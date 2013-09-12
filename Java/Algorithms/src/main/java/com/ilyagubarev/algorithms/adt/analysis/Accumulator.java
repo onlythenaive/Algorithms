@@ -28,28 +28,22 @@ import java.io.Serializable;
  */
 public class Accumulator implements Serializable {
 
-    /**
-     * Creates a new instance of Accumulator.
-     *
-     * @param id an identifier for the accumulator.
-     * @return a new instance of Accumulator.
-     * @throws IllegalArgumentException if specified id is null.
-     */
-    public static Accumulator create(String id) {
-        if (id == null) {
-            throw new IllegalArgumentException("accumulator id is null");
-        }
-        return new Accumulator(id, new Counter(id));
-    }
-
     private final String _id;
     private final Counter _values;
 
     private double _total;
 
-    Accumulator(String id, Counter values) {
+    /**
+     * Creates a new instance of Accumulator.
+     *
+     * @param id accumulator identifier.
+     */
+    public Accumulator(String id) {
+        if (id == null) {
+            throw new NullPointerException("accumulator id is null");
+        }
         _id = id;
-        _values = values;
+        _values = new Counter(id);
     }
 
     /**
@@ -57,7 +51,7 @@ public class Accumulator implements Serializable {
      *
      * @return accumulator identifier.
      */
-    public String getId() {
+    public final String getId() {
         return _id;
     }
 
@@ -67,7 +61,7 @@ public class Accumulator implements Serializable {
      * @return an average value.
      * @throws IllegalStateException if the accumulator is empty.
      */
-    public double getAverage() {
+    public final double getAverage() {
         if (isEmpty()) {
             throw new IllegalStateException("accumulator is empty");
         }
@@ -79,7 +73,7 @@ public class Accumulator implements Serializable {
      * 
      * @return accumulator size.
      */
-    public long getSize() {
+    public final long getSize() {
         return _values.getValue();
     }
 
@@ -88,7 +82,7 @@ public class Accumulator implements Serializable {
      *
      * @return true if the accumulator is empty.
      */
-    public boolean isEmpty() {
+    public final boolean isEmpty() {
         return getSize() == 0;
     }
 
@@ -97,9 +91,10 @@ public class Accumulator implements Serializable {
      *
      * @param value a numeric value.
      */
-    public void add(double value) {
+    public final void add(double value) {
         _total += value;
         _values.increment();
+        onAdd(value);
     }
 
     @Override
@@ -111,5 +106,14 @@ public class Accumulator implements Serializable {
             state = String.format("%f on %d values", getAverage(), getSize());
         }
         return String.format("[%s accumulator: %s]", _id, state);
+    }
+
+    /**
+     * Action on value adding.
+     *
+     * @param value a numeric value.
+     */
+    protected void onAdd(double value) {
+
     }
 }
