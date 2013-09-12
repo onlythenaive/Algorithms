@@ -27,7 +27,7 @@ import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
  * @since 11 September 2013
  * @author Ilya Gubarev
  */
-public final class ShellSorting extends AbstractSorting {
+public final class ShellSorting extends AbstractSorter {
 
     /**
      * Creates a new instance of ShellSorting with specified gap provider.

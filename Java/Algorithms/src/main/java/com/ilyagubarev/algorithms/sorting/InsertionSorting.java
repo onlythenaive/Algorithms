@@ -26,7 +26,7 @@ import com.ilyagubarev.algorithms.adt.analysis.Counter;
  * @since 11 September 2013
  * @author Ilya Gubarev
  */
-public final class InsertionSorting extends AbstractSorting {
+public final class InsertionSorting extends AbstractSorter {
 
     @Override
     public void sort(Comparable[] array, Counter tests, Counter exchanges) {

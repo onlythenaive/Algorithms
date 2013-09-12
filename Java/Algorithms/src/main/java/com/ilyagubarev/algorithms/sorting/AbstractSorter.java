@@ -26,7 +26,18 @@ import com.ilyagubarev.algorithms.adt.analysis.Counter;
  * @since 07 September 2013
  * @author Ilya Gubarev
  */
-public abstract class AbstractSorting implements Sorting {
+public abstract class AbstractSorter {
+
+    /**
+     * Sorts specified array in a natural order.
+     *
+     * @param array an array to be sorted.
+     * @param tests a counter of test operations.
+     * @param exchanges a counter of item exchanging operations.
+     *
+     * @see Counter
+     */
+    public abstract void sort(Comparable[] array, Counter tests, Counter exchanges);
 
     /**
      * Exchanges a couple of array items of specified indeces with each other.
