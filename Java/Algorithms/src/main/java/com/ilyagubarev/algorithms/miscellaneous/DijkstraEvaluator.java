@@ -18,8 +18,8 @@ package com.ilyagubarev.algorithms.miscellaneous;
 import java.io.IOException;
 import java.io.Reader;
 
-import com.ilyagubarev.algorithms.adt.ItemsStack;
-import com.ilyagubarev.algorithms.adt.SimpleLinkedStack;
+import com.ilyagubarev.algorithms.adt.collections.ItemsStack;
+import com.ilyagubarev.algorithms.adt.collections.SimpleLinkedStack;
 import com.ilyagubarev.algorithms.utils.SourceTokenizer;
 
 /**

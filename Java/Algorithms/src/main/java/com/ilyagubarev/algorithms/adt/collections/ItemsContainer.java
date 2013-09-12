@@ -13,39 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt;
+package com.ilyagubarev.algorithms.adt.collections;
+
+import java.io.Serializable;
 
 /**
- * FIFO policy collection common interface.
+ * Items container common interface.
  *
- * @see ItemsContainer
+ * @see Iterable
+ * @see Serializable
  *
- * @version 1.02, 03 September 2013
- * @since 02 September 2013
+ * @version 1.01, 03 September 2013
+ * @since 03 September 2013
  * @author Ilya Gubarev
  */
-public interface ItemsQueue<E> extends ItemsContainer<E> {
+public interface ItemsContainer<E> extends Iterable<E>, Serializable {
 
     /**
-     * Gets the oldest item.
+     * Gets current size of the container.
      *
-     * @return the oldest item.
-     * @throws IllegalStateException if the queue is empty.
+     * @return current size.
      */
-    E dequeue();
+    int getSize();
 
     /**
-     * Adds a new item to the queue.
+     * Checks if the container is empty.
      *
-     * @param item an item to be enqueued.
+     * @return true if the container is empty.
      */
-    void enqueue(E item);
-
-    /**
-     * Gets the oldest item and removes from the queue.
-     *
-     * @return the oldest item.
-     * @throws IllegalStateException if the queue is empty.
-     */
-    E poll();
+    boolean isEmpty();    
 }

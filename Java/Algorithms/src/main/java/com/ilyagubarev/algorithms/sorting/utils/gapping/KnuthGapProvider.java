@@ -18,8 +18,8 @@ package com.ilyagubarev.algorithms.sorting.utils.gapping;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.ilyagubarev.algorithms.adt.ItemsStack;
-import com.ilyagubarev.algorithms.adt.SimpleLinkedStack;
+import com.ilyagubarev.algorithms.adt.collections.ItemsStack;
+import com.ilyagubarev.algorithms.adt.collections.SimpleLinkedStack;
 
 /**
  * Gap value provider based on Donald Knuth sequence.
