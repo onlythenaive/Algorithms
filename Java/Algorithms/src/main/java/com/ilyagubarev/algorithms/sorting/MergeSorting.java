@@ -18,13 +18,65 @@ package com.ilyagubarev.algorithms.sorting;
 import com.ilyagubarev.algorithms.adt.analysis.Counter;
 
 /**
+ * "Divide & merge" method sorting algorithm implementation.
  *
- * @author gubarev
+ * @see AbstractSorting
+ *
+ * @version 1.01, 12 September 2013
+ * @since 11 September 2013
+ * @author Ilya Gubarev
  */
 public final class MergeSorting extends AbstractSorting {
 
+    private Comparable[] _auxillary;
+
     @Override
     public void sort(Comparable[] array, Counter tests, Counter exchanges) {
-        throw new UnsupportedOperationException();
-    }    
+        _auxillary = new Comparable[array.length];
+        sort(array, 0, array.length - 1, tests, exchanges);
+    }
+
+    /**
+     * Merges two sorted subarrays with each other.
+     *
+     * @param array an array containing sorted subarrays.
+     * @param leftFirst the first item index of left sorted subarray.
+     * @param leftLast the last item index of left sorted subarray.
+     * @param rightLast the last item index of right sorted subarray.
+     * @param tests a counter of test operations.
+     * @param exchanges a counter of item exchanging operations.     *
+     * @throws RuntimeException if specified indeces are illegal.
+     */
+    void merge(Comparable[] array, int leftFirst, int leftLast,
+            int rightLast, Counter tests, Counter exchanges) {
+        for (int i = leftFirst; i <= rightLast; ++i) {
+            _auxillary[i] = array[i];
+            exchanges.increment();
+        }
+        int left = leftFirst;
+        int right = leftLast + 1;
+        for (int i = leftFirst; i <= rightLast; ++i) {
+            if (left > leftLast) {
+                array[i] = _auxillary[right++];
+            } else if (right > rightLast) {
+                array[i] = _auxillary[left++];
+            } else if (isLess(_auxillary, right, left, tests)) {
+                array[i] = _auxillary[right++];
+            } else {
+                array[i] = _auxillary[left++];
+            }
+            exchanges.increment();
+        }
+    }
+
+    void sort(Comparable[] array, int leftFirst, int rightLast,
+            Counter tests, Counter exchanges) {
+        if (rightLast <= leftFirst) {
+            return;
+        }
+        int leftLast = leftFirst + (rightLast - leftFirst) / 2;
+        sort(array, leftFirst, leftLast, tests, exchanges);
+        sort(array, leftLast + 1, rightLast, tests, exchanges);
+        merge(array, leftFirst, leftLast, rightLast, tests, exchanges);
+    }
 }
