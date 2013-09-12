@@ -16,13 +16,14 @@
 package com.ilyagubarev.algorithms.sorting;
 
 import com.ilyagubarev.algorithms.adt.analysis.Counter;
+import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
 
 /**
  * Donald Shell method sorting algorithm implementation.
  *
  * @see AbstractSorting
  *
- * @version 1.01, 11 September 2013
+ * @version 1.02, 12 September 2013
  * @since 11 September 2013
  * @author Ilya Gubarev
  */
@@ -33,26 +34,27 @@ public final class ShellSorting extends AbstractSorting {
      *
      * @param provider gap value provider.
      * @return a new instance of ShellSorting.
+     *
+     * @see GapProvider
      */
-    public static ShellSorting create(Object provider) {
+    public static ShellSorting create(GapProvider provider) {
         if (provider == null) {
             throw new NullPointerException("gaps provider is null");
         }
         return new ShellSorting(provider);
     }
 
-    private final Object _provider;
+    private final GapProvider _provider;
 
-    private ShellSorting(Object provider) {
+    private ShellSorting(GapProvider provider) {
         _provider = provider;
     }
 
     @Override
     public void sort(Comparable[] array, Counter tests, Counter exchanges) {
-        int gap = 0;
-        int gapNumber = 0;
-        do {
-            gap = getNextGap(array.length, gap, gapNumber++);
+        _provider.reset(array.length);
+        while (_provider.isEmpty()) {
+            int gap = _provider.getNext();
             for (int pivot = gap; pivot < array.length; ++pivot) {
                 int i = pivot;
                 while ((i >= gap) && (isLess(array, i, i - gap, tests))) {
@@ -60,26 +62,6 @@ public final class ShellSorting extends AbstractSorting {
                     i = i - gap;
                 }
             }
-        } while (gap >= 1);
-    }
-
-    /**
-     * 
-     *
-     * @param arrayLength 
-     * @param currentGap 
-     * @param gapNumber 
-     * @return 
-     */
-    protected int getNextGap(int arrayLength, int currentGap, int gapNumber) {
-        if (gapNumber == 0) {
-            int result = 1;
-            while (result < arrayLength / 3) {
-                result = result * 3 + 1;
-            }
-            return result;
-        } else {
-            return currentGap / 3;
         }
     }
 }
