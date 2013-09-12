@@ -23,32 +23,26 @@ import java.util.Date;
  *
  * @see Serializable
  *
- * @version 1.01, 03 September 2013
+ * @version 1.02, 12 September 2013
  * @since 03 September 2013
  * @author Ilya Gubarev
  */
 public class Stopwatch implements Serializable {
 
+    private final String _id;
+    private final long _start;
+
     /**
      * Creates and starts a new instance of Stopwatch.
      *
      * @param id stopwatch identifier.
-     * @return a new instance of Stopwatch.
-     * @throws IllegalArgumentException if specified id is null.
      */
-    public static Stopwatch create(String id) {
+    public Stopwatch(String id) {
         if (id == null) {
-            throw new IllegalArgumentException("stopwatch id is null");
+            throw new NullPointerException("id is null");
         }
-        return new Stopwatch(id, System.currentTimeMillis());
-    }
-
-    private final String _id;
-    private final long _start;
-
-    Stopwatch(String id, long start) {
         _id = id;
-        _start = start;
+        _start = System.currentTimeMillis();
     }
 
     /**
@@ -56,16 +50,16 @@ public class Stopwatch implements Serializable {
      *
      * @return stopwatch identifier.
      */
-    public String getId() {
+    public final String getId() {
         return _id;
     }
 
     /**
-     * Gets elapsed time in milliseconds since stopwatch start.
+     * Gets elapsed time in milliseconds since stopwatch has been started.
      *
      * @return elapsed time.
      */
-    public long getElapsedTime() {
+    public final long getElapsedTime() {
         return System.currentTimeMillis() - _start;
     }
 
@@ -74,13 +68,13 @@ public class Stopwatch implements Serializable {
      *
      * @return start time.
      */
-    public Date getStartTime() {
+    public final Date getStartTime() {
         return new Date(_start);
     }
 
     @Override
     public String toString() {
         long elapsed = getElapsedTime();
-        return String.format("[%s stopwatch: %d ms elapsed]", _id, elapsed);
+        return String.format("[stopwatch (%s): %d ms elapsed]", _id, elapsed);
     }
 }
