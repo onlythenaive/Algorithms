@@ -15,34 +15,34 @@
  */
 package com.ilyagubarev.algorithms.adt.analysis;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Simple stopwatch.
  *
- * @see Serializable
- *
- * @version 1.02, 12 September 2013
+ * @version 1.03, 12 September 2013
  * @since 03 September 2013
  * @author Ilya Gubarev
  */
-public class Stopwatch implements Serializable {
+public class Stopwatch {
 
     private final String _id;
-    private final long _start;
+    private final boolean _resetable;
+
+    private long _start;
 
     /**
-     * Creates and starts a new instance of Stopwatch.
+     * Creates a new instance of Stopwatch.
      *
      * @param id stopwatch identifier.
+     * @param resetable true if reset operation is supported.
      */
-    public Stopwatch(String id) {
+    public Stopwatch(String id, boolean resetable) {
         if (id == null) {
             throw new NullPointerException("id is null");
         }
         _id = id;
-        _start = System.currentTimeMillis();
+        _resetable = resetable;
     }
 
     /**
@@ -55,12 +55,12 @@ public class Stopwatch implements Serializable {
     }
 
     /**
-     * Gets elapsed time in milliseconds since stopwatch has been started.
+     * Gets elapsed time in milliseconds.
      *
      * @return elapsed time.
      */
     public final long getElapsedTime() {
-        return System.currentTimeMillis() - _start;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -70,6 +70,21 @@ public class Stopwatch implements Serializable {
      */
     public final Date getStartTime() {
         return new Date(_start);
+    }
+
+    public final void start() {
+        _start = System.currentTimeMillis();
+    }
+
+    public final void stop() {
+        
+    }
+
+    public final void reset() {
+        if (!_resetable) {
+            throw new UnsupportedOperationException("reset is not supported");
+        }
+        
     }
 
     @Override
