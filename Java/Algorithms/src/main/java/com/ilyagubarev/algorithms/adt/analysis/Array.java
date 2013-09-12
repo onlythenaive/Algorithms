@@ -196,18 +196,3 @@ public final class Array {
         _source[index] = item;
     }
 }
-
-class AuxMemory {
-
-    void allocate(int size) {
-        
-    }
-
-    <T> T read(int index) {
-        throw new UnsupportedOperationException();
-    }
-
-    void write(int index, Object data) {
-        
-    }
-}
