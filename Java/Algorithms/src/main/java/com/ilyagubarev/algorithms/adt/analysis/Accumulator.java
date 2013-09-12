@@ -22,7 +22,7 @@ import java.io.Serializable;
  *
  * @see Serializable
  *
- * @version 1.02, 03 September 2013
+ * @version 1.02, 12 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
