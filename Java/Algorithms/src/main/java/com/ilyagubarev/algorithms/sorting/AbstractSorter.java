@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
+import com.ilyagubarev.algorithms.adt.analysis.Array;
+import com.ilyagubarev.algorithms.adt.analysis.AuxMemory;
 import com.ilyagubarev.algorithms.adt.analysis.Counter;
 import com.ilyagubarev.algorithms.adt.analysis.Stopwatch;
 
@@ -27,9 +29,8 @@ import com.ilyagubarev.algorithms.adt.analysis.Stopwatch;
  */
 public abstract class AbstractSorter {
 
-    public final void sort(Comparable[] array, Counter reads, Counter writes, Counter tests, Stopwatch stopwatch) {
-        
-        post();
+    public final boolean sort(Array target, AuxMemory aux, Stopwatch watch) {
+        throw new UnsupportedOperationException();
     }
 
     protected void prepare() {
