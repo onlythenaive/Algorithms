@@ -53,7 +53,7 @@ public final class ShellSorting extends AbstractSorting {
     @Override
     public void sort(Comparable[] array, Counter tests, Counter exchanges) {
         _provider.reset(array.length);
-        while (_provider.isEmpty()) {
+        while (!_provider.isEmpty()) {
             int gap = _provider.getNext();
             for (int pivot = gap; pivot < array.length; ++pivot) {
                 int i = pivot;
