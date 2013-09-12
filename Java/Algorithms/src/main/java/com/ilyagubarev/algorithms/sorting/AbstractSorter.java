@@ -16,17 +16,29 @@
 package com.ilyagubarev.algorithms.sorting;
 
 import com.ilyagubarev.algorithms.adt.analysis.Counter;
+import com.ilyagubarev.algorithms.adt.analysis.Stopwatch;
 
 /**
  * Sorting algorithm common implementation.
  *
- * @see Sorting
- *
- * @version 1.02, 11 September 2013
+ * @version 1.02, 12 September 2013
  * @since 07 September 2013
  * @author Ilya Gubarev
  */
 public abstract class AbstractSorter {
+
+    public final void sort(Comparable[] array, Counter reads, Counter writes, Counter tests, Stopwatch stopwatch) {
+        
+        post();
+    }
+
+    protected void prepare() {
+        
+    }
+
+    protected void post() {
+        
+    }
 
     /**
      * Sorts specified array in a natural order.
