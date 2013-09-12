@@ -25,6 +25,7 @@ public class AuxMemory {
     private final Counter _allocations;
     private final Counter _reads;
     private final Counter _writes;
+    private final Counter _tests;
 
     private int _maxAllocation;
     private int _totalAllocation;
@@ -43,6 +44,7 @@ public class AuxMemory {
         _allocations = new Counter(id);
         _reads = new Counter(id);
         _writes = new Counter(id);
+        _tests = new Counter(id);        
     }
 
     public void allocate(int size) {
@@ -82,8 +84,17 @@ public class AuxMemory {
         return _writes.getValue();
     }
 
+    public long getTestsCount() {
+        return _tests.getValue();
+    }
+
     public boolean isAllocated() {
         return _pool == null;
+    }
+
+    public boolean less(int subject, int sample) {
+        _tests.increment();
+        return ((Comparable) read(subject)).compareTo(read(sample)) < 0;
     }
 
     public <T> T read(int index) {

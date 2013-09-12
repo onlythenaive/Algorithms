@@ -17,11 +17,10 @@ package com.ilyagubarev.algorithms.sorting;
 
 import com.ilyagubarev.algorithms.adt.analysis.Array;
 import com.ilyagubarev.algorithms.adt.analysis.AuxMemory;
-import com.ilyagubarev.algorithms.adt.analysis.Counter;
 import com.ilyagubarev.algorithms.adt.analysis.Stopwatch;
 
 /**
- * Sorting algorithm common implementation.
+ * Sorting algorithm analyser common implementation.
  *
  * @version 1.02, 12 September 2013
  * @since 07 September 2013
@@ -29,63 +28,51 @@ import com.ilyagubarev.algorithms.adt.analysis.Stopwatch;
  */
 public abstract class AbstractSorter {
 
+    /**
+     * Sorts the target by a concrete method in natural order.
+     *
+     * @param target a target array to be sorted.
+     * @param aux an auxillary memory.
+     * @param watch a stopwatch for time consumption registration.
+     * @return true, if the target is sorted in natural order.
+     *
+     * @see Array
+     * @see AuxMemory
+     * @see Stopwatch
+     */
     public final boolean sort(Array target, AuxMemory aux, Stopwatch watch) {
-        throw new UnsupportedOperationException();
+        prepare(target.getSize());
+        watch.start();
+        method(target, aux);
+        watch.stop();
+        post();
+        return target.isSorted();
     }
 
-    protected void prepare() {
-        
+    /**
+     * Concrete sorting method implementation.
+     *
+     * @param target a target array to be sorted.
+     * @param aux an auxillary memory.
+     *
+     * @see Array
+     * @see AuxMemory
+     */
+    protected abstract void method(Array target, AuxMemory aux);
+
+    /**
+     * Pre-sorting actions (f.e. gap sequence generation for Shell method).
+     *
+     * @param n total amount of items in the target.
+     */
+    protected void prepare(int n) {
+
     }
 
+    /**
+     * Post-sorting actions.
+     */
     protected void post() {
-        
-    }
 
-    /**
-     * Sorts specified array in a natural order.
-     *
-     * @param array an array to be sorted.
-     * @param tests a counter of test operations.
-     * @param exchanges a counter of item exchanging operations.
-     *
-     * @see Counter
-     */
-    public abstract void sort(Comparable[] array, Counter tests, Counter exchanges);
-
-    /**
-     * Exchanges a couple of array items of specified indeces with each other.
-     *
-     * @param array an array with the objects to be exchanged.
-     * @param firstIndex an index of the first object.
-     * @param secondIndex an index of the second object.
-     * @param counter a counter to register the operation.
-     * @throws RuntimeException if the indeces are illegal.
-     *
-     * @see Counter
-     */
-    protected void exchange(Object[] array, int firstIndex, int secondIndex,
-            Counter counter) {
-        counter.increment();
-        Object buffer = array[firstIndex];
-        array[firstIndex] = array[secondIndex];
-        array[secondIndex] = buffer;
-    }
-
-    /**
-     * Checks if one array item is less than another.
-     *
-     * @param subjectIndex an index of a subject to be tested.
-     * @param sampleIndex an index of a sample object.
-     * @param counter a counter to register the operation.
-     * @return true if the subject is less than the sample.
-     * @throws ClassCastException if the objects are incomparable.
-     * @throws RuntimeException if the indeces are illegal.
-     *
-     * @see Counter
-     */
-    protected boolean isLess(Comparable[] array, int subjectIndex,
-            int sampleIndex, Counter counter) {
-        counter.increment();
-        return array[subjectIndex].compareTo(array[sampleIndex]) < 0;
     }
 }

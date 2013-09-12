@@ -15,53 +15,53 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.analysis.Counter;
+import com.ilyagubarev.algorithms.adt.analysis.Array;
+import com.ilyagubarev.algorithms.adt.analysis.AuxMemory;
 import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
 
 /**
  * Donald Shell method sorting algorithm implementation.
  *
- * @see AbstractSorting
+ * @see AbstractSorter
  *
- * @version 1.02, 12 September 2013
+ * @version 1.03, 12 September 2013
  * @since 11 September 2013
  * @author Ilya Gubarev
  */
-public final class ShellSorting extends AbstractSorter {
+public final class ShellSorter extends AbstractSorter {
+
+    private final GapProvider _provider;
 
     /**
      * Creates a new instance of ShellSorting with specified gap provider.
      *
      * @param provider gap value provider.
-     * @return a new instance of ShellSorting.
      *
      * @see GapProvider
      */
-    public static ShellSorting create(GapProvider provider) {
+    public ShellSorter(GapProvider provider) {
         if (provider == null) {
             throw new NullPointerException("gaps provider is null");
         }
-        return new ShellSorting(provider);
-    }
-
-    private final GapProvider _provider;
-
-    private ShellSorting(GapProvider provider) {
         _provider = provider;
     }
 
     @Override
-    public void sort(Comparable[] array, Counter tests, Counter exchanges) {
-        _provider.reset(array.length);
+    protected void method(Array target, AuxMemory aux) {
         while (!_provider.isEmpty()) {
             int gap = _provider.getNext();
-            for (int pivot = gap; pivot < array.length; ++pivot) {
+            for (int pivot = gap; pivot < target.getSize(); ++pivot) {
                 int i = pivot;
-                while ((i >= gap) && (isLess(array, i, i - gap, tests))) {
-                    exchange(array, i, i - gap, exchanges);
+                while (i >= gap && target.less(i, i - gap)) {
+                    target.swap(i, i - gap);
                     i = i - gap;
                 }
             }
         }
+    }
+
+    @Override
+    protected void prepare(int n) {
+        _provider.reset(n);
     }
 }

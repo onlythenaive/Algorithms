@@ -15,29 +15,28 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.analysis.Counter;
+import com.ilyagubarev.algorithms.adt.analysis.Array;
+import com.ilyagubarev.algorithms.adt.analysis.AuxMemory;
 
 /**
- * Selection sorting algorithm implementation.
+ * Insertion sorting algorithm implementation.
  *
- * @see AbstractSorting
+ * @see AbstractSorter
  *
- * @version 1.02, 11 September 2013
- * @since 07 September 2013
+ * @version 1.02, 12 September 2013
+ * @since 11 September 2013
  * @author Ilya Gubarev
  */
-public final class SelectionSorting extends AbstractSorter {
+public final class InsertionSorter extends AbstractSorter {
 
     @Override
-    public void sort(Comparable[] array, Counter tests, Counter exchanges) {
-        for (int pivot = 0; pivot < array.length; ++pivot) {
-            int min = pivot;
-            for (int i = pivot + 1; i < array.length; ++i) {
-                if (isLess(array, i, min, tests)) {
-                    min = i;
-                }
+    protected void method(Array target, AuxMemory aux) {
+        for (int pivot = 1; pivot < target.getSize(); ++pivot) {
+            int i = pivot;
+            while (i > 0 && target.less(i, i - 1)) {
+                target.swap(i, i - 1);
+                --i;
             }
-            exchange(array, pivot, min, exchanges);
         }
     }
 }

@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
+import com.ilyagubarev.algorithms.adt.analysis.Array;
+import com.ilyagubarev.algorithms.adt.analysis.AuxMemory;
 import com.ilyagubarev.algorithms.adt.analysis.Counter;
 
 /**
@@ -28,55 +30,40 @@ import com.ilyagubarev.algorithms.adt.analysis.Counter;
  */
 public final class MergeSorting extends AbstractSorter {
 
-    private Comparable[] _auxillary;
-
     @Override
-    public void sort(Comparable[] array, Counter tests, Counter exchanges) {
-        _auxillary = new Comparable[array.length];
-        sort(array, 0, array.length - 1, tests, exchanges);
+    protected void method(Array target, AuxMemory aux) {
+        aux.allocate(target.getSize());
+        sort(target, 0, target.getSize(), aux);
     }
 
-    /**
-     * Merges two sorted subarrays with each other.
-     *
-     * @param array an array containing sorted subarrays.
-     * @param leftFirst the first item index of left sorted subarray.
-     * @param leftLast the last item index of left sorted subarray.
-     * @param rightLast the last item index of right sorted subarray.
-     * @param tests a counter of test operations.
-     * @param exchanges a counter of item exchanging operations.     *
-     * @throws RuntimeException if specified indeces are illegal.
-     */
-    void merge(Comparable[] array, int leftFirst, int leftLast,
-            int rightLast, Counter tests, Counter exchanges) {
+    private void merge(Array target, int leftFirst, int leftLast,
+            int rightLast, AuxMemory aux) {
         for (int i = leftFirst; i <= rightLast; ++i) {
-            _auxillary[i] = array[i];
-            exchanges.increment();
+            target.set(i, aux, i);
         }
         int left = leftFirst;
         int right = leftLast + 1;
         for (int i = leftFirst; i <= rightLast; ++i) {
             if (left > leftLast) {
-                array[i] = _auxillary[right++];
+                target.get(i, aux, right++);
             } else if (right > rightLast) {
-                array[i] = _auxillary[left++];
-            } else if (isLess(_auxillary, right, left, tests)) {
-                array[i] = _auxillary[right++];
+                target.get(i, aux, left++);
+            } else if (aux.less(right, left)) {
+                target.get(i, aux, right++);
             } else {
-                array[i] = _auxillary[left++];
+                target.get(i, aux, left++);
             }
-            exchanges.increment();
         }
     }
 
-    void sort(Comparable[] array, int leftFirst, int rightLast,
-            Counter tests, Counter exchanges) {
+    private void sort(Array target, int leftFirst, int rightLast,
+            AuxMemory aux) {
         if (rightLast <= leftFirst) {
             return;
         }
         int leftLast = leftFirst + (rightLast - leftFirst) / 2;
-        sort(array, leftFirst, leftLast, tests, exchanges);
-        sort(array, leftLast + 1, rightLast, tests, exchanges);
-        merge(array, leftFirst, leftLast, rightLast, tests, exchanges);
+        sort(target, leftFirst, leftLast, aux);
+        sort(target, leftLast + 1, rightLast, aux);
+        merge(target, leftFirst, leftLast, rightLast, aux);
     }
 }

@@ -183,7 +183,7 @@ public final class Array {
             contents.append("; ");
         }
         contents.append("}");
-        return String.format("[ array (%s): %s]", _id, contents);
+        return String.format("[array (%s): %s]", _id, contents);
     }
 
     private Comparable read(int index) {
