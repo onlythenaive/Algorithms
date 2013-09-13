@@ -15,10 +15,19 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
+import com.ilyagubarev.algorithms.adt.ItemArray;
+import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
+import com.ilyagubarev.algorithms.adt.ItemHelper;
+import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+
 /**
  *
  * @author Ilya Gubarev
  */
 public interface Sorter {
-    
+
+    void prepare(int n);
+
+    void sort(ItemArray target, ItemHelper helper,
+            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory);
 }
