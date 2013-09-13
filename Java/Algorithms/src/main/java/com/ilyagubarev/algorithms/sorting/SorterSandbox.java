@@ -23,20 +23,23 @@ import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.tools.Stopwatch;
 
 /**
+ * Sorting method analyses sandbox.
  *
+ * @version 1.01, 13 September 2013
+ * @since 13 September 2013
  * @author Ilya Gubarev
  */
 public final class SorterSandbox {
 
     /**
-     * 
+     * Runs specified sorter on the target.
      *
-     * @param sorter
-     * @param target
-     * @param helper
-     * @param arrayFactory
-     * @param nodeFactory
-     * @param stopwatch
+     * @param sorter sorting algorithm implementation.
+     * @param target target array to be sorted.
+     * @param helper item utility methods provider.
+     * @param arrayFactory item arrays allocator.
+     * @param nodeFactory item nodes provider.
+     * @param stopwatch time consumption registry.
      *
      * @see ItemArray
      * @see ItemArrayFactory
