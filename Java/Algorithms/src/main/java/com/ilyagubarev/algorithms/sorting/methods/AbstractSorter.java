@@ -74,17 +74,20 @@ public abstract class AbstractSorter implements Sorter {
      * @param first an index of the first item.
      * @param second an index of the second item.
      * @param helper item utility method provider.
+     * @return true is specified items are swapped.
      *
      * @see ItemArray
      * @see ItemHelper
      */
-    protected final void swapIfLess(ItemArray target, int first, int second,
+    protected final boolean swapIfLess(ItemArray target, int first, int second,
             ItemHelper helper) {
         Item item1 = target.read(first);
         Item item2 = target.read(second);
         if (helper.less(item1, item2)) {
             target.write(first, item2);
             target.write(second, item1);
+            return true;
         }
+        return false;
     }
 }
