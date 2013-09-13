@@ -15,8 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.analysis.Array;
-import com.ilyagubarev.algorithms.adt.analysis.AuxMemory;
+import com.ilyagubarev.algorithms.adt.collections.Array;
+import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
 import com.ilyagubarev.algorithms.adt.tools.Counter;
 
 /**
