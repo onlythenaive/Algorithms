@@ -16,10 +16,9 @@
 package com.ilyagubarev.algorithms.adt;
 
 import com.ilyagubarev.algorithms.adt.tools.Counter;
-import com.ilyagubarev.algorithms.adt.tools.Registry;
 
 /**
- * Provider of items, item nodes and item arrays.
+ * Items provider.
  *
  * @version 1.02, 13 September 2013
  * @since 13 September 2013
@@ -27,60 +26,20 @@ import com.ilyagubarev.algorithms.adt.tools.Registry;
  */
 public final class ItemFactory {
 
-    private final Registry _arrayAllocations;
-    private final Counter _itemAllocations;
-    private final Counter _nodeAllocations;
+    private final Counter _creations;
 
     /**
      * Creates a new instance of ItemFactory.
      *
-     * @param arrayAllocations a registry of item array allocations.
-     * @param itemAllocations a counter of item allocations.
-     * @param nodeAllocations a counter of item node allocations.
+     * @param creations a counter of item creations.
      *
      * @see Counter
-     * @see Registry
      */
-    public ItemFactory(Registry arrayAllocations, Counter itemAllocations,
-            Counter nodeAllocations) {
-        if (arrayAllocations == null) {
-            throw new NullPointerException("array allocs registry is null");
+    public ItemFactory(Counter creations) {
+        if (creations == null) {
+            throw new NullPointerException("creations counter is null");
         }
-        if (itemAllocations == null) {
-            throw new NullPointerException("item allocs counter is null");
-        }
-        if (nodeAllocations == null) {
-            throw new NullPointerException("node allocs counter is null");
-        }
-        _itemAllocations = itemAllocations;
-        _arrayAllocations = arrayAllocations;
-        _nodeAllocations = nodeAllocations;
-    }
-
-    /**
-     * Creates a new instance of ItemArray of specified size.
-     *
-     * @param size a size of the array.
-     * @param reads a counter of array read operations.
-     * @param writes a counter of array write operations.
-     * @return a new instance of ItemArray.
-     * @throws IllegalArgumentException is specified size is negative.
-     *
-     * @see Counter
-     * @see ItemArray
-     */
-    public ItemArray allocate(int size, Counter reads, Counter writes) {
-        if (size < 0) {
-            throw new IllegalArgumentException("array size is negative");
-        }
-        if (reads == null) {
-            throw new NullPointerException("reads counter is null");            
-        }
-        if (writes == null) {
-            throw new NullPointerException("writes counter is null");            
-        }
-        _arrayAllocations.add(size);
-        return new ItemArray(size, reads, writes);
+        _creations = creations;
     }
 
     /**
@@ -92,7 +51,7 @@ public final class ItemFactory {
      * @see Item
      */
     public Item create(int source) {
-        _itemAllocations.increment();
+        _creations.increment();
         return new Item(source);
     }
 
@@ -105,7 +64,7 @@ public final class ItemFactory {
      * @see Item
      */
     public Item create(double source) {
-        _itemAllocations.increment();
+        _creations.increment();
         return new Item(source);
     }
 
@@ -121,35 +80,7 @@ public final class ItemFactory {
         if (source == null) {
             throw new NullPointerException("source is null");
         }
-        _itemAllocations.increment();
+        _creations.increment();
         return new Item(source);
-    }
-
-    /**
-     * Creates a new instance of ItemNode.
-     *
-     * @param item an item to be contained in the node.
-     * @param reads a counter of item read operations.
-     * @param linkReads a counter of link read operations.
-     * @param linkWrites a counter of link write operations.
-     * @return a new instance of ItemNode.
-     *
-     * @see Counter
-     * @see Item
-     * @see ItemNode
-     */
-    public ItemNode createNode(Item item, Counter reads, Counter linkReads,
-            Counter linkWrites) {
-        if (reads == null) {
-            throw new NullPointerException("reads counter is null");            
-        }
-        if (linkReads == null) {
-            throw new NullPointerException("link reads counter is null");            
-        }        
-        if (linkWrites == null) {
-            throw new NullPointerException("link writes counter is null");            
-        }        
-        _nodeAllocations.increment();
-        return new ItemNode(item, reads, linkReads, linkWrites);
     }
 }
