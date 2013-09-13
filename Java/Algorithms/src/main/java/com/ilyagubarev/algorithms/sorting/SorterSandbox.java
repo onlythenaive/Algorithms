@@ -15,6 +15,7 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
+import com.ilyagubarev.algorithms.sorting.methods.Sorter;
 import com.ilyagubarev.algorithms.adt.ItemArray;
 import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
 import com.ilyagubarev.algorithms.adt.ItemHelper;
