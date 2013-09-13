@@ -138,7 +138,7 @@ public final class Registry {
                 _minimum = value;
             }
         }
-        if (_addingDelegate == null) {
+        if (_addingDelegate != null) {
             _addingDelegate.execute(_values.getValue(), _total, getAverage(),
                     _maximum, _minimum);
         }
