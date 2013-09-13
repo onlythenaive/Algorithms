@@ -15,21 +15,30 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
+import com.ilyagubarev.algorithms.adt.Item;
+
 /**
- * Adding-only collection common interface.
+ * Item collection common interface.
  *
- * @see ItemsContainer
+ * @see Iterable
  *
- * @version 1.02, 03 September 2013
- * @since 02 September 2013
+ * @version 1.02, 13 September 2013
+ * @since 03 September 2013
  * @author Ilya Gubarev
  */
-public interface ItemsBag<E> extends ItemsContainer<E> {
-    
+public interface ItemCollection extends Iterable<Item> {
+
     /**
-     * Adds a new item to the bag.
+     * Gets current size of the container.
      *
-     * @param item an item to be added.
+     * @return current size.
      */
-    void add(E item);
+    int getSize();
+
+    /**
+     * Checks if the container is empty.
+     *
+     * @return true if the container is empty.
+     */
+    boolean isEmpty();    
 }

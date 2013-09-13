@@ -15,27 +15,29 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-//import com.ilyagubarev.algorithms.adt.ItemNode;
+//import com.ilyagubarev.algorithms.adt.Item;
 //import java.util.Iterator;
 //
+//import com.ilyagubarev.algorithms.adt.ItemNode;
+//
 ///**
-// * Simple ItemsStack implementation based on a linked list.
+// * Simple ItemStack implementation based on item nodes.
 // *
-// * @see ItemsStack
+// * @see ItemStack
 // *
-// * @version 1.02, 03 September 2013
+// * @version 1.03, 13 September 2013
 // * @since 02 September 2013
 // * @author Ilya Gubarev
 // */
-//public final class SimpleLinkedStack<E> implements ItemsStack<E> {
+//public final class SimpleItemNodeStack implements ItemStack {
 //
 //    private int _size;
-//    private ItemNode<E> _top;
+//    private ItemNode _top;
 //
 //    /**
-//     * Creates a new instance of SimpleLinkedStack.
+//     * Creates a new instance of SimpleItemNodeStack.
 //     */
-//    public SimpleLinkedStack() {
+//    public SimpleItemNodeStack() {
 //
 //    }
 //
@@ -70,17 +72,12 @@ package com.ilyagubarev.algorithms.adt.collections;
 //    }
 //
 //    @Override
-//    public void push(E item) {
-//        ItemNode<E> buffer = _top;
+//    public void push(Item item) {
+//        ItemNode buffer = _top;
 //        _top = new ItemNode<E>(item);
 //        _top.setNext(buffer);
 //        ++_size;
 //    }
-//
-//    @Override
-//    public String toString() {
-//        return String.format("[simple linked stack: %d items]", _size);
-//    }        
 //
 //    private void throwExceptionIfEmpty() {
 //        if (isEmpty()) {
