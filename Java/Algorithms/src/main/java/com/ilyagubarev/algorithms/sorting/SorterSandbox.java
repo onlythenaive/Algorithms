@@ -47,7 +47,10 @@ public final class SorterSandbox {
     public static void run(Sorter sorter, ItemArray target, ItemHelper helper,
             ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
             Stopwatch stopwatch) {
-        
+        sorter.prepare(target.getSize());
+        stopwatch.start();
+        sorter.sort(target, helper, arrayFactory, nodeFactory);
+        stopwatch.stop();
     }
 
     private SorterSandbox() {
