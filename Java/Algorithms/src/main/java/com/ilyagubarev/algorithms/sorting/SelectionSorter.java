@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 package com.ilyagubarev.algorithms.sorting;
-//
-//import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
-//import com.ilyagubarev.algorithms.adt.tools.Auxiliary;
-//
+
+import com.ilyagubarev.algorithms.adt.ItemArray;
+import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
+import com.ilyagubarev.algorithms.adt.ItemHelper;
+import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+
 ///**
 // * Sorting algorithm implementation based on selection method.
 // *
@@ -30,13 +32,14 @@ package com.ilyagubarev.algorithms.sorting;
 //public final class SelectionSorter extends AbstractSorter {
 //
 //    @Override
-//    protected void method(ItemsArray target, Auxiliary aux) {
+//    protected void method(ItemArray target, ItemHelper helper,
+//            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory) {
 //        for (int pivot = 0; pivot < target.getSize(); ++pivot) {
-////            int min = pivot;
-////            for (int i = pivot + 1; i < target.getSize(); ++i) {
-////                min = target.less(i, min) ? i : min;
-////            }
-////            target.swap(pivot, min);
-//        }
+//            int min = pivot;
+//            for (int i = pivot + 1; i < target.getSize(); ++i) {
+//                min = target.less(i, min) ? i : min;
+//            }
+//            target.swap(pivot, min);
+//        }        
 //    }
 //}

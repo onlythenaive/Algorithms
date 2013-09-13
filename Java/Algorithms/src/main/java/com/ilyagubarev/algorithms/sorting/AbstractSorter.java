@@ -30,28 +30,32 @@ import com.ilyagubarev.algorithms.adt.tools.Stopwatch;
  */
 public abstract class AbstractSorter {
 
+    private final ItemHelper _helper;
+    private final ItemArrayFactory _arrayFactory;
+    private final ItemNodeFactory _nodeFactory;
+    private final Stopwatch _stopwatch;
+
+    protected AbstractSorter(ItemHelper helper, ItemArrayFactory arrayFactory,
+            ItemNodeFactory nodeFactory, Stopwatch stopwatch) {
+        
+        _helper = helper;
+        _arrayFactory = arrayFactory;
+        _nodeFactory = nodeFactory;
+        _stopwatch = stopwatch;
+    }
+
     /**
      * Template sequence of sorting actions.
      *
      * @param target an array to be sorted.
-     * @param helper an item utility.
-     * @param arrayFactory item arrays provider.
-     * @param nodeFactory item nodes provider.
-     * @param stopwatch a stopwatch for time consumption registering.
      *
      * @see ItemArray
-     * @see ItemArrayFactory
-     * @see ItemHelper
-     * @see ItemNodeFactory
-     * @see Stopwatch
      */
-    public final void sort(ItemArray target, ItemHelper helper,
-            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
-            Stopwatch stopwatch) {
-        prepare(target.getSize());
-        stopwatch.start();
-        method(target, helper, arrayFactory, nodeFactory);
-        stopwatch.stop();
+    public final void sort(ItemArray target) {
+        prepare(target.getSize(), _arrayFactory, _nodeFactory);
+        _stopwatch.start();
+        method(target, _helper, _arrayFactory, _nodeFactory);
+        _stopwatch.stop();
         post();
     }
 
@@ -75,8 +79,14 @@ public abstract class AbstractSorter {
      * Actions before the sorting is started.
      *
      * @param n target array size.
+     * @param arrayFactory item arrays provider.
+     * @param nodeFactory item nodes provider.
+     * 
+     * @see ItemArrayFactory
+     * @see ItemNodeFactory
      */
-    protected void prepare(int n) {
+    protected void prepare(int n, ItemArrayFactory arrayFactory,
+            ItemNodeFactory nodeFactory) {
 
     }
 
@@ -85,5 +95,19 @@ public abstract class AbstractSorter {
      */
     protected void post() {
 
+    }
+
+    /**
+     * 
+     *
+     * @param target
+     * @param first
+     * @param second
+     * @param helper 
+     *
+     * @see 
+     */
+    protected final void swap(ItemArray target, int first, int second, ItemHelper helper) {
+        
     }
 }
