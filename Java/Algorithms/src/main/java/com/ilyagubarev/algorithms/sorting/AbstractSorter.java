@@ -15,64 +15,75 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-//import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
-//import com.ilyagubarev.algorithms.adt.tools.Stopwatch;
-//
-///**
-// * Sorting algorithm analyser common implementation.
-// *
-// * @version 1.02, 12 September 2013
-// * @since 07 September 2013
-// * @author Ilya Gubarev
-// */
-//public abstract class AbstractSorter {
-//
-//    /**
-//     * Sorts the target by a concrete method in natural order.
-//     *
-//     * @param target a target array to be sorted.
-//     * @param aux an auxillary memory.
-//     * @param watch a stopwatch for time consumption registration.
-//     * @return true, if the target is sorted in natural order.
-//     *
-//     * @see Array
-//     * @see AuxMemory
-//     * @see Stopwatch
-//     */
-//    public final boolean sort(ItemsArray target, Stopwatch watch) {
-//        prepare(target.getSize());
-//        watch.start();
-//        //method(target, aux);
-//        watch.stop();
-//        post();
-//        // return target.isSorted();
-//        throw new UnsupportedOperationException();
-//    }
-//
-//    /**
-//     * Concrete sorting method implementation.
-//     *
-//     * @param target a target array to be sorted.
-//     * @param aux an auxillary memory.
-//     *
-//     * @see Array
-//     * @see AuxMemory
-//     */
-//    protected abstract void method(ItemsArray target);
-//
-//    /**
-//     * Pre-sorting actions (f.e. gap sequence generation for Shell method).
-//     *
-//     * @param n total amount of items in the target.
-//     */
-//    protected void prepare(int n) {
-//
-//    }
-//
-//    /**
-//     * Post-sorting actions.
-//     */
-//    protected void post() {
-//
-//    }
-//}
+import com.ilyagubarev.algorithms.adt.ItemArray;
+import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
+import com.ilyagubarev.algorithms.adt.ItemHelper;
+import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.tools.Stopwatch;
+
+/**
+ * Sorting algorithm common implementation.
+ *
+ * @version 1.03, 13 September 2013
+ * @since 07 September 2013
+ * @author Ilya Gubarev
+ */
+public abstract class AbstractSorter {
+
+    /**
+     * Template sequence of sorting actions.
+     *
+     * @param target an array to be sorted.
+     * @param helper an item utility.
+     * @param arrayFactory item arrays provider.
+     * @param nodeFactory item nodes provider.
+     * @param stopwatch a stopwatch for time consumption registering.
+     *
+     * @see ItemArray
+     * @see ItemArrayFactory
+     * @see ItemHelper
+     * @see ItemNodeFactory
+     * @see Stopwatch
+     */
+    public final void sort(ItemArray target, ItemHelper helper,
+            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
+            Stopwatch stopwatch) {
+        prepare(target.getSize());
+        stopwatch.start();
+        method(target, helper, arrayFactory, nodeFactory);
+        stopwatch.stop();
+        post();
+    }
+
+    /**
+     * Concrete sorting method implementation.
+     *
+     * @param target an array to be sorted.
+     * @param helper an item utility.
+     * @param arrayFactory item arrays provider.
+     * @param nodeFactory item nodes provider.
+     *
+     * @see ItemArray
+     * @see ItemArrayFactory
+     * @see ItemHelper
+     * @see ItemNodeFactory
+     */
+    protected abstract void method(ItemArray target, ItemHelper helper,
+            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory);
+
+    /**
+     * Actions before the sorting is started.
+     *
+     * @param n target array size.
+     */
+    protected void prepare(int n) {
+
+    }
+
+    /**
+     * Actions after the sorting is completed.
+     */
+    protected void post() {
+
+    }
+}
