@@ -28,36 +28,23 @@ import com.ilyagubarev.algorithms.adt.tools.Registry;
 public final class ItemArrayFactory {
 
     private final Registry _allocations;
+    private final Counter _reads;
+    private final Counter _writes;
 
     /**
      * Creates a new instance of ItemArrayFactory.
      *
      * @param allocations a registry of allocations.
-     *
-     * @see Registry
-     */
-    public ItemArrayFactory(Registry allocations) {
-        if (allocations == null) {
-            throw new NullPointerException("allocations registry is null");
-        }        
-        _allocations = allocations;
-    }
-
-    /**
-     * Creates a new instance of ItemArray of specified size.
-     *
-     * @param size a size of the array.
      * @param reads a counter of array read operations.
      * @param writes a counter of array write operations.
-     * @return a new instance of ItemArray.
-     * @throws IllegalArgumentException is specified size is negative.
      *
      * @see Counter
-     * @see ItemArray
+     * @see Registry
      */
-    public ItemArray create(int size, Counter reads, Counter writes) {
-        if (size < 0) {
-            throw new IllegalArgumentException("array size is negative");
+    public ItemArrayFactory(Registry allocations, Counter reads,
+            Counter writes) {
+        if (allocations == null) {
+            throw new NullPointerException("allocations registry is null");
         }
         if (reads == null) {
             throw new NullPointerException("reads counter is null");            
@@ -65,7 +52,25 @@ public final class ItemArrayFactory {
         if (writes == null) {
             throw new NullPointerException("writes counter is null");            
         }
+        _allocations = allocations;
+        _reads = reads;
+        _writes = writes;
+    }
+
+    /**
+     * Creates a new instance of ItemArray of specified size.
+     *
+     * @param size a size of the array.
+     * @return a new instance of ItemArray.
+     * @throws IllegalArgumentException is specified size is negative.
+     *
+     * @see ItemArray
+     */
+    public ItemArray create(int size) {
+        if (size < 0) {
+            throw new IllegalArgumentException("array size is negative");
+        }
         _allocations.add(size);
-        return new ItemArray(size, reads, writes);
+        return new ItemArray(size, _reads, _writes);
     }
 }
