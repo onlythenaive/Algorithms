@@ -14,37 +14,35 @@
  * limitations under the License.
  */
 package com.ilyagubarev.algorithms.sorting.utils.gapping;
-//
-//import java.util.LinkedList;
-//import java.util.List;
-//
-//import com.ilyagubarev.algorithms.adt.collections.ItemsStack;
-//import com.ilyagubarev.algorithms.adt.collections.SimpleLinkedStack;
-//
-///**
-// * Gap value provider based on Donald Knuth sequence.
-// *
-// * @see GapProvider
-// *
-// * @version 1.01, 12 September 2013
-// * @since 12 September 2013
-// * @author Ilya Gubarev
-// */
-//public final class KnuthGapProvider extends GapProvider {
-//
-//    @Override
-//    protected List<Integer> getSequence(int n) {
-//        ItemsStack<Integer> reversed = new SimpleLinkedStack<Integer>();
-//        int gap = 1;
-//        int k = 1;
-//        do {
-//            reversed.push(gap);
-//            gap = ((int) Math.pow(3, ++k) - 1) / 2;
-//        } while (gap <= n / 3);
-//        List<Integer> result = new LinkedList<Integer>();
-//        while (!reversed.isEmpty()) {
-//            result.add(reversed.pop());
-//        }
-//        return result;
-//    }
-//}
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
+/**
+ * Gap value provider based on Donald Knuth sequence.
+ *
+ * @see GapProvider
+ *
+ * @version 1.01, 12 September 2013
+ * @since 12 September 2013
+ * @author Ilya Gubarev
+ */
+public final class KnuthGapProvider extends GapProvider {
+
+    @Override
+    protected List<Integer> getSequence(int n) {
+        Stack<Integer> reversed = new Stack<Integer>();
+        int gap = 1;
+        int k = 1;
+        do {
+            reversed.push(gap);
+            gap = ((int) Math.pow(3, ++k) - 1) / 2;
+        } while (gap <= n / 3);
+        List<Integer> result = new LinkedList<Integer>();
+        while (!reversed.isEmpty()) {
+            result.add(reversed.pop());
+        }
+        return result;
+    }
+}
