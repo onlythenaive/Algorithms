@@ -31,7 +31,7 @@ public final class ArraysHelper {
      *
      * @param array an array to be populated.
      */
-    public static void populate(Integer[] array) {
+    public static void populate(int[] array) {
         Random random = new Random();
         for (int i = 0; i < array.length; ++i) {
             array[i] = random.nextInt();
@@ -44,7 +44,7 @@ public final class ArraysHelper {
      * @param array an array to be populated.
      * @param maxValue a max value of random integers (exclusive).
      */
-    public static void populate(Integer[] array, int maxValue) {
+    public static void populate(int[] array, int maxValue) {
         Random random = new Random();
         for (int i = 0; i < array.length; ++i) {
             array[i] = random.nextInt(maxValue);
