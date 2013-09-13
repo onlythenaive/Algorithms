@@ -30,6 +30,11 @@ import com.ilyagubarev.algorithms.adt.ItemHelper;
  */
 public abstract class AbstractSorter implements Sorter {
 
+    @Override
+    public void prepare(int n) {
+        
+    }
+
     /**
      * Checks if the first item is less than the second.
      *
