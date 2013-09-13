@@ -17,7 +17,9 @@ package com.ilyagubarev.algorithms.sorting;
 
 import com.ilyagubarev.algorithms.adt.ItemArray;
 import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
+import com.ilyagubarev.algorithms.adt.ItemHelper;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.tools.Stopwatch;
 
 /**
  *
@@ -25,7 +27,30 @@ import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
  */
 public final class SorterSandbox {
 
-    void run(ItemArray target, ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory) {
+    /**
+     * 
+     *
+     * @param sorter
+     * @param target
+     * @param helper
+     * @param arrayFactory
+     * @param nodeFactory
+     * @param stopwatch
+     *
+     * @see ItemArray
+     * @see ItemArrayFactory
+     * @see ItemNodeFactory
+     * @see ItemHelper
+     * @see Sorter
+     * @see Stopwatch
+     */
+    public static void run(Sorter sorter, ItemArray target, ItemHelper helper,
+            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
+            Stopwatch stopwatch) {
         
+    }
+
+    private SorterSandbox() {
+
     }
 }
