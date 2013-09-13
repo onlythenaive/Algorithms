@@ -24,7 +24,25 @@ package com.ilyagubarev.algorithms.adt.tools;
  */
 public final class Statistics {
 
+    /**
+     * Callback delegate for the adding operation.
+     */
+    public static interface AddingDelegate {
+
+        /**
+         * Actions to be performed after a new value is added to the provider.
+         *
+         * @param n total collected values count.
+         * @param total total collected value.
+         * @param mean current average value.
+         * @param max current maximum value.
+         * @param min current minimum value.
+         */
+        void execute(long n, double total, double mean, double max, double min);
+    }
+
     private final Counter _values;
+    private final AddingDelegate _addingDelegate;
 
     private double _total;
     private Double _maximum;
@@ -34,7 +52,17 @@ public final class Statistics {
      * Creates a new instance of Statistics.
      */
     public Statistics() {
+        this(null);
+    }
+
+    /**
+     * Creates a new instance of Statistics.
+     *
+     * @param addingDelegate an instance of  delegate for the adding operation.
+     */
+    public Statistics(AddingDelegate addingDelegate) {
         _values = new Counter();
+        _addingDelegate = addingDelegate;
     }
 
     /**
@@ -109,6 +137,10 @@ public final class Statistics {
             if (_minimum > value) {
                 _minimum = value;
             }
+        }
+        if (_addingDelegate == null) {
+            _addingDelegate.execute(_values.getValue(), _total, getAverage(),
+                    _maximum, _minimum);
         }
     }
 }
