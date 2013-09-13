@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.collections.Array;
+import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
 import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
 import com.ilyagubarev.algorithms.adt.tools.Stopwatch;
 
@@ -40,13 +40,14 @@ public abstract class AbstractSorter {
      * @see AuxMemory
      * @see Stopwatch
      */
-    public final boolean sort(Array target, AuxMemory aux, Stopwatch watch) {
+    public final boolean sort(ItemsArray target, AuxMemory aux, Stopwatch watch) {
         prepare(target.getSize());
         watch.start();
         method(target, aux);
         watch.stop();
         post();
-        return target.isSorted();
+        // return target.isSorted();
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -58,7 +59,7 @@ public abstract class AbstractSorter {
      * @see Array
      * @see AuxMemory
      */
-    protected abstract void method(Array target, AuxMemory aux);
+    protected abstract void method(ItemsArray target, AuxMemory aux);
 
     /**
      * Pre-sorting actions (f.e. gap sequence generation for Shell method).

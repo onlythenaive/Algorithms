@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.collections.Array;
+import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
 import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
 import com.ilyagubarev.algorithms.adt.tools.Counter;
 
@@ -31,32 +31,32 @@ import com.ilyagubarev.algorithms.adt.tools.Counter;
 public final class MergeSorter extends AbstractSorter {
 
     @Override
-    protected void method(Array target, AuxMemory aux) {
+    protected void method(ItemsArray target, AuxMemory aux) {
         aux.allocate(target.getSize());
         sort(target, 0, target.getSize(), aux);
     }
 
-    private void merge(Array target, int leftFirst, int leftLast,
+    private void merge(ItemsArray target, int leftFirst, int leftLast,
             int rightLast, AuxMemory aux) {
-        for (int i = leftFirst; i <= rightLast; ++i) {
-            target.set(i, aux, i);
-        }
-        int left = leftFirst;
-        int right = leftLast + 1;
-        for (int i = leftFirst; i <= rightLast; ++i) {
-            if (left > leftLast) {
-                target.get(i, aux, right++);
-            } else if (right > rightLast) {
-                target.get(i, aux, left++);
-            } else if (aux.less(right, left)) {
-                target.get(i, aux, right++);
-            } else {
-                target.get(i, aux, left++);
-            }
-        }
+//        for (int i = leftFirst; i <= rightLast; ++i) {
+//            target.set(i, aux, i);
+//        }
+//        int left = leftFirst;
+//        int right = leftLast + 1;
+//        for (int i = leftFirst; i <= rightLast; ++i) {
+//            if (left > leftLast) {
+//                target.get(i, aux, right++);
+//            } else if (right > rightLast) {
+//                target.get(i, aux, left++);
+//            } else if (aux.less(right, left)) {
+//                target.get(i, aux, right++);
+//            } else {
+//                target.get(i, aux, left++);
+//            }
+//        }
     }
 
-    private void sort(Array target, int leftFirst, int rightLast,
+    private void sort(ItemsArray target, int leftFirst, int rightLast,
             AuxMemory aux) {
         if (rightLast <= leftFirst) {
             return;

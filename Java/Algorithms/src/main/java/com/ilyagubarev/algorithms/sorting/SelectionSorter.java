@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.collections.Array;
+import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
 import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
 
 /**
@@ -30,13 +30,13 @@ import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
 public final class SelectionSorter extends AbstractSorter {
 
     @Override
-    protected void method(Array target, AuxMemory aux) {
+    protected void method(ItemsArray target, AuxMemory aux) {
         for (int pivot = 0; pivot < target.getSize(); ++pivot) {
-            int min = pivot;
-            for (int i = pivot + 1; i < target.getSize(); ++i) {
-                min = target.less(i, min) ? i : min;
-            }
-            target.swap(pivot, min);
+//            int min = pivot;
+//            for (int i = pivot + 1; i < target.getSize(); ++i) {
+//                min = target.less(i, min) ? i : min;
+//            }
+//            target.swap(pivot, min);
         }
     }
 }

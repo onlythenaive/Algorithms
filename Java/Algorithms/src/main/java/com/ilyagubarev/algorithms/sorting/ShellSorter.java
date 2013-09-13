@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.collections.Array;
+import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
 import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
 import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
 
@@ -47,15 +47,15 @@ public final class ShellSorter extends AbstractSorter {
     }
 
     @Override
-    protected void method(Array target, AuxMemory aux) {
+    protected void method(ItemsArray target, AuxMemory aux) {
         while (!_provider.isEmpty()) {
             int gap = _provider.getNext();
             for (int pivot = gap; pivot < target.getSize(); ++pivot) {
-                int i = pivot;
-                while (i >= gap && target.less(i, i - gap)) {
-                    target.swap(i, i - gap);
-                    i = i - gap;
-                }
+//                int i = pivot;
+//                while (i >= gap && target.less(i, i - gap)) {
+//                    target.swap(i, i - gap);
+//                    i = i - gap;
+//                }
             }
         }
     }

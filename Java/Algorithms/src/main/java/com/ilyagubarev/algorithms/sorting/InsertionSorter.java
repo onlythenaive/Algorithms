@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.collections.Array;
+import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
 import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
 
 /**
@@ -30,13 +30,13 @@ import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
 public final class InsertionSorter extends AbstractSorter {
 
     @Override
-    protected void method(Array target, AuxMemory aux) {
+    protected void method(ItemsArray target, AuxMemory aux) {
         for (int pivot = 1; pivot < target.getSize(); ++pivot) {
             int i = pivot;
-            while (i > 0 && target.less(i, i - 1)) {
-                target.swap(i, i - 1);
-                --i;
-            }
+//            while (i > 0 && target.less(i, i - 1)) {
+//                target.swap(i, i - 1);
+//                --i;
+//            }
         }
     }
 }
