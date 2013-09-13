@@ -21,13 +21,34 @@ import com.ilyagubarev.algorithms.adt.ItemHelper;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
 
 /**
+ * Sorting algorithm common interface.
  *
+ * @version 1.03, 13 September 2013
+ * @since 10 September 2013
  * @author Ilya Gubarev
  */
 public interface Sorter {
 
+    /**
+     * Pre-sorting actions.
+     *
+     * @param n target array items count.
+     */
     void prepare(int n);
 
+    /**
+     * Concrete sorting method implementation.
+     *
+     * @param target target array to be sorted.
+     * @param helper item utility methods provider.
+     * @param arrayFactory item arrays allocator.
+     * @param nodeFactory item nodes provider.
+     *
+     * @see ItemArray
+     * @see ItemArrayFactory
+     * @see ItemNodeFactory
+     * @see ItemHelper
+     */
     void sort(ItemArray target, ItemHelper helper,
             ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory);
 }
