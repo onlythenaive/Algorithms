@@ -14,54 +14,53 @@
  * limitations under the License.
  */
 package com.ilyagubarev.algorithms.sorting.methods;
-//
-//import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
-//import com.ilyagubarev.algorithms.adt.tools.Auxiliary;
-//import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
-//
-///**
-// * Donald Shell method sorting algorithm implementation.
-// *
-// * @see AbstractSorter
-// *
-// * @version 1.03, 12 September 2013
-// * @since 11 September 2013
-// * @author Ilya Gubarev
-// */
-//public final class ShellSorter extends AbstractSorter {
-//
-//    private final GapProvider _provider;
-//
-//    /**
-//     * Creates a new instance of ShellSorting with specified gap provider.
-//     *
-//     * @param provider gap value provider.
-//     *
-//     * @see GapProvider
-//     */
-//    public ShellSorter(GapProvider provider) {
-//        if (provider == null) {
-//            throw new NullPointerException("gaps provider is null");
-//        }
-//        _provider = provider;
-//    }
-//
-//    @Override
-//    protected void method(ItemsArray target, Auxiliary aux) {
-//        while (!_provider.isEmpty()) {
-//            int gap = _provider.getNext();
-//            for (int pivot = gap; pivot < target.getSize(); ++pivot) {
-////                int i = pivot;
-////                while (i >= gap && target.less(i, i - gap)) {
-////                    target.swap(i, i - gap);
-////                    i = i - gap;
-////                }
-//            }
-//        }
-//    }
-//
-//    @Override
-//    protected void prepare(int n) {
-//        _provider.reset(n);
-//    }
-//}
+
+import com.ilyagubarev.algorithms.adt.ItemArray;
+import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
+import com.ilyagubarev.algorithms.adt.ItemHelper;
+import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
+
+/**
+ * Donald Shell method sorting algorithm implementation.
+ *
+ * @see AbstractSorter
+ *
+ * @version 1.04, 13 September 2013
+ * @since 11 September 2013
+ * @author Ilya Gubarev
+ */
+public final class ShellSorter extends AbstractSorter {
+
+    private final GapProvider _provider;
+
+    /**
+     * Creates a new instance of ShellSorting with specified gap provider.
+     *
+     * @param provider gap values provider.
+     *
+     * @see GapProvider
+     */
+    public ShellSorter(GapProvider provider) {
+        _provider = provider;
+    }
+
+    @Override
+    public void prepare(int n) {
+        _provider.reset(n);
+    }
+
+    @Override
+    public void sort(ItemArray target, ItemHelper helper,
+            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory) {
+        while (!_provider.isEmpty()) {
+            int gap = _provider.getNext();
+            for (int pivot = gap; pivot < target.getSize(); ++pivot) {
+                int i = pivot;
+                while (i >= gap && swapIfLess(target, i, i - gap, helper)) {
+                    i = i - gap;
+                }
+            }
+        }
+    }
+}
