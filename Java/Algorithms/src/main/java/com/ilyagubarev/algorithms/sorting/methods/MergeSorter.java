@@ -35,7 +35,7 @@ public final class MergeSorter extends AbstractSorter {
     public void sort(ItemArray target, ItemHelper helper,
             ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory) {
         ItemArray aux = arrayFactory.create(target.getSize());
-        sort(target, 0, target.getSize(), aux, helper);
+        sort(target, 0, target.getSize() - 1, aux, helper);
     }
 
     private void merge(ItemArray target, int leftFirst, int leftLast,
