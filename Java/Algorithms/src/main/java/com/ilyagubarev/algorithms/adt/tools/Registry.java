@@ -22,7 +22,7 @@ package com.ilyagubarev.algorithms.adt.tools;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class Statistics {
+public final class Registry {
 
     /**
      * Callback delegate for the adding operation.
@@ -51,7 +51,7 @@ public final class Statistics {
     /**
      * Creates a new instance of Statistics.
      */
-    public Statistics() {
+    public Registry() {
         this(null);
     }
 
@@ -60,7 +60,7 @@ public final class Statistics {
      *
      * @param addingDelegate an instance of  delegate for the adding operation.
      */
-    public Statistics(AddingDelegate addingDelegate) {
+    public Registry(AddingDelegate addingDelegate) {
         _values = new Counter();
         _addingDelegate = addingDelegate;
     }

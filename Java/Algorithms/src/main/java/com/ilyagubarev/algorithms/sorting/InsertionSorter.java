@@ -15,28 +15,28 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
-import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
-
-/**
- * Insertion sorting algorithm implementation.
- *
- * @see AbstractSorter
- *
- * @version 1.02, 12 September 2013
- * @since 11 September 2013
- * @author Ilya Gubarev
- */
-public final class InsertionSorter extends AbstractSorter {
-
-    @Override
-    protected void method(ItemsArray target, AuxMemory aux) {
-        for (int pivot = 1; pivot < target.getSize(); ++pivot) {
-            int i = pivot;
-//            while (i > 0 && target.less(i, i - 1)) {
-//                target.swap(i, i - 1);
-//                --i;
-//            }
-        }
-    }
-}
+//import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
+//import com.ilyagubarev.algorithms.adt.tools.Auxiliary;
+//
+///**
+// * Insertion sorting algorithm implementation.
+// *
+// * @see AbstractSorter
+// *
+// * @version 1.02, 12 September 2013
+// * @since 11 September 2013
+// * @author Ilya Gubarev
+// */
+//public final class InsertionSorter extends AbstractSorter {
+//
+//    @Override
+//    protected void method(ItemsArray target, Auxiliary aux) {
+//        for (int pivot = 1; pivot < target.getSize(); ++pivot) {
+//            int i = pivot;
+////            while (i > 0 && target.less(i, i - 1)) {
+////                target.swap(i, i - 1);
+////                --i;
+////            }
+//        }
+//    }
+//}

@@ -15,57 +15,58 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-/**
- * Linked list nodes iterator.
- *
- * @see Iterator
- * @see ListNode
- *
- * @version 1.02, 03 September 2013
- * @since 02 September 2013
- * @author Ilya Gubarev
- */
-public final class ListNodeIterator<E> implements Iterator<E> {
-
-    private ListNode<E> _current;
-
-    /**
-     * Creates a new instance of ListNodeIterator.
-     *
-     * @param start a starting node.
-     *
-     * @see ListNode
-     */
-    public ListNodeIterator(ListNode<E> start) {
-        _current = start;
-    }
-
-    @Override
-    public boolean hasNext() {
-        return _current != null;
-    }
-
-    @Override
-    public E next() {
-        if (hasNext()) {
-            E result = _current.getItem();
-            _current = _current.getNext();
-            return result;
-        } else {
-            throw new NoSuchElementException("iterator has no next element");
-        }
-    }
-
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException("removal is not supported");
-    }
-
-    @Override
-    public String toString() {
-        return String.format("[list node iterator at %s]", _current);
-    }
-}
+//import com.ilyagubarev.algorithms.adt.ItemNode;
+//import java.util.Iterator;
+//import java.util.NoSuchElementException;
+//
+///**
+// * Linked list nodes iterator.
+// *
+// * @see Iterator
+// * @see ListNode
+// *
+// * @version 1.02, 03 September 2013
+// * @since 02 September 2013
+// * @author Ilya Gubarev
+// */
+//public final class ListNodeIterator<E> implements Iterator<E> {
+//
+//    private ItemNode<E> _current;
+//
+//    /**
+//     * Creates a new instance of ListNodeIterator.
+//     *
+//     * @param start a starting node.
+//     *
+//     * @see ListNode
+//     */
+//    public ListNodeIterator(ItemNode<E> start) {
+//        _current = start;
+//    }
+//
+//    @Override
+//    public boolean hasNext() {
+//        return _current != null;
+//    }
+//
+//    @Override
+//    public E next() {
+//        if (hasNext()) {
+//            E result = _current.getItem();
+//            _current = _current.getNext();
+//            return result;
+//        } else {
+//            throw new NoSuchElementException("iterator has no next element");
+//        }
+//    }
+//
+//    @Override
+//    public void remove() {
+//        throw new UnsupportedOperationException("removal is not supported");
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return String.format("[list node iterator at %s]", _current);
+//    }
+//}

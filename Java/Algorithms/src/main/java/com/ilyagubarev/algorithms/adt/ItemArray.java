@@ -13,43 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt.collections;
+package com.ilyagubarev.algorithms.adt;
 
-import com.ilyagubarev.algorithms.adt.Item;
 import com.ilyagubarev.algorithms.adt.tools.Counter;
 
 /**
- * Items array model for sorting/searching methods analysis.
+ * Item array model for sorting/searching methods analysis.
  *
  * @version 1.03, 13 September 2013
  * @since 12 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemsArray {
+public final class ItemArray {
 
     private final Item[] _array;
     private final Counter _reads;
     private final Counter _writes;
 
-    /**
-     * Creates a new instance of ItemsArray with specified size.
-     *
-     * @param size array size.
-     * @param reads a counter of read operations.
-     * @param writes a counter of write operations.
-     *
-     * @see Counter
-     */
-    public ItemsArray(int size, Counter reads, Counter writes) {
-        if (size < 0) {
-            throw new IllegalArgumentException("array size is negative");
-        }
-        if (reads == null) {
-            throw new NullPointerException("reads conuter is null");
-        }
-        if (writes == null) {
-            throw new NullPointerException("writes conuter is null");
-        }
+    ItemArray(int size, Counter reads, Counter writes) {
         _array = new Item[size];
         _reads = reads;
         _writes = writes;
@@ -91,5 +72,14 @@ public final class ItemsArray {
     public void write(int index, Item item) {
         _array[index] = item;
         _writes.increment();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder content = new StringBuilder();
+        for (Item item : _array) {
+            content.append(String.format("%s, ", item));
+        }
+        return String.format("[item array: {%s}]", content);
     }
 }

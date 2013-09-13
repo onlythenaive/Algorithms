@@ -15,55 +15,55 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
-import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
-import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
-import com.ilyagubarev.algorithms.adt.tools.Counter;
-
-/**
- * "Divide & merge" method sorting algorithm implementation.
- *
- * @see AbstractSorting
- *
- * @version 1.01, 12 September 2013
- * @since 11 September 2013
- * @author Ilya Gubarev
- */
-public final class MergeSorter extends AbstractSorter {
-
-    @Override
-    protected void method(ItemsArray target, AuxMemory aux) {
-        aux.allocate(target.getSize());
-        sort(target, 0, target.getSize(), aux);
-    }
-
-    private void merge(ItemsArray target, int leftFirst, int leftLast,
-            int rightLast, AuxMemory aux) {
-//        for (int i = leftFirst; i <= rightLast; ++i) {
-//            target.set(i, aux, i);
+//import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
+//import com.ilyagubarev.algorithms.adt.tools.Auxiliary;
+//import com.ilyagubarev.algorithms.adt.tools.Counter;
+//
+///**
+// * "Divide & merge" method sorting algorithm implementation.
+// *
+// * @see AbstractSorting
+// *
+// * @version 1.01, 12 September 2013
+// * @since 11 September 2013
+// * @author Ilya Gubarev
+// */
+//public final class MergeSorter extends AbstractSorter {
+//
+//    @Override
+//    protected void method(ItemsArray target, Auxiliary aux) {
+//        aux.allocate(target.getSize());
+//        sort(target, 0, target.getSize(), aux);
+//    }
+//
+//    private void merge(ItemsArray target, int leftFirst, int leftLast,
+//            int rightLast, Auxiliary aux) {
+////        for (int i = leftFirst; i <= rightLast; ++i) {
+////            target.set(i, aux, i);
+////        }
+////        int left = leftFirst;
+////        int right = leftLast + 1;
+////        for (int i = leftFirst; i <= rightLast; ++i) {
+////            if (left > leftLast) {
+////                target.get(i, aux, right++);
+////            } else if (right > rightLast) {
+////                target.get(i, aux, left++);
+////            } else if (aux.less(right, left)) {
+////                target.get(i, aux, right++);
+////            } else {
+////                target.get(i, aux, left++);
+////            }
+////        }
+//    }
+//
+//    private void sort(ItemsArray target, int leftFirst, int rightLast,
+//            Auxiliary aux) {
+//        if (rightLast <= leftFirst) {
+//            return;
 //        }
-//        int left = leftFirst;
-//        int right = leftLast + 1;
-//        for (int i = leftFirst; i <= rightLast; ++i) {
-//            if (left > leftLast) {
-//                target.get(i, aux, right++);
-//            } else if (right > rightLast) {
-//                target.get(i, aux, left++);
-//            } else if (aux.less(right, left)) {
-//                target.get(i, aux, right++);
-//            } else {
-//                target.get(i, aux, left++);
-//            }
-//        }
-    }
-
-    private void sort(ItemsArray target, int leftFirst, int rightLast,
-            AuxMemory aux) {
-        if (rightLast <= leftFirst) {
-            return;
-        }
-        int leftLast = leftFirst + (rightLast - leftFirst) / 2;
-        sort(target, leftFirst, leftLast, aux);
-        sort(target, leftLast + 1, rightLast, aux);
-        merge(target, leftFirst, leftLast, rightLast, aux);
-    }
-}
+//        int leftLast = leftFirst + (rightLast - leftFirst) / 2;
+//        sort(target, leftFirst, leftLast, aux);
+//        sort(target, leftLast + 1, rightLast, aux);
+//        merge(target, leftFirst, leftLast, rightLast, aux);
+//    }
+//}

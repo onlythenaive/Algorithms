@@ -13,39 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt.collections;
+package com.ilyagubarev.algorithms.adt;
 
-import java.io.Serializable;
+import com.ilyagubarev.algorithms.adt.tools.Counter;
 
 /**
- * Linked list node.
+ * Item linked node.
  *
- * @see Serializable
- *
- * @version 1.02, 03 September 2013
+ * @version 1.03, 13 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ListNode<E> implements Serializable {
+public final class ItemNode {
 
-    private E _item;
-    private ListNode<E> _next;
+    private final Item _item;
+    private final Counter _reads;
+    private final Counter _linkReads;
+    private final Counter _linkWrites;
 
-    /**
-     * Creates a new instance of ListNode.
-     *
-     * @param item a containing item.
-     */
-    public ListNode(E item) {
+    private ItemNode _next;
+
+    ItemNode(Item item, Counter reads, Counter linkReads, Counter linkWrites) {
         _item = item;
+        _reads = reads;
+        _linkReads = linkReads;
+        _linkWrites = linkWrites;
     }
 
     /**
      * Gets a containing item.
      *
-     * @return a contained item.
+     * @return contained item.
+     *
+     * @see Item
      */
-    public E getItem() {
+    public Item getItem() {
+        _reads.increment();
         return _item;
     }
 
@@ -54,17 +57,9 @@ public final class ListNode<E> implements Serializable {
      *
      * @return the next node.
      */
-    public ListNode<E> getNext() {
+    public ItemNode getNext() {
+        _linkReads.increment();
         return _next;
-    }
-
-    /**
-     * Sets a new containing item.
-     *
-     * @param item an item to be contained.
-     */
-    public void setItem(E item) {
-        _item = item;
     }
 
     /**
@@ -72,12 +67,13 @@ public final class ListNode<E> implements Serializable {
      *
      * @param node the next node.
      */
-    public void setNext(ListNode<E> node) {
+    public void setNext(ItemNode node) {
+        _linkWrites.increment();
         _next = node;
     }
 
     @Override
     public String toString() {
-        return String.format("[list node: %s]", _item);
+        return String.format("[item list: %s]", _item);
     }
 }

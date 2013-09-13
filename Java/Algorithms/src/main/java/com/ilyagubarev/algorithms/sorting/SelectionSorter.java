@@ -14,29 +14,29 @@
  * limitations under the License.
  */
 package com.ilyagubarev.algorithms.sorting;
-
-import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
-import com.ilyagubarev.algorithms.adt.collections.AuxMemory;
-
-/**
- * Sorting algorithm implementation based on selection method.
- *
- * @see AbstractSorter
- *
- * @version 1.03, 12 September 2013
- * @since 07 September 2013
- * @author Ilya Gubarev
- */
-public final class SelectionSorter extends AbstractSorter {
-
-    @Override
-    protected void method(ItemsArray target, AuxMemory aux) {
-        for (int pivot = 0; pivot < target.getSize(); ++pivot) {
-//            int min = pivot;
-//            for (int i = pivot + 1; i < target.getSize(); ++i) {
-//                min = target.less(i, min) ? i : min;
-//            }
-//            target.swap(pivot, min);
-        }
-    }
-}
+//
+//import com.ilyagubarev.algorithms.adt.collections.ItemsArray;
+//import com.ilyagubarev.algorithms.adt.tools.Auxiliary;
+//
+///**
+// * Sorting algorithm implementation based on selection method.
+// *
+// * @see AbstractSorter
+// *
+// * @version 1.03, 12 September 2013
+// * @since 07 September 2013
+// * @author Ilya Gubarev
+// */
+//public final class SelectionSorter extends AbstractSorter {
+//
+//    @Override
+//    protected void method(ItemsArray target, Auxiliary aux) {
+//        for (int pivot = 0; pivot < target.getSize(); ++pivot) {
+////            int min = pivot;
+////            for (int i = pivot + 1; i < target.getSize(); ++i) {
+////                min = target.less(i, min) ? i : min;
+////            }
+////            target.swap(pivot, min);
+//        }
+//    }
+//}

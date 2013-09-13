@@ -31,28 +31,21 @@ public final class ItemHelper {
 
     /**
      * Creates a new instance of ItemHelper.
-     */
-    public ItemHelper() {
-        _hashings = new Counter();
-        _tests = new Counter();
-    }
-
-    /**
-     * Gets total number of hash computations provided.
+     * 
+     * @param hashings a counter of item hashings.
+     * @param tests a counter of item tests.
      *
-     * @return number of hash computations.
+     * @see Counter
      */
-    public long getHashings() {
-        return _hashings.getValue();
-    }
-
-    /**
-     * Gets total number of less/equal/greater tests provided.
-     *
-     * @return number of tests.
-     */
-    public long getTests() {
-        return _tests.getValue();
+    public ItemHelper(Counter hashings, Counter tests) {
+        if (hashings == null) {
+            throw new NullPointerException("hashings counter is null");
+        }
+        if (tests == null) {
+            throw new NullPointerException("tests counter is null");
+        }
+        _hashings = hashings;
+        _tests = tests;
     }
 
     /**

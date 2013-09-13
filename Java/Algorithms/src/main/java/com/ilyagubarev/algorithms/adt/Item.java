@@ -15,55 +15,18 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
-import java.io.Serializable;
-
 /**
  * Item model to be used in various tests and analyses.
  *
- * @see Serializable
- *
- * @version 1.01, 13 September 2013
+ * @version 1.02, 13 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
-public final class Item implements Serializable {
-
-    /**
-     * Creates a new instance of Item based on the source.
-     *
-     * @param source a source the item to be based on.
-     * @return a new instance of Item.
-     */
-    public static Item create(int source) {
-        return new Item(source);
-    }
-
-    /**
-     * Creates a new instance of Item based on the source.
-     *
-     * @param source a source the item to be based on.
-     * @return a new instance of Item.
-     */
-    public static Item create(double source) {
-        return new Item(source);
-    }
-
-    /**
-     * Creates a new instance of Item based on the source.
-     *
-     * @param source a source the item to be based on.
-     * @return a new instance of Item.
-     */
-    public static Item create(String source) {
-        if (source == null) {
-            throw new NullPointerException("source is null");
-        }
-        return new Item(source);
-    }
+public final class Item {
 
     private final Comparable _data;
 
-    private Item(Comparable data) {
+    Item(Comparable data) {
         _data = data;
     }
 
