@@ -15,73 +15,104 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-//import com.ilyagubarev.algorithms.adt.Item;
-//import java.util.Iterator;
-//
-//import com.ilyagubarev.algorithms.adt.ItemNode;
-//
-///**
-// * Simple ItemStack implementation based on item nodes.
-// *
-// * @see ItemStack
-// *
-// * @version 1.03, 13 September 2013
-// * @since 02 September 2013
-// * @author Ilya Gubarev
-// */
-//public final class SimpleItemNodeStack implements ItemStack {
-//
-//    private int _size;
-//    private ItemNode _top;
-//
-//    /**
-//     * Creates a new instance of SimpleItemNodeStack.
-//     */
-//    public SimpleItemNodeStack() {
-//
-//    }
-//
-//    @Override
-//    public int getSize() {
-//        return _size;
-//    }
-//
-//    @Override
-//    public boolean isEmpty() {
-//        return _size == 0;
-//    }
-//
-//    @Override
-//    public Iterator<E> iterator() {
-//        return new ListNodeIterator<E>(_top);
-//    }
-//
-//    @Override
-//    public E peek() {
-//        throwExceptionIfEmpty();
-//        return _top.getItem();
-//    }
-//
-//    @Override
-//    public E pop() {
-//        throwExceptionIfEmpty();
-//        ItemNode<E> buffer = _top;
-//        _top = _top.getNext();
-//        --_size;
-//        return buffer.getItem();
-//    }
-//
-//    @Override
-//    public void push(Item item) {
-//        ItemNode buffer = _top;
-//        _top = new ItemNode<E>(item);
-//        _top.setNext(buffer);
-//        ++_size;
-//    }
-//
-//    private void throwExceptionIfEmpty() {
-//        if (isEmpty()) {
-//            throw new IllegalStateException("stack is empty");
-//        }
-//    }
-//}
+import java.util.Iterator;
+
+import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemNode;
+import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.tools.Counter;
+
+/**
+ * Simple ItemStack implementation based on item nodes.
+ *
+ * @see ItemStack
+ *
+ * @version 1.03, 13 September 2013
+ * @since 02 September 2013
+ * @author Ilya Gubarev
+ */
+public final class SimpleItemNodeStack implements ItemStack {
+
+    private final Counter _reads;
+    private final Counter _linkReads;
+    private final Counter _linkWrites;
+    private final ItemNodeFactory _factory;
+
+    private int _size;
+    private ItemNode _top;
+
+    /**
+     * Creates a new instance of SimpleItemNodeStack.
+     *
+     * @param factory an item nodes provider.
+     * @param reads a counter of item read operations.
+     * @param linkReads a counter of item node link read operations.
+     * @param linkWrites a counter of item node link write operations.
+     *
+     * @see Counter
+     * @see ItemNodeFactory
+     */
+    public SimpleItemNodeStack(ItemNodeFactory factory, Counter reads,
+            Counter linkReads, Counter linkWrites) {
+        if (factory == null) {
+            throw new NullPointerException("item nodes provider is null");
+        }
+        if (reads == null) {
+            throw new NullPointerException("item reads counter is null");
+        }
+        if (linkReads == null) {
+            throw new NullPointerException("node link reads counter is null");
+        }
+        if (linkWrites == null) {
+            throw new NullPointerException("node link writes counter is null");
+        }
+        _factory = factory;
+        _reads = reads;
+        _linkReads = linkReads;
+        _linkWrites = linkWrites;
+    }
+
+    @Override
+    public int getSize() {
+        return _size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return _size == 0;
+    }
+
+    @Override
+    public Iterator<Item> iterator() {
+        return new ItemNodeIterator(_top);
+    }
+
+    @Override
+    public Item peek() {
+        throwExceptionIfEmpty();
+        return _top.getItem();
+    }
+
+    @Override
+    public Item pop() {
+        throwExceptionIfEmpty();
+        ItemNode buffer = _top;
+        _top = _top.getNext();
+        --_size;
+        return buffer.getItem();
+    }
+
+    @Override
+    public void push(Item item) {
+        ItemNode buffer = _top;
+        _top = _factory.createNode(item, _reads, _linkReads, _linkWrites);
+        _top.setNext(buffer);
+        ++_size;
+    }
+
+    private void throwExceptionIfEmpty() {
+        if (isEmpty()) {
+            throw new IllegalStateException("stack is empty");
+        }
+    }
+}
