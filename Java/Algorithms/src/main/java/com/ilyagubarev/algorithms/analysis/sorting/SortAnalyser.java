@@ -17,6 +17,7 @@ package com.ilyagubarev.algorithms.analysis.sorting;
 
 import com.ilyagubarev.algorithms.adt.ItemType;
 import com.ilyagubarev.algorithms.sorting.methods.Sorter;
+import java.util.Set;
 
 /**
  *
@@ -25,7 +26,7 @@ import com.ilyagubarev.algorithms.sorting.methods.Sorter;
  */
 public final class SortAnalyser {
 
-    public static void analyse(Sorter sorter, Comparable[] target, int recursionLimit, int timeLimit, int auxMemoryLimit) {
+    public static void analyse(Set<Sorter> sorters, Comparable[] target, int recursionLimit, int timeLimit, int auxMemoryLimit) {
 
     }
 
