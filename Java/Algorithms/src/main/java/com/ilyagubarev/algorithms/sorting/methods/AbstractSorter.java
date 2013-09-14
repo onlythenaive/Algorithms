@@ -18,6 +18,7 @@ package com.ilyagubarev.algorithms.sorting.methods;
 import com.ilyagubarev.algorithms.adt.Item;
 import com.ilyagubarev.algorithms.adt.ItemArray;
 import com.ilyagubarev.algorithms.adt.ItemHelper;
+import com.ilyagubarev.algorithms.adt.tools.Registry;
 
 /**
  * Sorting algorithm common implementation.
@@ -89,5 +90,27 @@ public abstract class AbstractSorter implements Sorter {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Registers a recursive call.
+     *
+     * @param recursions a registry of recursive calls.
+     *
+     * @see Registry
+     */
+    protected final void registerRecursiveCall(Registry recursions) {
+        recursions.register(1);
+    }
+
+    /**
+     * Registers a recursive return.
+     *
+     * @param recursions a registry of recursive calls.
+     *
+     * @see Registry
+     */
+    protected final void registerRecursiveReturn(Registry recursions) {
+        recursions.register(-1);
     }
 }
