@@ -70,7 +70,7 @@ public final class ItemArrayFactory {
         if (size < 0) {
             throw new IllegalArgumentException("array size is negative");
         }
-        _allocations.add(size);
+        _allocations.register(size);
         return new ItemArray(size, _reads, _writes);
     }
 }

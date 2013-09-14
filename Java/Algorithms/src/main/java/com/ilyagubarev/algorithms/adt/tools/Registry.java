@@ -41,12 +41,12 @@ public final class Registry {
         void execute(long n, double total, double mean, double max, double min);
     }
 
-    private final Counter _values;
     private final AddingDelegate _addingDelegate;
 
+    private int _values;
     private double _total;
-    private Double _maximum;
-    private Double _minimum;
+    private Double _maximumValue;
+    private Double _minimumValue;
 
     /**
      * Creates a new instance of Statistics.
@@ -61,7 +61,6 @@ public final class Registry {
      * @param addingDelegate an instance of  delegate for the adding operation.
      */
     public Registry(AddingDelegate addingDelegate) {
-        _values = new Counter();
         _addingDelegate = addingDelegate;
     }
 
@@ -70,11 +69,11 @@ public final class Registry {
      *
      * @return average value.
      */
-    public double getAverage() {
-        if (_values.getValue() == 0) {
+    public double getAverageValue() {
+        if (_values == 0) {
             return 0.0;
         }
-        return _total / _values.getValue();
+        return _total / _values;
     }
 
     /**
@@ -82,11 +81,11 @@ public final class Registry {
      *
      * @return maximum value.
      */
-    public double getMaximum() {
-        if (_maximum == null) {
+    public double getMaximumValue() {
+        if (_maximumValue == null) {
             return 0;
         }
-        return _maximum;
+        return _maximumValue;
     }
 
     /**
@@ -94,11 +93,11 @@ public final class Registry {
      *
      * @return minimum value.
      */
-    public double getMinimum() {
-        if (_minimum == null) {
+    public double getMinimumValue() {
+        if (_minimumValue == null) {
             return 0;
         }
-        return _minimum;
+        return _minimumValue;
     }
 
     /**
@@ -116,7 +115,7 @@ public final class Registry {
      * @return values count.
      */
     public long getValuesCount() {
-        return _values.getValue();
+        return _values;
     }
 
     /**
@@ -124,23 +123,22 @@ public final class Registry {
      *
      * @param value numeric value.
      */
-    public void add(double value) {
+    public void register(double value) {
         _total += value;
-        _values.increment();
-        if (_values.getValue() == 1) {
-            _maximum = value;
-            _minimum = value;
+        _values++;
+        if (_values == 1) {
+            _maximumValue = value;
+            _minimumValue = value;
         } else {
-            if (_maximum < value) {
-                _maximum = value;
+            if (_maximumValue < value) {
+                _maximumValue = value;
             }
-            if (_minimum > value) {
-                _minimum = value;
+            if (_minimumValue > value) {
+                _minimumValue = value;
             }
         }
         if (_addingDelegate != null) {
-            _addingDelegate.execute(_values.getValue(), _total, getAverage(),
-                    _maximum, _minimum);
+            _addingDelegate.execute(_values, _total, getAverageValue(), _maximumValue, _minimumValue);
         }
     }
 }
