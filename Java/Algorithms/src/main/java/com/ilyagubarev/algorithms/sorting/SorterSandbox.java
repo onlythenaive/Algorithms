@@ -20,6 +20,7 @@ import com.ilyagubarev.algorithms.adt.ItemArray;
 import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
 import com.ilyagubarev.algorithms.adt.ItemHelper;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.tools.Registry;
 import com.ilyagubarev.algorithms.adt.tools.Stopwatch;
 
 /**
@@ -39,18 +40,20 @@ public final class SorterSandbox {
      * @param helper item utility methods provider.
      * @param arrayFactory item arrays allocator.
      * @param nodeFactory item nodes provider.
+     * @param recursionRegistry registry of recursive calls
      * @param stopwatch time consumption registry.
      *
      * @see ItemArray
      * @see ItemArrayFactory
      * @see ItemNodeFactory
      * @see ItemHelper
+     * @see Registry
      * @see Sorter
      * @see Stopwatch
      */
     public static void run(Sorter sorter, ItemArray target, ItemHelper helper,
             ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
-            Stopwatch stopwatch) {
+            Registry recursionRegistry, Stopwatch stopwatch) {
         sorter.prepare(target.getSize());
         stopwatch.start();
         sorter.sort(target, helper, arrayFactory, nodeFactory);
