@@ -52,7 +52,7 @@ public final class ItemFactory {
      */
     public Item create(int source) {
         _creations.increment();
-        return new Item(source);
+        return new Item(source, ItemType.INTEGER);
     }
 
     /**
@@ -65,7 +65,7 @@ public final class ItemFactory {
      */
     public Item create(double source) {
         _creations.increment();
-        return new Item(source);
+        return new Item(source, ItemType.DOUBLE);
     }
 
     /**
@@ -81,6 +81,6 @@ public final class ItemFactory {
             throw new NullPointerException("source is null");
         }
         _creations.increment();
-        return new Item(source);
+        return new Item(source, ItemType.STRING);
     }
 }

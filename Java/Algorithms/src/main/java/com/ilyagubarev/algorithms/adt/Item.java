@@ -25,9 +25,22 @@ package com.ilyagubarev.algorithms.adt;
 public final class Item {
 
     private final Comparable _data;
+    private final ItemType _type;
 
-    Item(Comparable data) {
+    Item(Comparable data, ItemType type) {
         _data = data;
+        _type = type;
+    }
+
+    /**
+     * Gets item type.
+     *
+     * @return item type.
+     *
+     * @see ItemType
+     */
+    public ItemType getType() {
+        return _type;
     }
 
     @Override
