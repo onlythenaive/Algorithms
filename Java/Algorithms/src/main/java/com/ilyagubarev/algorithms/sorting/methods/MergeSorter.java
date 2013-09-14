@@ -37,7 +37,7 @@ public final class MergeSorter extends AbstractSorter {
             ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
             Registry recursions) {
         ItemArray aux = arrayFactory.create(target.getSize());
-        sort(target, 0, target.getSize() - 1, aux, helper);
+        sort(target, 0, target.getSize() - 1, aux, helper, recursions);
     }
 
     private void merge(ItemArray target, int leftFirst, int leftLast,
@@ -61,13 +61,17 @@ public final class MergeSorter extends AbstractSorter {
     }
 
     private void sort(ItemArray target, int leftFirst, int rightLast,
-            ItemArray aux, ItemHelper helper) {
+            ItemArray aux, ItemHelper helper, Registry recursions) {
         if (rightLast <= leftFirst) {
             return;
         }
         int leftLast = leftFirst + (rightLast - leftFirst) / 2;
-        sort(target, leftFirst, leftLast, aux, helper);
-        sort(target, leftLast + 1, rightLast, aux, helper);
+        registerRecursiveCall(recursions);
+        sort(target, leftFirst, leftLast, aux, helper, recursions);
+        registerRecursiveReturn(recursions);
+        registerRecursiveCall(recursions);
+        sort(target, leftLast + 1, rightLast, aux, helper, recursions);
+        registerRecursiveReturn(recursions);
         merge(target, leftFirst, leftLast, rightLast, aux, helper);
     }
 }
