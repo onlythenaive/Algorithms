@@ -40,7 +40,7 @@ public final class SorterSandbox {
      * @param helper item utility methods provider.
      * @param arrayFactory item arrays allocator.
      * @param nodeFactory item nodes provider.
-     * @param recursionRegistry registry of recursive calls
+     * @param recursions registry of recursive calls
      * @param stopwatch time consumption registry.
      *
      * @see ItemArray
@@ -53,10 +53,10 @@ public final class SorterSandbox {
      */
     public static void run(Sorter sorter, ItemArray target, ItemHelper helper,
             ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
-            Registry recursionRegistry, Stopwatch stopwatch) {
+            Registry recursions, Stopwatch stopwatch) {
         sorter.prepare(target.getSize());
         stopwatch.start();
-        sorter.sort(target, helper, arrayFactory, nodeFactory);
+        sorter.sort(target, helper, arrayFactory, nodeFactory, recursions);
         stopwatch.stop();
     }
 

@@ -19,13 +19,14 @@ import com.ilyagubarev.algorithms.adt.ItemArray;
 import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
 import com.ilyagubarev.algorithms.adt.ItemHelper;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.tools.Registry;
 
 /**
  * "Divide & merge" method sorting algorithm implementation.
  *
  * @see AbstractSorting
  *
- * @version 1.02, 13 September 2013
+ * @version 1.03, 14 September 2013
  * @since 11 September 2013
  * @author Ilya Gubarev
  */
@@ -33,7 +34,8 @@ public final class MergeSorter extends AbstractSorter {
 
     @Override
     public void sort(ItemArray target, ItemHelper helper,
-            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory) {
+            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
+            Registry recursions) {
         ItemArray aux = arrayFactory.create(target.getSize());
         sort(target, 0, target.getSize() - 1, aux, helper);
     }
