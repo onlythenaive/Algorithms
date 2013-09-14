@@ -27,17 +27,17 @@ public final class Counter {
     /**
      * Callback delegate for the increment operation.
      */
-    public static interface IncrementDelegate {
+    public static interface OnIncrementHandler {
 
         /**
-         * Actions to be performed after counter value is incremented.
+         * Actions to be performed on counter value is incremented.
          *
          * @param value counter incremented value.
          */
         void execute(long value);
     }
 
-    private final IncrementDelegate _incrementDelegate;
+    private final OnIncrementHandler _handler;
 
     private long _value;
 
@@ -51,12 +51,12 @@ public final class Counter {
     /**
      * Creates a new instance of Counter.
      *
-     * @param incrementDelegate a delegate instance for post-increment.
+     * @param handler a delegate instance for the increment operation.
      *
-     * @see IncrementDelegate
+     * @see OnIncrementHandler
      */
-    public Counter(IncrementDelegate incrementDelegate) {
-        _incrementDelegate = incrementDelegate;
+    public Counter(OnIncrementHandler handler) {
+        _handler = handler;
     }
 
     /**
@@ -73,8 +73,8 @@ public final class Counter {
      */
     public void increment() {
         ++_value;
-        if (_incrementDelegate != null) {
-            _incrementDelegate.execute(_value);
+        if (_handler != null) {
+            _handler.execute(_value);
         }
     }
 }

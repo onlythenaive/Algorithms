@@ -18,90 +18,121 @@ package com.ilyagubarev.algorithms.adt.tools;
 /**
  * Simple statistics provider.
  *
- * @version 1.03, 13 September 2013
+ * @version 1.03, 14 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
 public final class Registry {
 
     /**
-     * Callback delegate for the adding operation.
+     * Callback delegate for the register operation.
      */
-    public static interface AddingDelegate {
+    public static interface OnRegisterHandler {
 
         /**
-         * Actions to be performed after a new value is added to the provider.
+         * Actions to be performed on a new value is registered.
          *
-         * @param n total collected values count.
-         * @param total total collected value.
-         * @param mean current average value.
-         * @param max current maximum value.
-         * @param min current minimum value.
+         * @param value
+         * @param count
+         * @param total
+         * @param maxTotal
+         * @param minTotal
+         * @param averageValue
+         * @param maxValue
+         * @param minValue 
          */
-        void execute(long n, double total, double mean, double max, double min);
+        void execute(double value, long count, double total, double maxTotal,
+                double minTotal, double averageValue, double maxValue,
+                double minValue);
     }
 
-    private final AddingDelegate _addingDelegate;
+    private final double _basis;
+    private final OnRegisterHandler _handler;
 
-    private int _values;
+    private int _count;
     private double _total;
-    private Double _maximumValue;
-    private Double _minimumValue;
+    private double _maxTotal;
+    private double _minTotal;
+    private Double _maxValue;
+    private Double _minValue;
 
     /**
-     * Creates a new instance of Statistics.
+     * Creates a new instance of Registry.
+     *
+     * @param basis a basis of the registry.
      */
-    public Registry() {
-        this(null);
+    public Registry(double basis) {
+        this(basis, null);
     }
 
     /**
-     * Creates a new instance of Statistics.
+     * Creates a new instance of Registry.
      *
-     * @param addingDelegate an instance of  delegate for the adding operation.
+     * @param basis a basis of the registry.
+     * @param handler an instance of delegate for the register operation.
+     *
+     * @see OnRegisterHandler
      */
-    public Registry(AddingDelegate addingDelegate) {
-        _addingDelegate = addingDelegate;
+    public Registry(double basis, OnRegisterHandler handler) {
+        _basis = basis;
+        _maxTotal = basis;
+        _minTotal = basis;
+        _handler = handler;
     }
 
     /**
-     * Gets current average value.
+     * Gets average registered value.
      *
-     * @return average value.
+     * @return average registered value.
+     * @throws IllegalStateException if the registry is empty.
      */
     public double getAverageValue() {
-        if (_values == 0) {
-            return 0.0;
-        }
-        return _total / _values;
+        throwExceptionIfEmpty();
+        return (_total - _basis) / _count;
     }
 
     /**
-     * Gets current maximum value.
+     * Gets maximum total value.
      *
-     * @return maximum value.
+     * @return maximum total value.
      */
-    public double getMaximumValue() {
-        if (_maximumValue == null) {
-            return 0;
-        }
-        return _maximumValue;
+    public double getMax() {
+        return _maxTotal;
     }
 
     /**
-     * Gets current minimum value.
+     * Gets maximum registered value.
      *
-     * @return minimum value.
+     * @return maximum registered value.
+     * @throws IllegalStateException if the registry is empty.
      */
-    public double getMinimumValue() {
-        if (_minimumValue == null) {
-            return 0;
-        }
-        return _minimumValue;
+    public double getMaxValue() {
+        throwExceptionIfEmpty();
+        return _maxValue;
     }
 
     /**
-     * Gets total collected value.
+     * Gets minimum total value.
+     *
+     * @return minimum total value.
+     */
+    public double getMin() {
+        return _minTotal;
+    }
+
+    /**
+     * Gets minimum registered value.
+     *
+     * @return minimum registered value.
+     * @throws IllegalStateException if the registry is empty.
+     */
+    public double getMinValue() {
+        throwExceptionIfEmpty();
+        return _minValue;
+    }
+
+    /**
+     * Gets a total of registered values.
      *
      * @return total value.
      */
@@ -110,35 +141,57 @@ public final class Registry {
     }
 
     /**
-     * Gets current collected values count.
+     * Gets current registered values count.
      * 
-     * @return values count.
+     * @return registered values count.
      */
     public long getValuesCount() {
-        return _values;
+        return _count;
     }
 
     /**
-     * Adds specified value to the statistics provider.
+     * Checks if the registry has no registered values.
      *
-     * @param value numeric value.
+     * @return true if the registry is empty.
+     */
+    public boolean isEmpty() {
+        return getValuesCount() == 0;
+    }
+
+    /**
+     * Registers specified value at the registry.
+     *
+     * @param value a numeric value.
      */
     public void register(double value) {
-        _total += value;
-        _values++;
-        if (_values == 1) {
-            _maximumValue = value;
-            _minimumValue = value;
+        if (isEmpty()) {
+            _maxValue = value;
+            _minValue = value;
         } else {
-            if (_maximumValue < value) {
-                _maximumValue = value;
+            if (_maxValue < value) {
+                _maxValue = value;
             }
-            if (_minimumValue > value) {
-                _minimumValue = value;
+            if (_minValue > value) {
+                _minValue = value;
             }
         }
-        if (_addingDelegate != null) {
-            _addingDelegate.execute(_values, _total, getAverageValue(), _maximumValue, _minimumValue);
+        _count++;
+        _total += value;
+        if (_maxTotal < _total) {
+            _maxTotal = _total;
+        }
+        if (_minTotal > _total) {
+            _minTotal = _total;
+        }        
+        if (_handler != null) {
+            _handler.execute(value, _count, _total, _maxTotal, _minTotal,
+                    getAverageValue(), _maxTotal, _minValue);
+        }
+    }
+
+    private void throwExceptionIfEmpty() {
+        if (isEmpty()) {
+            throw new IllegalStateException("registry is empty");
         }
     }
 }
