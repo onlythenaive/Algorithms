@@ -20,22 +20,18 @@ import java.util.Iterator;
 import com.ilyagubarev.algorithms.adt.Item;
 import com.ilyagubarev.algorithms.adt.ItemNode;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
-import com.ilyagubarev.algorithms.adt.tools.Counter;
 
 /**
  * Simple ItemStack implementation based on item nodes.
  *
  * @see ItemStack
  *
- * @version 1.03, 13 September 2013
+ * @version 1.03, 14 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
 public final class SimpleItemNodeStack implements ItemStack {
 
-    private final Counter _reads;
-    private final Counter _linkReads;
-    private final Counter _linkWrites;
     private final ItemNodeFactory _factory;
 
     private int _size;
@@ -45,31 +41,14 @@ public final class SimpleItemNodeStack implements ItemStack {
      * Creates a new instance of SimpleItemNodeStack.
      *
      * @param factory an item nodes provider.
-     * @param reads a counter of item read operations.
-     * @param linkReads a counter of item node link read operations.
-     * @param linkWrites a counter of item node link write operations.
      *
-     * @see Counter
      * @see ItemNodeFactory
      */
-    public SimpleItemNodeStack(ItemNodeFactory factory, Counter reads,
-            Counter linkReads, Counter linkWrites) {
+    public SimpleItemNodeStack(ItemNodeFactory factory) {
         if (factory == null) {
             throw new NullPointerException("item nodes provider is null");
         }
-        if (reads == null) {
-            throw new NullPointerException("item reads counter is null");
-        }
-        if (linkReads == null) {
-            throw new NullPointerException("node link reads counter is null");
-        }
-        if (linkWrites == null) {
-            throw new NullPointerException("node link writes counter is null");
-        }
         _factory = factory;
-        _reads = reads;
-        _linkReads = linkReads;
-        _linkWrites = linkWrites;
     }
 
     @Override
