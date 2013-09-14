@@ -33,6 +33,11 @@ import com.ilyagubarev.algorithms.adt.tools.Registry;
 public final class InsertionSorter extends AbstractSorter {
 
     @Override
+    public String getInfo() {
+        return "Insertions method";
+    }
+
+    @Override
     public void sort(ItemArray target, ItemHelper helper,
             ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
             Registry recursions) {

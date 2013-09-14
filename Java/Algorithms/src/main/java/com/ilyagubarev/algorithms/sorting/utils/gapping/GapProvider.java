@@ -35,6 +35,13 @@ public abstract class GapProvider {
     }
 
     /**
+     * Gets a text info about gap values sequence.
+     *
+     * @return sequence info.
+     */
+    public abstract String getSequenceInfo();
+
+    /**
      * Gets the next gap value.
      *
      * @return gap value.

@@ -31,6 +31,13 @@ import com.ilyagubarev.algorithms.adt.tools.Registry;
 public interface Sorter {
 
     /**
+     * Gets a text info about the algorithm.
+     *
+     * @return algorithm info.
+     */
+    String getInfo();
+
+    /**
      * Pre-sorting actions.
      *
      * @param n target array items count.

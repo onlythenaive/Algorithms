@@ -31,6 +31,11 @@ import java.util.Stack;
 public final class KnuthGapProvider extends GapProvider {
 
     @Override
+    public String getSequenceInfo() {
+        return "Knuth gap sequence";
+    }
+
+    @Override
     protected List<Integer> getSequence(int n) {
         Stack<Integer> reversed = new Stack<Integer>();
         int gap = 1;

@@ -47,6 +47,11 @@ public final class ShellSorter extends AbstractSorter {
     }
 
     @Override
+    public String getInfo() {
+        return "Shell method with " + _provider.getSequenceInfo();
+    }
+
+    @Override
     public void prepare(int n) {
         _provider.reset(n);
     }
