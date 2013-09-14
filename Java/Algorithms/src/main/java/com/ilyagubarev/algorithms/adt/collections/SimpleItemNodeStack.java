@@ -105,7 +105,7 @@ public final class SimpleItemNodeStack implements ItemStack {
     @Override
     public void push(Item item) {
         ItemNode buffer = _top;
-        _top = _factory.createNode(item, _reads, _linkReads, _linkWrites);
+        _top = _factory.createNode(item);
         _top.setNext(buffer);
         ++_size;
     }

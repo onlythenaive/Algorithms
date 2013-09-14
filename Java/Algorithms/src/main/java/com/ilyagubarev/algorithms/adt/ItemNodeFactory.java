@@ -20,43 +20,32 @@ import com.ilyagubarev.algorithms.adt.tools.Counter;
 /**
  * Item nodes provider.
  *
- * @version 1.01, 13 September 2013
+ * @version 1.02, 14 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
 public final class ItemNodeFactory {
 
     private final Counter _creations;
+    private final Counter _reads;
+    private final Counter _linkReads;
+    private final Counter _linkWrites;
 
     /**
      * Creates a new instance of ItemNodeFactory.
      *
      * @param creations a counter of item node creations.
-     *
-     * @see Counter
-     */
-    public ItemNodeFactory(Counter creations) {
-        if (creations == null) {
-            throw new NullPointerException("creations counter is null");
-        }   
-        _creations = creations;
-    }
-
-    /**
-     * Creates a new instance of ItemNode.
-     *
-     * @param item an item to be contained in the node.
      * @param reads a counter of item read operations.
      * @param linkReads a counter of link read operations.
      * @param linkWrites a counter of link write operations.
-     * @return a new instance of ItemNode.
      *
      * @see Counter
-     * @see Item
-     * @see ItemNode
      */
-    public ItemNode createNode(Item item, Counter reads, Counter linkReads,
-            Counter linkWrites) {
+    public ItemNodeFactory(Counter creations, Counter reads,
+            Counter linkReads, Counter linkWrites) {
+        if (creations == null) {
+            throw new NullPointerException("creations counter is null");
+        }   
         if (reads == null) {
             throw new NullPointerException("reads counter is null");            
         }
@@ -66,7 +55,23 @@ public final class ItemNodeFactory {
         if (linkWrites == null) {
             throw new NullPointerException("link writes counter is null");            
         }        
+        _creations = creations;
+        _reads = reads;
+        _linkReads = linkReads;
+        _linkWrites = linkWrites;
+    }
+
+    /**
+     * Creates a new instance of ItemNode.
+     *
+     * @param item an item to be contained in the node.
+     * @return a new instance of ItemNode.
+     *
+     * @see Item
+     * @see ItemNode
+     */
+    public ItemNode createNode(Item item) {
         _creations.increment();
-        return new ItemNode(item, reads, linkReads, linkWrites);
+        return new ItemNode(item, _reads, _linkReads, _linkWrites);
     }
 }
