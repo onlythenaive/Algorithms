@@ -30,7 +30,7 @@ import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleItemNodeStack implements ItemStack {
+public final class SimpleItemStack implements ItemStack {
 
     private final ItemNodeFactory _factory;
 
@@ -38,13 +38,13 @@ public final class SimpleItemNodeStack implements ItemStack {
     private ItemListNode _top;
 
     /**
-     * Creates a new instance of SimpleItemNodeStack.
+     * Creates a new instance of SimpleItemStack.
      *
-     * @param factory an item nodes provider.
+     * @param factory item nodes provider.
      *
      * @see ItemNodeFactory
      */
-    public SimpleItemNodeStack(ItemNodeFactory factory) {
+    public SimpleItemStack(ItemNodeFactory factory) {
         if (factory == null) {
             throw new NullPointerException("item nodes provider is null");
         }
