@@ -62,6 +62,20 @@ public final class ItemNodeFactory {
     }
 
     /**
+     * Creates a new instance of ItemBinaryNode.
+     *
+     * @param item an item to be contained in the node.
+     * @return a new instance of ItemBinaryNode.
+     *
+     * @see Item
+     * @see ItemBinaryNode
+     */
+    public ItemBinaryNode createBinaryNode(Item item) {
+        _creations.increment();
+        return new ItemBinaryNode(item, _reads, _linkReads, _linkWrites);
+    }
+
+    /**
      * Creates a new instance of ItemListNode.
      *
      * @param item an item to be contained in the node.
