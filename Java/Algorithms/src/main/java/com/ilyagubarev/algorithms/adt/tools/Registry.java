@@ -32,14 +32,14 @@ public final class Registry {
         /**
          * Actions to be performed on a new value is registered.
          *
-         * @param value
-         * @param count
-         * @param total
-         * @param maxTotal
-         * @param minTotal
-         * @param averageValue
-         * @param maxValue
-         * @param minValue 
+         * @param value a new registered value.
+         * @param count registered values count.
+         * @param total total value.
+         * @param maxTotal maximal total value.
+         * @param minTotal minimal total value.
+         * @param averageValue average registered value.
+         * @param maxValue maximal registered value.
+         * @param minValue minimal registered value.
          */
         void execute(double value, long count, double total, double maxTotal,
                 double minTotal, double averageValue, double maxValue,
@@ -92,18 +92,18 @@ public final class Registry {
     }
 
     /**
-     * Gets maximum total value.
+     * Gets maximal total value.
      *
-     * @return maximum total value.
+     * @return maximal total value.
      */
     public double getMax() {
         return _maxTotal;
     }
 
     /**
-     * Gets maximum registered value.
+     * Gets maximal registered value.
      *
-     * @return maximum registered value.
+     * @return maximal registered value.
      * @throws IllegalStateException if the registry is empty.
      */
     public double getMaxValue() {
@@ -112,18 +112,18 @@ public final class Registry {
     }
 
     /**
-     * Gets minimum total value.
+     * Gets minimal total value.
      *
-     * @return minimum total value.
+     * @return minimal total value.
      */
     public double getMin() {
         return _minTotal;
     }
 
     /**
-     * Gets minimum registered value.
+     * Gets minimal registered value.
      *
-     * @return minimum registered value.
+     * @return minimal registered value.
      * @throws IllegalStateException if the registry is empty.
      */
     public double getMinValue() {
