@@ -21,40 +21,30 @@ import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.tools.Registry;
 
 /**
- * Top-down merge method sorting algorithm implementation.
+ * Bottom-up merge method sorting algorithm implementation.
  *
  * @see MergeSorter
  *
- * @version 1.04, 15 September 2013
- * @since 11 September 2013
+ * @version 1.01, 15 September 2013
+ * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class TopDownMergeSorter extends MergeSorter {
+public final class BottomUpMergeSorter extends MergeSorter {
 
     @Override
     public String getInfo() {
-        return "Top-down merge method";
+        return "Bottom-up merge method";
     }
 
     @Override
     public void sort(ItemArray target, ItemArrayFactory arrayFactory,
             ItemNodeFactory nodeFactory, Registry recursions) {
         ItemArray aux = arrayFactory.create(target.getSize());
-        sort(target, 0, target.getSize() - 1, aux, recursions);
-    }
-
-    private void sort(ItemArray target, int leftFirst, int rightLast,
-            ItemArray aux, Registry recursions) {
-        if (rightLast <= leftFirst) {
-            return;
+        for (int subSize = 1; subSize < target.getSize(); subSize += subSize) {
+            for (int i = 0; i < target.getSize() - subSize; i += 2 * subSize) {
+                int rightLast = Math.min(i + 2 * subSize, target.getSize());
+                merge(target, i, i + subSize - 1, rightLast - 1, aux);
+            }
         }
-        int leftLast = leftFirst + (rightLast - leftFirst) / 2;
-        registerRecursiveCall(recursions);
-        sort(target, leftFirst, leftLast, aux, recursions);
-        registerRecursiveReturn(recursions);
-        registerRecursiveCall(recursions);
-        sort(target, leftLast + 1, rightLast, aux, recursions);
-        registerRecursiveReturn(recursions);
-        merge(target, leftFirst, leftLast, rightLast, aux);
     }
 }
