@@ -17,7 +17,6 @@ package com.ilyagubarev.algorithms.sorting.methods;
 
 import com.ilyagubarev.algorithms.adt.ItemArray;
 import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
-import com.ilyagubarev.algorithms.adt.ItemHelper;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.tools.Registry;
 
@@ -26,7 +25,7 @@ import com.ilyagubarev.algorithms.adt.tools.Registry;
  *
  * @see AbstractSorter
  *
- * @version 1.03, 14 September 2013
+ * @version 1.04, 15 September 2013
  * @since 07 September 2013
  * @author Ilya Gubarev
  */
@@ -38,13 +37,12 @@ public final class SelectionSorter extends AbstractSorter {
     }
 
     @Override
-    public void sort(ItemArray target, ItemHelper helper,
-            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
-            Registry recursions) {
+    public void sort(ItemArray target, ItemArrayFactory arrayFactory,
+            ItemNodeFactory nodeFactory, Registry recursions) {
         for (int pivot = 0; pivot < target.getSize(); ++pivot) {
             int min = pivot;
             for (int i = pivot + 1; i < target.getSize(); ++i) {
-                min = less(target, i, min, helper) ? i : min;
+                min = less(target, i, min) ? i : min;
             }
             swap(target, pivot, min);
         }        

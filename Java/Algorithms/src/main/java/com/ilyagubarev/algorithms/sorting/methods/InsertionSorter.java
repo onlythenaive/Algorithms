@@ -17,7 +17,6 @@ package com.ilyagubarev.algorithms.sorting.methods;
 
 import com.ilyagubarev.algorithms.adt.ItemArray;
 import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
-import com.ilyagubarev.algorithms.adt.ItemHelper;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.tools.Registry;
 
@@ -38,12 +37,11 @@ public final class InsertionSorter extends AbstractSorter {
     }
 
     @Override
-    public void sort(ItemArray target, ItemHelper helper,
-            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
-            Registry recursions) {
+    public void sort(ItemArray target, ItemArrayFactory arrayFactory,
+            ItemNodeFactory nodeFactory, Registry recursions) {
         for (int pivot = 1; pivot < target.getSize(); ++pivot) {
             int i = pivot;
-            while (i > 0 && swapIfLess(target, i, i - 1, helper)) {
+            while (i > 0 && swapIfLess(target, i, i - 1)) {
                 --i;
             }
         }

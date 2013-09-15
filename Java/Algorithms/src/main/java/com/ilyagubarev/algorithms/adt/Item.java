@@ -15,48 +15,60 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
+import com.ilyagubarev.algorithms.adt.tools.Counter;
+
 /**
  * Item model to be used in various tests and analyses.
  *
- * @version 1.02, 13 September 2013
+ * @see Comparable
+ *
+ * @version 1.03, 15 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
-public final class Item {
+public final class Item implements Comparable<Item> {
 
     private final Comparable _data;
-    private final ItemType _type;
+    private final Counter _cmps;
+    private final Counter _hashings;    
+    private final Counter _tests;
 
-    Item(Comparable data, ItemType type) {
+    Item(Comparable data, Counter cmps, Counter hashings, Counter tests) {
         _data = data;
-        _type = type;
+        _cmps = cmps;
+        _hashings = hashings;
+        _tests = tests;
     }
 
-    /**
-     * Gets item type.
-     *
-     * @return item type.
-     *
-     * @see ItemType
-     */
-    public ItemType getType() {
-        return _type;
+    @Override
+    public int compareTo(Item item) {
+        _cmps.increment();
+        if (_data.getClass() != item.getClass()) {
+            throw new IllegalArgumentException("items are incomparable");
+        }
+        return _data.compareTo(item._data);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        _tests.increment();
+        if (object == null) {
+            return false;
+        }
+        if (getClass() != object.getClass()) {
+            return false;
+        }
+        return _data.equals(((Item)object)._data);
+    }
+
+    @Override
+    public int hashCode() {
+        _hashings.increment();
+        return _data.hashCode();
     }
 
     @Override
     public String toString() {
         return String.format("[item: %s]", _data);
-    }
-
-    int getHash() {
-        return _data.hashCode();
-    }
-
-    boolean isEqualTo(Item item) {
-        return _data.equals(item._data);
-    }
-
-    int compareTo(Item item) {
-        return _data.compareTo(item._data);
     }
 }

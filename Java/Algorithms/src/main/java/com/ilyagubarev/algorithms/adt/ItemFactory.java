@@ -20,26 +20,45 @@ import com.ilyagubarev.algorithms.adt.tools.Counter;
 /**
  * Items provider.
  *
- * @version 1.02, 13 September 2013
+ * @version 1.03, 15 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
 public final class ItemFactory {
 
     private final Counter _creations;
+    private final Counter _comparisons;
+    private final Counter _hashings;
+    private final Counter _tests;
 
     /**
      * Creates a new instance of ItemFactory.
      *
      * @param creations a counter of item creations.
+     * @param comparisons a counter of item comparisons.
+     * @param hashings a counter of item hashings.
+     * @param tests a counter of item equality tests.
      *
      * @see Counter
      */
-    public ItemFactory(Counter creations) {
+    public ItemFactory(Counter creations, Counter comparisons,
+            Counter hashings, Counter tests) {
         if (creations == null) {
             throw new NullPointerException("creations counter is null");
         }
+        if (comparisons == null) {
+            throw new NullPointerException("comparisons counter is null");
+        }
+        if (hashings == null) {
+            throw new NullPointerException("hashings counter is null");
+        }
+        if (tests == null) {
+            throw new NullPointerException("tests counter is null");
+        }
         _creations = creations;
+        _comparisons = comparisons;
+        _hashings = hashings;
+        _tests = tests;
     }
 
     /**
@@ -48,39 +67,14 @@ public final class ItemFactory {
      * @param source a source the item to be based on.
      * @return a new instance of Item.
      *
+     * @see Comparable
      * @see Item
      */
-    public Item create(int source) {
-        _creations.increment();
-        return new Item(source, ItemType.INTEGER);
-    }
-
-    /**
-     * Creates a new instance of Item based on the source.
-     *
-     * @param source a source the item to be based on.
-     * @return a new instance of Item.
-     *
-     * @see Item
-     */
-    public Item create(double source) {
-        _creations.increment();
-        return new Item(source, ItemType.DOUBLE);
-    }
-
-    /**
-     * Creates a new instance of Item based on the source.
-     *
-     * @param source a source the item to be based on.
-     * @return a new instance of Item.
-     *
-     * @see Item
-     */
-    public Item create(String source) {
+    public Item create(Comparable source) {
         if (source == null) {
             throw new NullPointerException("source is null");
         }
         _creations.increment();
-        return new Item(source, ItemType.STRING);
+        return new Item(source, _comparisons, _hashings, _tests);
     }
 }

@@ -17,14 +17,13 @@ package com.ilyagubarev.algorithms.sorting.methods;
 
 import com.ilyagubarev.algorithms.adt.ItemArray;
 import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
-import com.ilyagubarev.algorithms.adt.ItemHelper;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.tools.Registry;
 
 /**
  * Sorting algorithm common interface.
  *
- * @version 1.03, 14 September 2013
+ * @version 1.04, 15 September 2013
  * @since 10 September 2013
  * @author Ilya Gubarev
  */
@@ -48,7 +47,6 @@ public interface Sorter {
      * Concrete sorting method implementation.
      *
      * @param target target array to be sorted.
-     * @param helper item utility methods provider.
      * @param arrayFactory item arrays allocator.
      * @param nodeFactory item nodes provider.
      * @param recursions registry of recursive calls.
@@ -56,10 +54,8 @@ public interface Sorter {
      * @see ItemArray
      * @see ItemArrayFactory
      * @see ItemNodeFactory
-     * @see ItemHelper
      * @see Registry
      */
-    void sort(ItemArray target, ItemHelper helper,
-            ItemArrayFactory arrayFactory, ItemNodeFactory nodeFactory,
-            Registry recursions);
+    void sort(ItemArray target, ItemArrayFactory arrayFactory,
+            ItemNodeFactory nodeFactory, Registry recursions);
 }
