@@ -15,6 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
+import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.Item;

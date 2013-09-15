@@ -13,53 +13,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt.collections;
+package com.ilyagubarev.algorithms.adt.collections.iterators;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.ilyagubarev.algorithms.adt.Item;
-import com.ilyagubarev.algorithms.adt.ItemListNode;
+import com.ilyagubarev.algorithms.adt.ItemBinaryNode;
 
 /**
- * Item linked list node iterator.
+ * Item binary tree node iterator.
  *
- * @see ItemListNode
+ * @see ItemBinaryNode
  * @see Iterator
  *
- * @version 1.05, 15 September 2013
- * @since 02 September 2013
+ * @version 1.01, 15 September 2013
+ * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemListNodeIterator implements Iterator<Item> {
+public final class ItemBinaryNodeIterator implements Iterator<Item> {
 
-    private ItemListNode _current;
+    private ItemBinaryNode _next;
 
     /**
-     * Creates a new instance of ItemNodeIterator.
+     * Creates a new instance of ItemBinaryIterator.
      *
-     * @param start a starting node.
+     * @param root a root node.
      *
-     * @see ItemListNode
+     * @see ItemBinaryNode
      */
-    public ItemListNodeIterator(ItemListNode start) {
-        _current = start;
+    public ItemBinaryNodeIterator(ItemBinaryNode root) {
+        _next = root;
+        if (_next != null) {
+            ItemBinaryNode node;
+            while ((node = _next.getLeftChild()) != null) {
+                _next = node;
+            }
+        }
     }
 
     @Override
     public boolean hasNext() {
-        return _current != null;
+        return _next != null;
     }
 
     @Override
     public Item next() {
-        if (hasNext()) {
-            Item result = _current.getItem();
-            _current = _current.getNext();
-            return result;
-        } else {
+        if (!hasNext()) {
             throw new NoSuchElementException("iterator has no next element");
         }
+        throw new UnsupportedOperationException();
     }
 
     @Override
