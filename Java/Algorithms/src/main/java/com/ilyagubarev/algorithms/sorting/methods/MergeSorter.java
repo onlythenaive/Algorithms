@@ -16,34 +16,19 @@
 package com.ilyagubarev.algorithms.sorting.methods;
 
 import com.ilyagubarev.algorithms.adt.ItemArray;
-import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
-import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
-import com.ilyagubarev.algorithms.adt.tools.Registry;
 
 /**
- * "Divide & merge" method sorting algorithm implementation.
+ * Abstract merge method sorting implementation.
  *
  * @see AbstractSorting
  *
- * @version 1.04, 15 September 2013
- * @since 11 September 2013
+ * @version 1.01, 15 September 2013
+ * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class MergeSorter extends AbstractSorter {
+public abstract class MergeSorter extends AbstractSorter {
 
-    @Override
-    public String getInfo() {
-        return "Merge method";
-    }
-
-    @Override
-    public void sort(ItemArray target, ItemArrayFactory arrayFactory,
-            ItemNodeFactory nodeFactory, Registry recursions) {
-        ItemArray aux = arrayFactory.create(target.getSize());
-        sort(target, 0, target.getSize() - 1, aux, recursions);
-    }
-
-    private void merge(ItemArray target, int leftFirst, int leftLast,
+    protected final void merge(ItemArray target, int leftFirst, int leftLast,
             int rightLast, ItemArray aux) {
         for (int i = leftFirst; i <= rightLast; ++i) {
             aux.write(i, target.read(i));
@@ -61,20 +46,5 @@ public final class MergeSorter extends AbstractSorter {
                 target.write(i, aux.read(left++));
             }
         }
-    }
-
-    private void sort(ItemArray target, int leftFirst, int rightLast,
-            ItemArray aux, Registry recursions) {
-        if (rightLast <= leftFirst) {
-            return;
-        }
-        int leftLast = leftFirst + (rightLast - leftFirst) / 2;
-        registerRecursiveCall(recursions);
-        sort(target, leftFirst, leftLast, aux, recursions);
-        registerRecursiveReturn(recursions);
-        registerRecursiveCall(recursions);
-        sort(target, leftLast + 1, rightLast, aux, recursions);
-        registerRecursiveReturn(recursions);
-        merge(target, leftFirst, leftLast, rightLast, aux);
     }
 }
