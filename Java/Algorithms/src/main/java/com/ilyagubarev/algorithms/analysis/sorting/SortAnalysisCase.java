@@ -15,8 +15,6 @@
  */
 package com.ilyagubarev.algorithms.analysis.sorting;
 
-import com.ilyagubarev.algorithms.adt.ItemType;
-
 /**
  * Task case for sorting method analyser.
  *

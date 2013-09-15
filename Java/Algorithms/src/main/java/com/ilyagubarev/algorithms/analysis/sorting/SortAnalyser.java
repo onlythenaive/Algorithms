@@ -15,7 +15,6 @@
  */
 package com.ilyagubarev.algorithms.analysis.sorting;
 
-import com.ilyagubarev.algorithms.adt.ItemType;
 import com.ilyagubarev.algorithms.sorting.methods.Sorter;
 import java.util.Set;
 
