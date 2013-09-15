@@ -18,22 +18,23 @@ package com.ilyagubarev.algorithms.adt;
 import com.ilyagubarev.algorithms.adt.tools.Counter;
 
 /**
- * Item linked node.
+ * Item linked list node.
  *
- * @version 1.03, 13 September 2013
+ * @version 1.04, 15 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemNode {
+public final class ItemListNode {
 
     private final Item _item;
     private final Counter _reads;
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
-    private ItemNode _next;
+    private ItemListNode _next;
 
-    ItemNode(Item item, Counter reads, Counter linkReads, Counter linkWrites) {
+    ItemListNode(Item item, Counter reads, Counter linkReads,
+            Counter linkWrites) {
         _item = item;
         _reads = reads;
         _linkReads = linkReads;
@@ -57,7 +58,7 @@ public final class ItemNode {
      *
      * @return the next node.
      */
-    public ItemNode getNext() {
+    public ItemListNode getNext() {
         _linkReads.increment();
         return _next;
     }
@@ -67,13 +68,13 @@ public final class ItemNode {
      *
      * @param node the next node.
      */
-    public void setNext(ItemNode node) {
+    public void setNext(ItemListNode node) {
         _linkWrites.increment();
         _next = node;
     }
 
     @Override
     public String toString() {
-        return String.format("[item list: %s]", _item);
+        return String.format("[item list node: %s]", _item);
     }
 }

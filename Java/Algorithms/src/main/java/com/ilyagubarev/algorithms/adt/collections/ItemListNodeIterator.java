@@ -19,30 +19,30 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.ilyagubarev.algorithms.adt.Item;
-import com.ilyagubarev.algorithms.adt.ItemNode;
+import com.ilyagubarev.algorithms.adt.ItemListNode;
 
 /**
- * Item linked node iterator.
+ * Item linked list node iterator.
  *
- * @see ItemNode
+ * @see ItemListNode
  * @see Iterator
  *
- * @version 1.04, 13 September 2013
+ * @version 1.05, 15 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemNodeIterator implements Iterator<Item> {
+public final class ItemListNodeIterator implements Iterator<Item> {
 
-    private ItemNode _current;
+    private ItemListNode _current;
 
     /**
      * Creates a new instance of ItemNodeIterator.
      *
      * @param start a starting node.
      *
-     * @see ItemNode
+     * @see ItemListNode
      */
-    public ItemNodeIterator(ItemNode start) {
+    public ItemListNodeIterator(ItemListNode start) {
         _current = start;
     }
 

@@ -20,7 +20,7 @@ import com.ilyagubarev.algorithms.adt.tools.Counter;
 /**
  * Item nodes provider.
  *
- * @version 1.02, 14 September 2013
+ * @version 1.03, 15 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
@@ -62,16 +62,16 @@ public final class ItemNodeFactory {
     }
 
     /**
-     * Creates a new instance of ItemNode.
+     * Creates a new instance of ItemListNode.
      *
      * @param item an item to be contained in the node.
-     * @return a new instance of ItemNode.
+     * @return a new instance of ItemListNode.
      *
      * @see Item
-     * @see ItemNode
+     * @see ItemListNode
      */
-    public ItemNode createNode(Item item) {
+    public ItemListNode createListNode(Item item) {
         _creations.increment();
-        return new ItemNode(item, _reads, _linkReads, _linkWrites);
+        return new ItemListNode(item, _reads, _linkReads, _linkWrites);
     }
 }

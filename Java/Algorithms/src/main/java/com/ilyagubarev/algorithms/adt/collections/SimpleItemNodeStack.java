@@ -18,15 +18,15 @@ package com.ilyagubarev.algorithms.adt.collections;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.Item;
-import com.ilyagubarev.algorithms.adt.ItemNode;
+import com.ilyagubarev.algorithms.adt.ItemListNode;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
 
 /**
- * Simple ItemStack implementation based on item nodes.
+ * Simple ItemStack implementation based on item list nodes.
  *
  * @see ItemStack
  *
- * @version 1.03, 14 September 2013
+ * @version 1.04, 15 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
@@ -35,7 +35,7 @@ public final class SimpleItemNodeStack implements ItemStack {
     private final ItemNodeFactory _factory;
 
     private int _size;
-    private ItemNode _top;
+    private ItemListNode _top;
 
     /**
      * Creates a new instance of SimpleItemNodeStack.
@@ -63,7 +63,7 @@ public final class SimpleItemNodeStack implements ItemStack {
 
     @Override
     public Iterator<Item> iterator() {
-        return new ItemNodeIterator(_top);
+        return new ItemListNodeIterator(_top);
     }
 
     @Override
@@ -75,7 +75,7 @@ public final class SimpleItemNodeStack implements ItemStack {
     @Override
     public Item pop() {
         throwExceptionIfEmpty();
-        ItemNode buffer = _top;
+        ItemListNode buffer = _top;
         _top = _top.getNext();
         --_size;
         return buffer.getItem();
@@ -83,8 +83,8 @@ public final class SimpleItemNodeStack implements ItemStack {
 
     @Override
     public void push(Item item) {
-        ItemNode buffer = _top;
-        _top = _factory.createNode(item);
+        ItemListNode buffer = _top;
+        _top = _factory.createListNode(item);
         _top.setNext(buffer);
         ++_size;
     }
