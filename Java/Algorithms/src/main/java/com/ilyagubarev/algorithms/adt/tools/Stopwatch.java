@@ -24,6 +24,22 @@ package com.ilyagubarev.algorithms.adt.tools;
  */
 public final class Stopwatch {
 
+    /**
+     * Callback delegate for the check operation.
+     */
+    public static interface OnCheckHandler {
+
+        /**
+         * Actions to be performed on check.
+         *
+         * @param started true if the stopwatch is started.
+         * @param elapsedTime elapsed time in milliseconds.
+         */
+        void execute(boolean started, long elapsedTime);
+    }
+
+    private final OnCheckHandler _handler;
+
     private long _start;
     private long _stored;
     private boolean _started;
@@ -32,7 +48,18 @@ public final class Stopwatch {
      * Creates a new instance of Stopwatch.
      */
     public Stopwatch() {
-        
+        this(null);
+    }
+
+    /**
+     * Creates a new instance of Stopwatch.
+     *
+     * @param handler 
+     *
+     * @see OnCheckHandler
+     */
+    public Stopwatch(OnCheckHandler handler) {
+        _handler = handler;
     }
 
     /**
@@ -45,6 +72,15 @@ public final class Stopwatch {
             return _stored; 
         }
         return System.currentTimeMillis() - _start;
+    }
+
+    /**
+     * Provides a time-check operation.
+     */
+    public void check() {
+        if (_handler != null) {
+            _handler.execute(_started, getElapsedTime());
+        }
     }
 
     /**
