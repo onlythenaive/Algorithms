@@ -20,7 +20,7 @@ import com.ilyagubarev.algorithms.adt.tools.Counter;
 /**
  * Item nodes provider.
  *
- * @version 1.03, 15 September 2013
+ * @version 1.04, 16 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
@@ -28,6 +28,7 @@ public final class ItemNodeFactory {
 
     private final Counter _creations;
     private final Counter _reads;
+    private final Counter _writes;
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
@@ -36,18 +37,22 @@ public final class ItemNodeFactory {
      *
      * @param creations a counter of item node creations.
      * @param reads a counter of item read operations.
+     * @param writes a counter of item write operations.
      * @param linkReads a counter of link read operations.
      * @param linkWrites a counter of link write operations.
      *
      * @see Counter
      */
-    public ItemNodeFactory(Counter creations, Counter reads,
+    public ItemNodeFactory(Counter creations, Counter reads, Counter writes,
             Counter linkReads, Counter linkWrites) {
         if (creations == null) {
             throw new NullPointerException("creations counter is null");
         }   
         if (reads == null) {
             throw new NullPointerException("reads counter is null");            
+        }
+        if (writes == null) {
+            throw new NullPointerException("writes counter is null");            
         }
         if (linkReads == null) {
             throw new NullPointerException("link reads counter is null");            
@@ -57,6 +62,7 @@ public final class ItemNodeFactory {
         }        
         _creations = creations;
         _reads = reads;
+        _writes = writes;
         _linkReads = linkReads;
         _linkWrites = linkWrites;
     }
@@ -72,7 +78,8 @@ public final class ItemNodeFactory {
      */
     public ItemBinaryNode createBinaryNode(Item item) {
         _creations.increment();
-        return new ItemBinaryNode(item, _reads, _linkReads, _linkWrites);
+        return new ItemBinaryNode(item, _reads, _writes, _linkReads,
+                _linkWrites);
     }
 
     /**
@@ -86,6 +93,6 @@ public final class ItemNodeFactory {
      */
     public ItemListNode createListNode(Item item) {
         _creations.increment();
-        return new ItemListNode(item, _reads, _linkReads, _linkWrites);
+        return new ItemListNode(item, _reads, _writes, _linkReads, _linkWrites);
     }
 }

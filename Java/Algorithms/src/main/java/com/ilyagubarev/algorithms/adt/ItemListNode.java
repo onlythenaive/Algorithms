@@ -20,23 +20,25 @@ import com.ilyagubarev.algorithms.adt.tools.Counter;
 /**
  * Item linked list node.
  *
- * @version 1.04, 15 September 2013
+ * @version 1.05, 16 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
 public final class ItemListNode {
 
-    private final Item _item;
     private final Counter _reads;
+    private final Counter _writes;
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
+    private Item _item;
     private ItemListNode _next;
 
-    ItemListNode(Item item, Counter reads, Counter linkReads,
+    ItemListNode(Item item, Counter reads, Counter writes, Counter linkReads,
             Counter linkWrites) {
         _item = item;
         _reads = reads;
+        _writes = writes;
         _linkReads = linkReads;
         _linkWrites = linkWrites;
     }
@@ -61,6 +63,18 @@ public final class ItemListNode {
     public ItemListNode getNext() {
         _linkReads.increment();
         return _next;
+    }
+
+    /**
+     * Sets a new contained item.
+     *
+     * @param item an item to be contained.
+     *
+     * @see Item
+     */
+    public void setItem(Item item) {
+        _writes.increment();
+        _item = item;
     }
 
     /**

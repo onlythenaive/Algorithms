@@ -20,25 +20,27 @@ import com.ilyagubarev.algorithms.adt.tools.Counter;
 /**
  * Item binary tree node.
  *
- * @version 1.01, 15 September 2013
+ * @version 1.02, 16 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
 public final class ItemBinaryNode {
 
-    private final Item _item;
     private final Counter _reads;
+    private final Counter _writes;
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
+    private Item _item;
     private ItemBinaryNode _leftChild;
     private ItemBinaryNode _rightChild;
     private ItemBinaryNode _parent;
 
-    ItemBinaryNode(Item item, Counter reads, Counter linkReads,
-            Counter linkWrites) {
+    ItemBinaryNode(Item item, Counter reads, Counter writes,
+            Counter linkReads, Counter linkWrites) {
         _item = item;
         _reads = reads;
+        _writes = writes;
         _linkReads = linkReads;
         _linkWrites = linkWrites;
     }
@@ -66,15 +68,6 @@ public final class ItemBinaryNode {
     }
 
     /**
-     * Sets a reference to the left child node.
-     *
-     * @param node the left child node.
-     */
-    public void setLeftChild(ItemBinaryNode node) {
-        _linkWrites.increment();
-        _leftChild = node;
-    }
-    /**
      * Gets a reference to the right child node.
      *
      * @return the right child node.
@@ -86,16 +79,6 @@ public final class ItemBinaryNode {
     }
 
     /**
-     * Sets a reference to the right child node.
-     *
-     * @param node the right child node.
-     */
-    public void setRightChild(ItemBinaryNode node) {
-        _linkWrites.increment();
-        _rightChild = node;
-    }
-
-    /**
      * Gets a reference to the parent node.
      *
      * @return the parent node.
@@ -103,6 +86,38 @@ public final class ItemBinaryNode {
     public ItemBinaryNode getParent() {
         _linkReads.increment();
         return _parent;
+    }
+
+    /**
+     * Sets a new contained item.
+     *
+     * @param item an item to be contained.
+     *
+     * @see Item
+     */
+    public void setItem(Item item) {
+        _writes.increment();
+        _item = item;
+    }
+
+    /**
+     * Sets a reference to the left child node.
+     *
+     * @param node the left child node.
+     */
+    public void setLeftChild(ItemBinaryNode node) {
+        _linkWrites.increment();
+        _leftChild = node;
+    }
+
+    /**
+     * Sets a reference to the right child node.
+     *
+     * @param node the right child node.
+     */
+    public void setRightChild(ItemBinaryNode node) {
+        _linkWrites.increment();
+        _rightChild = node;
     }
 
     /**
