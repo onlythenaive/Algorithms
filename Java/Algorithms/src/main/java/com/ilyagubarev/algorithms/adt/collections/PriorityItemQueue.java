@@ -64,7 +64,7 @@ public final class PriorityItemQueue implements ItemQueue {
         if (isEmpty()) {
             _root = node;
         } else {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException();        
         }
         _size++;
     }
