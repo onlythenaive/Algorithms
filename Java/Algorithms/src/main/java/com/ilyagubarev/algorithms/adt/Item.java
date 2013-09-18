@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
-import com.ilyagubarev.algorithms.adt.tools.Counter;
+import com.ilyagubarev.algorithms.adt.meters.Counter;
 
 /**
  * Item model to be used in various tests and analyses.

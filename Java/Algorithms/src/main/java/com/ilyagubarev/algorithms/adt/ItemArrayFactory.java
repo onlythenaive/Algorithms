@@ -15,8 +15,8 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
-import com.ilyagubarev.algorithms.adt.tools.Counter;
-import com.ilyagubarev.algorithms.adt.tools.Registry;
+import com.ilyagubarev.algorithms.adt.meters.Counter;
+import com.ilyagubarev.algorithms.adt.meters.Registry;
 
 /**
  * Item array allocator.

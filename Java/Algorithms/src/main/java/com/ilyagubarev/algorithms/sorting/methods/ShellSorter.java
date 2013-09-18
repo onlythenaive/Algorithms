@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.sorting.methods;
 import com.ilyagubarev.algorithms.adt.ItemArray;
 import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
-import com.ilyagubarev.algorithms.adt.tools.Registry;
+import com.ilyagubarev.algorithms.adt.meters.Registry;
 import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
 
 /**

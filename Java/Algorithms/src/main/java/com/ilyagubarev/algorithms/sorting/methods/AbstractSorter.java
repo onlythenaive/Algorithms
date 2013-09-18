@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.sorting.methods;
 
 import com.ilyagubarev.algorithms.adt.Item;
 import com.ilyagubarev.algorithms.adt.ItemArray;
-import com.ilyagubarev.algorithms.adt.tools.Registry;
+import com.ilyagubarev.algorithms.adt.meters.Registry;
 
 /**
  * Sorting algorithm common implementation.
