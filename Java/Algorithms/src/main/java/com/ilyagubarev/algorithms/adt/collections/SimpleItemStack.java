@@ -15,12 +15,12 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.Item;
 import com.ilyagubarev.algorithms.adt.ItemListNode;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator;
 
 /**
  * Simple ItemStack implementation based on item list nodes.
