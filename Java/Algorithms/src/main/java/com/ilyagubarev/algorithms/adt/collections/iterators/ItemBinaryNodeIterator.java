@@ -27,7 +27,7 @@ import com.ilyagubarev.algorithms.adt.ItemBinaryNode;
  * @see ItemBinaryNode
  * @see Iterator
  *
- * @version 1.01, 15 September 2013
+ * @version 1.02, 18 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
@@ -44,11 +44,8 @@ public final class ItemBinaryNodeIterator implements Iterator<Item> {
      */
     public ItemBinaryNodeIterator(ItemBinaryNode root) {
         _next = root;
-        if (_next != null) {
-            ItemBinaryNode node;
-            while ((node = _next.getLeftChild()) != null) {
-                _next = node;
-            }
+        while (_next.getLeftChild() != null) {
+            _next = _next.getLeftChild();
         }
     }
 
