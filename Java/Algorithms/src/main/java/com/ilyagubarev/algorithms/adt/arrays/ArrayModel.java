@@ -76,6 +76,6 @@ public final class ArrayModel<E> {
         for (E item : _data) {
             content.append(String.format("%s, ", item));
         }
-        return String.format("[item array: {%s}]", content);
+        return String.format("[array model: {%s}]", content);
     }
 }

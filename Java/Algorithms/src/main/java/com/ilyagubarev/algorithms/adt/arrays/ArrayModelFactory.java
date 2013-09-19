@@ -19,7 +19,7 @@ import com.ilyagubarev.algorithms.adt.meters.Counter;
 import com.ilyagubarev.algorithms.adt.meters.Registry;
 
 /**
- * Array model allocator.
+ * Array model provider.
  *
  * @version 1.02, 19 September 2013
  * @since 13 September 2013
@@ -34,7 +34,7 @@ public final class ArrayModelFactory {
     /**
      * Creates a new instance of ArrayModelFactory.
      *
-     * @param allocations a registry of allocations.
+     * @param allocations a registry of array model allocations.
      * @param reads a counter of array read operations.
      * @param writes a counter of array write operations.
      *
