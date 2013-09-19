@@ -19,8 +19,8 @@ import com.ilyagubarev.algorithms.adt.collections.stacks.SimpleItemStack;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
-import com.ilyagubarev.algorithms.adt.collections.ItemBag;
-import com.ilyagubarev.algorithms.adt.collections.ItemStack;
+import com.ilyagubarev.algorithms.adt.collections.BagModel;
+import com.ilyagubarev.algorithms.adt.collections.StackModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 
 /**
@@ -32,9 +32,9 @@ import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleItemBag implements ItemBag {
+public final class SimpleItemBag implements BagModel {
 
-    private final ItemStack _stack;
+    private final StackModel _stack;
 
     /**
      * Creates a new instance of SimpleItemBag.

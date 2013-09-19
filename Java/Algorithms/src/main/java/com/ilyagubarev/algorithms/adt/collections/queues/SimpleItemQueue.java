@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt.collections.queues;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
-import com.ilyagubarev.algorithms.adt.collections.ItemQueue;
+import com.ilyagubarev.algorithms.adt.collections.QueueModel;
 import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.iterators.ListNodeModelIterator;
@@ -32,7 +32,7 @@ import com.ilyagubarev.algorithms.adt.iterators.ListNodeModelIterator;
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleItemQueue implements ItemQueue {
+public final class SimpleItemQueue implements QueueModel {
 
     private final NodeModelFactory _factory;
 

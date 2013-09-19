@@ -15,45 +15,37 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
-
 /**
- * FIFO policy collection common interface.
+ * FIFO policy collection model common interface.
  *
- * @see ItemCollection
+ * @see CollectionModel
  *
- * @version 1.02, 13 September 2013
+ * @version 1.03, 19 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface ItemQueue extends ItemCollection {
+public interface QueueModel<E> extends CollectionModel<E> {
 
     /**
      * Gets the oldest item in the queue.
      *
      * @return the oldest item.
      * @throws IllegalStateException if the queue is empty.
-     *
-     * @see Item
      */
-    ItemModel dequeue();
+    E dequeue();
 
     /**
      * Adds a new item to the queue.
      *
      * @param item an item to be enqueued.
-     *
-     * @see Item
      */
-    void enqueue(ItemModel item);
+    void enqueue(E item);
 
     /**
      * Gets the oldest item and removes from the queue.
      *
      * @return the oldest item.
      * @throws IllegalStateException if the queue is empty.
-     *
-     * @see Item
      */
-    ItemModel poll();
+    E poll();
 }

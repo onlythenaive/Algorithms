@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt.collections.stacks;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
-import com.ilyagubarev.algorithms.adt.collections.ItemStack;
+import com.ilyagubarev.algorithms.adt.collections.StackModel;
 import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.iterators.ListNodeModelIterator;
@@ -32,7 +32,7 @@ import com.ilyagubarev.algorithms.adt.iterators.ListNodeModelIterator;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleItemStack implements ItemStack {
+public final class SimpleItemStack implements StackModel {
 
     private final NodeModelFactory _factory;
 

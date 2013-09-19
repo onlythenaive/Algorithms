@@ -15,30 +15,28 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
-
 /**
- * Item collection common interface.
+ * Collection model common interface.
  *
  * @see Iterable
  *
- * @version 1.02, 13 September 2013
+ * @version 1.03, 19 September 2013
  * @since 03 September 2013
  * @author Ilya Gubarev
  */
-public interface ItemCollection extends Iterable<ItemModel> {
+public interface CollectionModel<E> extends Iterable<E> {
 
     /**
-     * Gets current size of the container.
+     * Gets current size of the collection.
      *
      * @return current size.
      */
     int getSize();
 
     /**
-     * Checks if the container is empty.
+     * Checks if the collection is empty.
      *
-     * @return true if the container is empty.
+     * @return true if the collection is empty.
      */
     boolean isEmpty();    
 }

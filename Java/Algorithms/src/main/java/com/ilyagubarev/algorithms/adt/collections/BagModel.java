@@ -15,18 +15,16 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
-
 /**
- * Adding-only collection common interface.
+ * Adding-only collection model common interface.
  *
- * @see ItemCollection
+ * @see CollectionModel
  *
- * @version 1.03, 13 September 2013
+ * @version 1.04, 19 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface ItemBag extends ItemCollection {
+public interface BagModel<E> extends CollectionModel<E> {
     
     /**
      * Adds a new item to the bag.
@@ -35,5 +33,5 @@ public interface ItemBag extends ItemCollection {
      *
      * @see Item
      */
-    void add(ItemModel item);
+    void add(E item);
 }

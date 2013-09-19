@@ -15,45 +15,37 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
-
 /**
- * LIFO policy collection common interface.
+ * LIFO policy collection model common interface.
  *
- * @see ItemCollection
+ * @see CollectionModel
  *
- * @version 1.03, 13 September 2013
+ * @version 1.04, 19 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface ItemStack extends ItemCollection {
+public interface StackModel<E> extends CollectionModel<E> {
 
     /**
      * Gets the latest pushed item.
      *
      * @return the latest pushed item.
      * @throws IllegalStateException if the stack is empty.
-     *
-     * @see Item
      */    
-    ItemModel peek();
+    E peek();
 
     /**
      * Gets the latest pushed item and removes it from the stack.
      *
      * @return the latest pushed item.
      * @throws IllegalStateException if the stack is empty.
-     *
-     * @see Item
      */    
-    ItemModel pop();
+    E pop();
 
     /**
      * Pushes down a new item into the stack.
      *
      * @param item an item to be pushed to the stack.
-     *
-     * @see Item
      */
-    void push(ItemModel item);
+    void push(E item);
 }
