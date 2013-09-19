@@ -15,36 +15,36 @@
  */
 package com.ilyagubarev.algorithms.adt.collections.bags;
 
-import com.ilyagubarev.algorithms.adt.collections.stacks.SimpleItemStack;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.collections.BagModel;
 import com.ilyagubarev.algorithms.adt.collections.StackModel;
+import com.ilyagubarev.algorithms.adt.collections.stacks.SimpleStackModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 
 /**
- * Simple ItemBag implementation based on ItemStack.
+ * Simple BagModel implementation based on StackModel.
  *
- * @see ItemBag
+ * @see BagModel
  *
- * @version 1.01, 15 September 2013
+ * @version 1.02, 19 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleItemBag implements BagModel {
+public final class SimpleBagModel<E> implements BagModel<E> {
 
-    private final StackModel _stack;
+    private final StackModel<E> _stack;
 
     /**
-     * Creates a new instance of SimpleItemBag.
+     * Creates a new instance of SimpleBagModel.
      *
-     * @param factory item nodes provider.
+     * @param factory node model provider.
      *
-     * @see ItemNodeFactory
+     * @see NodeModelFactory
      */
-    public SimpleItemBag(NodeModelFactory factory) {
-        _stack = new SimpleItemStack(factory);
+    public SimpleBagModel(NodeModelFactory factory) {
+        _stack = new SimpleStackModel<E>(factory);
     }
 
     @Override
@@ -58,12 +58,12 @@ public final class SimpleItemBag implements BagModel {
     }
 
     @Override
-    public void add(ItemModel item) {
+    public void add(E item) {
         _stack.push(item);
     }
 
     @Override
-    public Iterator<ItemModel> iterator() {
+    public Iterator<E> iterator() {
         return _stack.iterator();
     }
 }

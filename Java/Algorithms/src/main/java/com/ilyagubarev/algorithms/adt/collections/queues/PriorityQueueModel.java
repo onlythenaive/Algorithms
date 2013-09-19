@@ -24,29 +24,29 @@ import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.iterators.BinaryNodeModelIterator;
 
 /**
- * Priority ItemQueue implementation based on item binary tree nodes.
+ * Priority ModelQueue implementation based on binary tree node model.
  *
- * @see ItemQueue
+ * @see QueueModel
  *
- * @version 1.01, 15 September 2013
+ * @version 1.02, 19 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class PriorityItemQueue implements QueueModel {
+public final class PriorityQueueModel<E> implements QueueModel<E> {
 
     private final NodeModelFactory _factory;
 
     private int _size;
-    private BinaryNodeModel _root;
+    private BinaryNodeModel<E> _root;
     
     /**
-     * Creates a new instance of PriorityItemQueue.
+     * Creates a new instance of PriorityQueueModel.
      *
      * @param factory 
      *
-     * @see ItemNodeFactory
+     * @see NodeModelFactory
      */
-    public PriorityItemQueue(NodeModelFactory factory) {
+    public PriorityQueueModel(NodeModelFactory factory) {
         if (factory == null) {
             throw new NullPointerException("item nodes provider is null");
         }
@@ -54,14 +54,14 @@ public final class PriorityItemQueue implements QueueModel {
     }
 
     @Override
-    public ItemModel dequeue() {
+    public E dequeue() {
         throwExceptionIfEmpty();
             throw new UnsupportedOperationException();        
     }
 
     @Override
-    public void enqueue(ItemModel item) {
-        BinaryNodeModel node = _factory.createBinaryNode(item);
+    public void enqueue(E item) {
+        BinaryNodeModel<E> node = _factory.createBinaryNode(item);
         if (isEmpty()) {
             _root = node;
         } else {
@@ -71,7 +71,7 @@ public final class PriorityItemQueue implements QueueModel {
     }
 
     @Override
-    public ItemModel poll() {
+    public E poll() {
         throwExceptionIfEmpty();
         return _root.getItem();
     }
@@ -87,8 +87,8 @@ public final class PriorityItemQueue implements QueueModel {
     }
 
     @Override
-    public Iterator<ItemModel> iterator() {
-        return new BinaryNodeModelIterator(_root);
+    public Iterator<E> iterator() {
+        return new BinaryNodeModelIterator<E>(_root);
     }
 
     private void throwExceptionIfEmpty() {
