@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.meters.Registry;
 
@@ -59,7 +59,7 @@ public abstract class AbstractSorter implements Sorter {
      * @see ItemArray
      */
     protected final void swap(ArrayModel target, int first, int second) {
-        Item buffer = target.read(first);
+        ItemModel buffer = target.read(first);
         target.write(first, target.read(second));
         target.write(second, buffer);
     }
@@ -76,8 +76,8 @@ public abstract class AbstractSorter implements Sorter {
      * @see ItemHelper
      */
     protected final boolean swapIfLess(ArrayModel target, int first, int second) {
-        Item item1 = target.read(first);
-        Item item2 = target.read(second);
+        ItemModel item1 = target.read(first);
+        ItemModel item2 = target.read(second);
         if (item1.compareTo(item2) < 0) {
             target.write(first, item2);
             target.write(second, item1);

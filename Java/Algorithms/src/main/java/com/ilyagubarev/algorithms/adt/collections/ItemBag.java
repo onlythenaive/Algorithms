@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 
 /**
  * Adding-only collection common interface.
@@ -35,5 +35,5 @@ public interface ItemBag extends ItemCollection {
      *
      * @see Item
      */
-    void add(Item item);
+    void add(ItemModel item);
 }

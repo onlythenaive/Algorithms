@@ -18,13 +18,13 @@ package com.ilyagubarev.algorithms.adt;
 import com.ilyagubarev.algorithms.adt.meters.Counter;
 
 /**
- * Items provider.
+ * Item model provider.
  *
- * @version 1.03, 15 September 2013
+ * @version 1.04, 19 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemFactory {
+public final class ItemModelFactory {
 
     private final Counter _creations;
     private final Counter _comparisons;
@@ -32,16 +32,16 @@ public final class ItemFactory {
     private final Counter _tests;
 
     /**
-     * Creates a new instance of ItemFactory.
+     * Creates a new instance of ItemModelFactory.
      *
-     * @param creations a counter of item creations.
-     * @param comparisons a counter of item comparisons.
-     * @param hashings a counter of item hashings.
-     * @param tests a counter of item equality tests.
+     * @param creations a counter of item model creations.
+     * @param comparisons a counter of item model comparisons.
+     * @param hashings a counter of item model hashings.
+     * @param tests a counter of item model equality tests.
      *
      * @see Counter
      */
-    public ItemFactory(Counter creations, Counter comparisons,
+    public ItemModelFactory(Counter creations, Counter comparisons,
             Counter hashings, Counter tests) {
         if (creations == null) {
             throw new NullPointerException("creations counter is null");
@@ -62,19 +62,19 @@ public final class ItemFactory {
     }
 
     /**
-     * Creates a new instance of Item based on the source.
+     * Creates a new instance of ItemModel based on the source.
      *
-     * @param source a source the item to be based on.
-     * @return a new instance of Item.
+     * @param source a source the item model to be based on.
+     * @return a new instance of ItemModel.
      *
      * @see Comparable
-     * @see Item
+     * @see ItemModel
      */
-    public Item create(Comparable source) {
+    public <T extends Comparable> ItemModel<T> create(T source) {
         if (source == null) {
             throw new NullPointerException("source is null");
         }
         _creations.increment();
-        return new Item(source, _comparisons, _hashings, _tests);
+        return new ItemModel(source, _comparisons, _hashings, _tests);
     }
 }

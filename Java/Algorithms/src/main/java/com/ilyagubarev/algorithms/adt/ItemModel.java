@@ -22,30 +22,28 @@ import com.ilyagubarev.algorithms.adt.meters.Counter;
  *
  * @see Comparable
  *
- * @version 1.03, 15 September 2013
+ * @version 1.04, 19 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
-public final class Item implements Comparable<Item> {
+public final class ItemModel<E extends Comparable>
+        implements Comparable<ItemModel<E>> {
 
-    private final Comparable _data;
+    private final E _data;
     private final Counter _comparisons;
     private final Counter _hashings;    
     private final Counter _tests;
 
-    Item(Comparable data, Counter cmps, Counter hashings, Counter tests) {
+    ItemModel(E data, Counter comparisons, Counter hashings, Counter tests) {
         _data = data;
-        _comparisons = cmps;
+        _comparisons = comparisons;
         _hashings = hashings;
         _tests = tests;
     }
 
     @Override
-    public int compareTo(Item item) {
+    public int compareTo(ItemModel<E> item) {
         _comparisons.increment();
-        if (_data.getClass() != item.getClass()) {
-            throw new IllegalArgumentException("items are incomparable");
-        }
         return _data.compareTo(item._data);
     }
 
@@ -58,7 +56,7 @@ public final class Item implements Comparable<Item> {
         if (getClass() != object.getClass()) {
             return false;
         }
-        return _data.equals(((Item)object)._data);
+        return _data.equals(((ItemModel)object)._data);
     }
 
     @Override
@@ -69,6 +67,6 @@ public final class Item implements Comparable<Item> {
 
     @Override
     public String toString() {
-        return String.format("[item: %s]", _data);
+        return String.format("[item model: %s]", _data);
     }
 }

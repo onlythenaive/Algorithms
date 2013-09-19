@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.adt.collections;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
 
 /**
@@ -55,12 +55,12 @@ public final class SimpleItemBag implements ItemBag {
     }
 
     @Override
-    public void add(Item item) {
+    public void add(ItemModel item) {
         _stack.push(item);
     }
 
     @Override
-    public Iterator<Item> iterator() {
+    public Iterator<ItemModel> iterator() {
         return _stack.iterator();
     }
 }

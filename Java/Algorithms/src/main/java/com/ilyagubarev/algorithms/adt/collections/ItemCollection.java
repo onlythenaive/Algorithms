@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 
 /**
  * Item collection common interface.
@@ -26,7 +26,7 @@ import com.ilyagubarev.algorithms.adt.Item;
  * @since 03 September 2013
  * @author Ilya Gubarev
  */
-public interface ItemCollection extends Iterable<Item> {
+public interface ItemCollection extends Iterable<ItemModel> {
 
     /**
      * Gets current size of the container.

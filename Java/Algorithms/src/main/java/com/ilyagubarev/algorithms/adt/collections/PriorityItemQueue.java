@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.adt.collections;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.ItemBinaryNode;
 import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.collections.iterators.ItemBinaryNodeIterator;
@@ -53,13 +53,13 @@ public final class PriorityItemQueue implements ItemQueue {
     }
 
     @Override
-    public Item dequeue() {
+    public ItemModel dequeue() {
         throwExceptionIfEmpty();
             throw new UnsupportedOperationException();        
     }
 
     @Override
-    public void enqueue(Item item) {
+    public void enqueue(ItemModel item) {
         ItemBinaryNode node = _factory.createBinaryNode(item);
         if (isEmpty()) {
             _root = node;
@@ -70,7 +70,7 @@ public final class PriorityItemQueue implements ItemQueue {
     }
 
     @Override
-    public Item poll() {
+    public ItemModel poll() {
         throwExceptionIfEmpty();
         return _root.getItem();
     }
@@ -86,7 +86,7 @@ public final class PriorityItemQueue implements ItemQueue {
     }
 
     @Override
-    public Iterator<Item> iterator() {
+    public Iterator<ItemModel> iterator() {
         return new ItemBinaryNodeIterator(_root);
     }
 

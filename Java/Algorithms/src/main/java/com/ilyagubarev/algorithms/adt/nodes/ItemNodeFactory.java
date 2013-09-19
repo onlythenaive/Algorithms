@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.nodes;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.meters.Counter;
 
 /**
@@ -77,7 +77,7 @@ public final class ItemNodeFactory {
      * @see Item
      * @see ItemBinaryNode
      */
-    public ItemBinaryNode createBinaryNode(Item item) {
+    public ItemBinaryNode createBinaryNode(ItemModel item) {
         _creations.increment();
         return new ItemBinaryNode(item, _reads, _writes, _linkReads,
                 _linkWrites);
@@ -92,7 +92,7 @@ public final class ItemNodeFactory {
      * @see Item
      * @see ItemListNode
      */
-    public ItemListNode createListNode(Item item) {
+    public ItemListNode createListNode(ItemModel item) {
         _creations.increment();
         return new ItemListNode(item, _reads, _writes, _linkReads, _linkWrites);
     }

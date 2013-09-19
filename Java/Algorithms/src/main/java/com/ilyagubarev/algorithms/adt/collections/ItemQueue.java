@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 
 /**
  * FIFO policy collection common interface.
@@ -36,7 +36,7 @@ public interface ItemQueue extends ItemCollection {
      *
      * @see Item
      */
-    Item dequeue();
+    ItemModel dequeue();
 
     /**
      * Adds a new item to the queue.
@@ -45,7 +45,7 @@ public interface ItemQueue extends ItemCollection {
      *
      * @see Item
      */
-    void enqueue(Item item);
+    void enqueue(ItemModel item);
 
     /**
      * Gets the oldest item and removes from the queue.
@@ -55,5 +55,5 @@ public interface ItemQueue extends ItemCollection {
      *
      * @see Item
      */
-    Item poll();
+    ItemModel poll();
 }

@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt.collections.iterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.ItemBinaryNode;
 
 /**
@@ -31,7 +31,7 @@ import com.ilyagubarev.algorithms.adt.nodes.ItemBinaryNode;
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemBinaryNodeIterator implements Iterator<Item> {
+public final class ItemBinaryNodeIterator implements Iterator<ItemModel> {
 
     private ItemBinaryNode _next;
 
@@ -55,7 +55,7 @@ public final class ItemBinaryNodeIterator implements Iterator<Item> {
     }
 
     @Override
-    public Item next() {
+    public ItemModel next() {
         if (!hasNext()) {
             throw new NoSuchElementException("iterator has no next element");
         }

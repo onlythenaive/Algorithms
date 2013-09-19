@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.adt.collections;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.ItemListNode;
 import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator;
@@ -63,18 +63,18 @@ public final class SimpleItemStack implements ItemStack {
     }
 
     @Override
-    public Iterator<Item> iterator() {
+    public Iterator<ItemModel> iterator() {
         return new ItemListNodeIterator(_top);
     }
 
     @Override
-    public Item peek() {
+    public ItemModel peek() {
         throwExceptionIfEmpty();
         return _top.getItem();
     }
 
     @Override
-    public Item pop() {
+    public ItemModel pop() {
         throwExceptionIfEmpty();
         ItemListNode buffer = _top;
         _top = _top.getNext();
@@ -83,7 +83,7 @@ public final class SimpleItemStack implements ItemStack {
     }
 
     @Override
-    public void push(Item item) {
+    public void push(ItemModel item) {
         ItemListNode buffer = _top;
         _top = _factory.createListNode(item);
         _top.setNext(buffer);

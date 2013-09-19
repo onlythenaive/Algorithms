@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt.collections.iterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.ItemListNode;
 
 /**
@@ -31,7 +31,7 @@ import com.ilyagubarev.algorithms.adt.nodes.ItemListNode;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemListNodeIterator implements Iterator<Item> {
+public final class ItemListNodeIterator implements Iterator<ItemModel> {
 
     private ItemListNode _next;
 
@@ -52,9 +52,9 @@ public final class ItemListNodeIterator implements Iterator<Item> {
     }
 
     @Override
-    public Item next() {
+    public ItemModel next() {
         if (hasNext()) {
-            Item result = _next.getItem();
+            ItemModel result = _next.getItem();
             _next = _next.getNext();
             return result;
         } else {

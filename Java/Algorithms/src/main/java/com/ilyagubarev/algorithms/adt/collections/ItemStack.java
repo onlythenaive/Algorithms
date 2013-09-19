@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.collections;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 
 /**
  * LIFO policy collection common interface.
@@ -36,7 +36,7 @@ public interface ItemStack extends ItemCollection {
      *
      * @see Item
      */    
-    Item peek();
+    ItemModel peek();
 
     /**
      * Gets the latest pushed item and removes it from the stack.
@@ -46,7 +46,7 @@ public interface ItemStack extends ItemCollection {
      *
      * @see Item
      */    
-    Item pop();
+    ItemModel pop();
 
     /**
      * Pushes down a new item into the stack.
@@ -55,5 +55,5 @@ public interface ItemStack extends ItemCollection {
      *
      * @see Item
      */
-    void push(Item item);
+    void push(ItemModel item);
 }

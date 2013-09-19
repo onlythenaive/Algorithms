@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.nodes;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.meters.Counter;
 
 /**
@@ -32,10 +32,10 @@ public final class ItemListNode {
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
-    private Item _item;
+    private ItemModel _item;
     private ItemListNode _next;
 
-    ItemListNode(Item item, Counter reads, Counter writes, Counter linkReads,
+    ItemListNode(ItemModel item, Counter reads, Counter writes, Counter linkReads,
             Counter linkWrites) {
         _item = item;
         _reads = reads;
@@ -51,7 +51,7 @@ public final class ItemListNode {
      *
      * @see Item
      */
-    public Item getItem() {
+    public ItemModel getItem() {
         _reads.increment();
         return _item;
     }
@@ -73,7 +73,7 @@ public final class ItemListNode {
      *
      * @see Item
      */
-    public void setItem(Item item) {
+    public void setItem(ItemModel item) {
         _writes.increment();
         _item = item;
     }

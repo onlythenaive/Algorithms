@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.adt.collections;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.Item;
+import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.ItemListNode;
 import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator;
@@ -64,16 +64,16 @@ public final class SimpleItemQueue implements ItemQueue {
     }
 
     @Override
-    public Item dequeue() {
+    public ItemModel dequeue() {
         throwExceptionIfEmpty();
-        Item result = _oldest.getItem();
+        ItemModel result = _oldest.getItem();
         _oldest = _oldest.getNext();
         _size--;
         return result;
     }
 
     @Override
-    public void enqueue(Item item) {
+    public void enqueue(ItemModel item) {
         ItemListNode node = _factory.createListNode(item);
         if (isEmpty()) {
             _oldest = node;
@@ -85,12 +85,12 @@ public final class SimpleItemQueue implements ItemQueue {
     }
 
     @Override
-    public Iterator<Item> iterator() {
+    public Iterator<ItemModel> iterator() {
         return new ItemListNodeIterator(_oldest);
     }
 
     @Override
-    public Item poll() {
+    public ItemModel poll() {
         throwExceptionIfEmpty();
         return _oldest.getItem();
     }
