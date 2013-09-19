@@ -13,40 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt.collections;
+package com.ilyagubarev.algorithms.adt.collections.stacks;
 
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
+import com.ilyagubarev.algorithms.adt.collections.ItemStack;
 import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.iterators.ListNodeModelIterator;
 
 /**
- * Simple ItemQueue implementation based on item list nodes.
+ * Simple ItemStack implementation based on item list nodes.
  *
- * @see ItemQueue
+ * @see ItemStack
  *
- * @version 1.01, 15 September 2013
- * @since 15 September 2013
+ * @version 1.04, 15 September 2013
+ * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleItemQueue implements ItemQueue {
+public final class SimpleItemStack implements ItemStack {
 
     private final NodeModelFactory _factory;
 
     private int _size;
-    private ListNodeModel _newest;
-    private ListNodeModel _oldest;
+    private ListNodeModel _top;
 
     /**
-     * Creates a new instance of SimpleItemQueue.
+     * Creates a new instance of SimpleItemStack.
      *
-     * @param factory 
+     * @param factory item nodes provider.
      *
      * @see ItemNodeFactory
      */
-    public SimpleItemQueue(NodeModelFactory factory) {
+    public SimpleItemStack(NodeModelFactory factory) {
         if (factory == null) {
             throw new NullPointerException("item nodes provider is null");
         }
@@ -64,40 +64,36 @@ public final class SimpleItemQueue implements ItemQueue {
     }
 
     @Override
-    public ItemModel dequeue() {
-        throwExceptionIfEmpty();
-        ItemModel result = _oldest.getItem();
-        _oldest = _oldest.getNext();
-        _size--;
-        return result;
-    }
-
-    @Override
-    public void enqueue(ItemModel item) {
-        ListNodeModel node = _factory.createListNode(item);
-        if (isEmpty()) {
-            _oldest = node;
-        } else {
-            _newest.setNext(node);
-        }
-        _newest = node;
-        _size++;
-    }
-
-    @Override
     public Iterator<ItemModel> iterator() {
-        return new ListNodeModelIterator(_oldest);
+        return new ListNodeModelIterator(_top);
     }
 
     @Override
-    public ItemModel poll() {
+    public ItemModel peek() {
         throwExceptionIfEmpty();
-        return _oldest.getItem();
+        return _top.getItem();
+    }
+
+    @Override
+    public ItemModel pop() {
+        throwExceptionIfEmpty();
+        ListNodeModel buffer = _top;
+        _top = _top.getNext();
+        --_size;
+        return buffer.getItem();
+    }
+
+    @Override
+    public void push(ItemModel item) {
+        ListNodeModel buffer = _top;
+        _top = _factory.createListNode(item);
+        _top.setNext(buffer);
+        ++_size;
     }
 
     private void throwExceptionIfEmpty() {
         if (isEmpty()) {
-            throw new IllegalStateException("queue is empty");
+            throw new IllegalStateException("stack is empty");
         }
     }
 }

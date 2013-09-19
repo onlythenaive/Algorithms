@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt.collections;
+package com.ilyagubarev.algorithms.adt.collections.queues;
 
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
+import com.ilyagubarev.algorithms.adt.collections.ItemQueue;
 import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.iterators.BinaryNodeModelIterator;
