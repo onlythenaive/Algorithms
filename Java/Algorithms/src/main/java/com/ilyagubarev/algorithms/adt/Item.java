@@ -29,20 +29,20 @@ import com.ilyagubarev.algorithms.adt.meters.Counter;
 public final class Item implements Comparable<Item> {
 
     private final Comparable _data;
-    private final Counter _cmps;
+    private final Counter _comparisons;
     private final Counter _hashings;    
     private final Counter _tests;
 
     Item(Comparable data, Counter cmps, Counter hashings, Counter tests) {
         _data = data;
-        _cmps = cmps;
+        _comparisons = cmps;
         _hashings = hashings;
         _tests = tests;
     }
 
     @Override
     public int compareTo(Item item) {
-        _cmps.increment();
+        _comparisons.increment();
         if (_data.getClass() != item.getClass()) {
             throw new IllegalArgumentException("items are incomparable");
         }
