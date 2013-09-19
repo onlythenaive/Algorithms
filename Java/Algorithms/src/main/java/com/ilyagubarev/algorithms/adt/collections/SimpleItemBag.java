@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt.collections;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.Item;
-import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
 
 /**
  * Simple ItemBag implementation based on ItemStack.

@@ -18,8 +18,8 @@ package com.ilyagubarev.algorithms.adt.collections;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.Item;
-import com.ilyagubarev.algorithms.adt.ItemBinaryNode;
-import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.ItemBinaryNode;
+import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.collections.iterators.ItemBinaryNodeIterator;
 
 /**

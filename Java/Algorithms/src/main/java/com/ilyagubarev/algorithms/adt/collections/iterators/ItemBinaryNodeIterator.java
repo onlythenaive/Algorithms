@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.ilyagubarev.algorithms.adt.Item;
-import com.ilyagubarev.algorithms.adt.ItemBinaryNode;
+import com.ilyagubarev.algorithms.adt.nodes.ItemBinaryNode;
 
 /**
  * Item binary tree node iterator.
