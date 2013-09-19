@@ -13,36 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt.collections.iterators;
+package com.ilyagubarev.algorithms.adt.iterators;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
 
 /**
- * Item binary tree node iterator.
+ * Binary tree node model iterator.
  *
- * @see ItemBinaryNode
+ * @see BinaryNodeModel
  * @see Iterator
  *
- * @version 1.02, 18 September 2013
+ * @version 1.03, 19 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemBinaryNodeIterator implements Iterator<ItemModel> {
+public final class BinaryNodeModelIterator<E> implements Iterator<E> {
 
-    private BinaryNodeModel _next;
+    private BinaryNodeModel<E> _next;
 
     /**
-     * Creates a new instance of ItemBinaryIterator.
+     * Creates a new instance of BinaryNodeModelIterator.
      *
      * @param root a root node.
      *
-     * @see ItemBinaryNode
+     * @see BinaryNodeModel
      */
-    public ItemBinaryNodeIterator(BinaryNodeModel root) {
+    public BinaryNodeModelIterator(BinaryNodeModel<E> root) {
         _next = root;
         while (_next.getLeftChild() != null) {
             _next = _next.getLeftChild();
@@ -55,7 +54,7 @@ public final class ItemBinaryNodeIterator implements Iterator<ItemModel> {
     }
 
     @Override
-    public ItemModel next() {
+    public E next() {
         if (!hasNext()) {
             throw new NoSuchElementException("iterator has no next element");
         }

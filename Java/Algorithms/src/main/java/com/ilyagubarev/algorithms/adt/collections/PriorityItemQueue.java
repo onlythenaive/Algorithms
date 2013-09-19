@@ -20,7 +20,7 @@ import java.util.Iterator;
 import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
-import com.ilyagubarev.algorithms.adt.collections.iterators.ItemBinaryNodeIterator;
+import com.ilyagubarev.algorithms.adt.iterators.BinaryNodeModelIterator;
 
 /**
  * Priority ItemQueue implementation based on item binary tree nodes.
@@ -87,7 +87,7 @@ public final class PriorityItemQueue implements ItemQueue {
 
     @Override
     public Iterator<ItemModel> iterator() {
-        return new ItemBinaryNodeIterator(_root);
+        return new BinaryNodeModelIterator(_root);
     }
 
     private void throwExceptionIfEmpty() {

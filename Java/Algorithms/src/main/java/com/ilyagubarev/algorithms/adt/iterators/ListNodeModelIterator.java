@@ -13,36 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt.collections.iterators;
+package com.ilyagubarev.algorithms.adt.iterators;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 
 /**
- * Item linked list node iterator.
+ * Linked list node model iterator.
  *
- * @see ItemListNode
  * @see Iterator
+ * @see ListNodeModel
  *
- * @version 1.05, 15 September 2013
+ * @version 1.06, 19 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemListNodeIterator implements Iterator<ItemModel> {
+public final class ListNodeModelIterator<E> implements Iterator<E> {
 
-    private ListNodeModel _next;
+    private ListNodeModel<E> _next;
 
     /**
-     * Creates a new instance of ItemNodeIterator.
+     * Creates a new instance of ListNodeModelIterator.
      *
      * @param start a starting node.
      *
-     * @see ItemListNode
+     * @see ListNodeModel
      */
-    public ItemListNodeIterator(ListNodeModel start) {
+    public ListNodeModelIterator(ListNodeModel<E> start) {
         _next = start;
     }
 
@@ -52,9 +51,9 @@ public final class ItemListNodeIterator implements Iterator<ItemModel> {
     }
 
     @Override
-    public ItemModel next() {
+    public E next() {
         if (hasNext()) {
-            ItemModel result = _next.getItem();
+            E result = _next.getItem();
             _next = _next.getNext();
             return result;
         } else {

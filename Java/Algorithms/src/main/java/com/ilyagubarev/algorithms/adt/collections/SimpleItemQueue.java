@@ -20,7 +20,7 @@ import java.util.Iterator;
 import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
-import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator;
+import com.ilyagubarev.algorithms.adt.iterators.ListNodeModelIterator;
 
 /**
  * Simple ItemQueue implementation based on item list nodes.
@@ -86,7 +86,7 @@ public final class SimpleItemQueue implements ItemQueue {
 
     @Override
     public Iterator<ItemModel> iterator() {
-        return new ItemListNodeIterator(_oldest);
+        return new ListNodeModelIterator(_oldest);
     }
 
     @Override
