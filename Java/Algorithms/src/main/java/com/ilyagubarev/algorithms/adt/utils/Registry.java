@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt.meters;
+package com.ilyagubarev.algorithms.adt.utils;
 
 /**
  * Simple statistics provider.

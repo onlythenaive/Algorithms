@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.nodes;
 
-import com.ilyagubarev.algorithms.adt.meters.Counter;
+import com.ilyagubarev.algorithms.adt.utils.Counter;
 
 /**
  * Binary tree node model.

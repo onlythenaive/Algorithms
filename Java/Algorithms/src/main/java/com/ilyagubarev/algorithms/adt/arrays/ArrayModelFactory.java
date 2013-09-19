@@ -15,8 +15,8 @@
  */
 package com.ilyagubarev.algorithms.adt.arrays;
 
-import com.ilyagubarev.algorithms.adt.meters.Counter;
-import com.ilyagubarev.algorithms.adt.meters.Registry;
+import com.ilyagubarev.algorithms.adt.utils.Counter;
+import com.ilyagubarev.algorithms.adt.utils.Registry;
 
 /**
  * Array model provider.

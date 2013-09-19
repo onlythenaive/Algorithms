@@ -19,8 +19,8 @@ import com.ilyagubarev.algorithms.sorting.methods.Sorter;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
-import com.ilyagubarev.algorithms.adt.meters.Registry;
-import com.ilyagubarev.algorithms.adt.meters.Stopwatch;
+import com.ilyagubarev.algorithms.adt.utils.Registry;
+import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
 
 /**
  * Sorting method analyses sandbox.

@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.arrays;
 
-import com.ilyagubarev.algorithms.adt.meters.Counter;
+import com.ilyagubarev.algorithms.adt.utils.Counter;
 
 /**
  * Array model for sorting / searching methods analysis.
