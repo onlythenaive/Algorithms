@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
-import com.ilyagubarev.algorithms.adt.nodes.ItemBinaryNode;
+import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
 
 /**
  * Item binary tree node iterator.
@@ -33,7 +33,7 @@ import com.ilyagubarev.algorithms.adt.nodes.ItemBinaryNode;
  */
 public final class ItemBinaryNodeIterator implements Iterator<ItemModel> {
 
-    private ItemBinaryNode _next;
+    private BinaryNodeModel _next;
 
     /**
      * Creates a new instance of ItemBinaryIterator.
@@ -42,7 +42,7 @@ public final class ItemBinaryNodeIterator implements Iterator<ItemModel> {
      *
      * @see ItemBinaryNode
      */
-    public ItemBinaryNodeIterator(ItemBinaryNode root) {
+    public ItemBinaryNodeIterator(BinaryNodeModel root) {
         _next = root;
         while (_next.getLeftChild() != null) {
             _next = _next.getLeftChild();

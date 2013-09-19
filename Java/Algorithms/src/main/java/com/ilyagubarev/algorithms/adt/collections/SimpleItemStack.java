@@ -18,8 +18,8 @@ package com.ilyagubarev.algorithms.adt.collections;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
-import com.ilyagubarev.algorithms.adt.nodes.ItemListNode;
-import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator;
 
 /**
@@ -33,10 +33,10 @@ import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator
  */
 public final class SimpleItemStack implements ItemStack {
 
-    private final ItemNodeFactory _factory;
+    private final NodeModelFactory _factory;
 
     private int _size;
-    private ItemListNode _top;
+    private ListNodeModel _top;
 
     /**
      * Creates a new instance of SimpleItemStack.
@@ -45,7 +45,7 @@ public final class SimpleItemStack implements ItemStack {
      *
      * @see ItemNodeFactory
      */
-    public SimpleItemStack(ItemNodeFactory factory) {
+    public SimpleItemStack(NodeModelFactory factory) {
         if (factory == null) {
             throw new NullPointerException("item nodes provider is null");
         }
@@ -76,7 +76,7 @@ public final class SimpleItemStack implements ItemStack {
     @Override
     public ItemModel pop() {
         throwExceptionIfEmpty();
-        ItemListNode buffer = _top;
+        ListNodeModel buffer = _top;
         _top = _top.getNext();
         --_size;
         return buffer.getItem();
@@ -84,7 +84,7 @@ public final class SimpleItemStack implements ItemStack {
 
     @Override
     public void push(ItemModel item) {
-        ItemListNode buffer = _top;
+        ListNodeModel buffer = _top;
         _top = _factory.createListNode(item);
         _top.setNext(buffer);
         ++_size;

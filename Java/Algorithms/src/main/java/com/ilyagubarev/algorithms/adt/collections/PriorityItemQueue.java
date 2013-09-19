@@ -18,8 +18,8 @@ package com.ilyagubarev.algorithms.adt.collections;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
-import com.ilyagubarev.algorithms.adt.nodes.ItemBinaryNode;
-import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.collections.iterators.ItemBinaryNodeIterator;
 
 /**
@@ -33,10 +33,10 @@ import com.ilyagubarev.algorithms.adt.collections.iterators.ItemBinaryNodeIterat
  */
 public final class PriorityItemQueue implements ItemQueue {
 
-    private final ItemNodeFactory _factory;
+    private final NodeModelFactory _factory;
 
     private int _size;
-    private ItemBinaryNode _root;
+    private BinaryNodeModel _root;
     
     /**
      * Creates a new instance of PriorityItemQueue.
@@ -45,7 +45,7 @@ public final class PriorityItemQueue implements ItemQueue {
      *
      * @see ItemNodeFactory
      */
-    public PriorityItemQueue(ItemNodeFactory factory) {
+    public PriorityItemQueue(NodeModelFactory factory) {
         if (factory == null) {
             throw new NullPointerException("item nodes provider is null");
         }
@@ -60,7 +60,7 @@ public final class PriorityItemQueue implements ItemQueue {
 
     @Override
     public void enqueue(ItemModel item) {
-        ItemBinaryNode node = _factory.createBinaryNode(item);
+        BinaryNodeModel node = _factory.createBinaryNode(item);
         if (isEmpty()) {
             _root = node;
         } else {

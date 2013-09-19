@@ -15,17 +15,16 @@
  */
 package com.ilyagubarev.algorithms.adt.nodes;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.meters.Counter;
 
 /**
- * Item nodes provider.
+ * Node model provider.
  *
- * @version 1.04, 16 September 2013
+ * @version 1.05, 19 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemNodeFactory {
+public final class NodeModelFactory {
 
     private final Counter _creations;
     private final Counter _reads;
@@ -34,17 +33,17 @@ public final class ItemNodeFactory {
     private final Counter _linkWrites;
 
     /**
-     * Creates a new instance of ItemNodeFactory.
+     * Creates a new instance of NodeModelFactory.
      *
-     * @param creations a counter of item node creations.
-     * @param reads a counter of item read operations.
-     * @param writes a counter of item write operations.
-     * @param linkReads a counter of link read operations.
-     * @param linkWrites a counter of link write operations.
+     * @param creations a counter of node model creations.
+     * @param reads a counter of node model read operations.
+     * @param writes a counter of node model write operations.
+     * @param linkReads a counter of node model link read operations.
+     * @param linkWrites a counter of node model link write operations.
      *
      * @see Counter
      */
-    public ItemNodeFactory(Counter creations, Counter reads, Counter writes,
+    public NodeModelFactory(Counter creations, Counter reads, Counter writes,
             Counter linkReads, Counter linkWrites) {
         if (creations == null) {
             throw new NullPointerException("creations counter is null");
@@ -69,17 +68,16 @@ public final class ItemNodeFactory {
     }
 
     /**
-     * Creates a new instance of ItemBinaryNode.
+     * Creates a new instance of BinaryNodeModel.
      *
      * @param item an item to be contained in the node.
-     * @return a new instance of ItemBinaryNode.
+     * @return a new instance of BinaryNodeModel.
      *
-     * @see Item
-     * @see ItemBinaryNode
+     * @see BinaryNodeModel
      */
-    public ItemBinaryNode createBinaryNode(ItemModel item) {
+    public <T> BinaryNodeModel<T> createBinaryNode(T item) {
         _creations.increment();
-        return new ItemBinaryNode(item, _reads, _writes, _linkReads,
+        return new BinaryNodeModel<T>(item, _reads, _writes, _linkReads,
                 _linkWrites);
     }
 
@@ -89,11 +87,11 @@ public final class ItemNodeFactory {
      * @param item an item to be contained in the node.
      * @return a new instance of ItemListNode.
      *
-     * @see Item
-     * @see ItemListNode
+     * @see ListNodeModel
      */
-    public ItemListNode createListNode(ItemModel item) {
+    public <T> ListNodeModel<T> createListNode(T item) {
         _creations.increment();
-        return new ItemListNode(item, _reads, _writes, _linkReads, _linkWrites);
+        return new ListNodeModel<T>(item, _reads, _writes, _linkReads,
+                _linkWrites);
     }
 }

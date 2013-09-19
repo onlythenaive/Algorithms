@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.sorting.methods;
 
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
-import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.meters.Registry;
 import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
 
@@ -57,7 +57,7 @@ public final class ShellSorter extends AbstractSorter {
 
     @Override
     public void sort(ArrayModel target, ArrayModelFactory arrayFactory,
-            ItemNodeFactory nodeFactory, Registry recursions) {
+            NodeModelFactory nodeFactory, Registry recursions) {
         while (!_provider.isEmpty()) {
             int gap = _provider.getNext();
             for (int pivot = gap; pivot < target.getSize(); ++pivot) {

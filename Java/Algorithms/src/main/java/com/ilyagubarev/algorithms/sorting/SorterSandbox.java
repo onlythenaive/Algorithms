@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.sorting;
 import com.ilyagubarev.algorithms.sorting.methods.Sorter;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
-import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.meters.Registry;
 import com.ilyagubarev.algorithms.adt.meters.Stopwatch;
 
@@ -49,7 +49,7 @@ public final class SorterSandbox {
      * @see Stopwatch
      */
     public static void run(Sorter sorter, ArrayModel target,
-            ArrayModelFactory arrayFactory, ItemNodeFactory nodeFactory,
+            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions, Stopwatch stopwatch) {
         sorter.prepare(target.getSize());
         stopwatch.start();

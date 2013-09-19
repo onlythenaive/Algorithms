@@ -18,8 +18,8 @@ package com.ilyagubarev.algorithms.adt.collections;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
-import com.ilyagubarev.algorithms.adt.nodes.ItemListNode;
-import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator;
 
 /**
@@ -33,11 +33,11 @@ import com.ilyagubarev.algorithms.adt.collections.iterators.ItemListNodeIterator
  */
 public final class SimpleItemQueue implements ItemQueue {
 
-    private final ItemNodeFactory _factory;
+    private final NodeModelFactory _factory;
 
     private int _size;
-    private ItemListNode _newest;
-    private ItemListNode _oldest;
+    private ListNodeModel _newest;
+    private ListNodeModel _oldest;
 
     /**
      * Creates a new instance of SimpleItemQueue.
@@ -46,7 +46,7 @@ public final class SimpleItemQueue implements ItemQueue {
      *
      * @see ItemNodeFactory
      */
-    public SimpleItemQueue(ItemNodeFactory factory) {
+    public SimpleItemQueue(NodeModelFactory factory) {
         if (factory == null) {
             throw new NullPointerException("item nodes provider is null");
         }
@@ -74,7 +74,7 @@ public final class SimpleItemQueue implements ItemQueue {
 
     @Override
     public void enqueue(ItemModel item) {
-        ItemListNode node = _factory.createListNode(item);
+        ListNodeModel node = _factory.createListNode(item);
         if (isEmpty()) {
             _oldest = node;
         } else {

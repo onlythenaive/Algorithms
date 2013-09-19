@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt.collections;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
-import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 
 /**
  * Simple ItemBag implementation based on ItemStack.
@@ -40,7 +40,7 @@ public final class SimpleItemBag implements ItemBag {
      *
      * @see ItemNodeFactory
      */
-    public SimpleItemBag(ItemNodeFactory factory) {
+    public SimpleItemBag(NodeModelFactory factory) {
         _stack = new SimpleItemStack(factory);
     }
 

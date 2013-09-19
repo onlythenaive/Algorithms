@@ -15,27 +15,26 @@
  */
 package com.ilyagubarev.algorithms.adt.nodes;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.meters.Counter;
 
 /**
- * Item linked list node.
+ * Linked list node model.
  *
- * @version 1.05, 16 September 2013
+ * @version 1.06, 19 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemListNode {
+public final class ListNodeModel<E> {
 
     private final Counter _reads;
     private final Counter _writes;
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
-    private ItemModel _item;
-    private ItemListNode _next;
+    private E _item;
+    private ListNodeModel<E> _next;
 
-    ItemListNode(ItemModel item, Counter reads, Counter writes, Counter linkReads,
+    ListNodeModel(E item, Counter reads, Counter writes, Counter linkReads,
             Counter linkWrites) {
         _item = item;
         _reads = reads;
@@ -48,10 +47,8 @@ public final class ItemListNode {
      * Gets a containing item.
      *
      * @return contained item.
-     *
-     * @see Item
      */
-    public ItemModel getItem() {
+    public E getItem() {
         _reads.increment();
         return _item;
     }
@@ -61,7 +58,7 @@ public final class ItemListNode {
      *
      * @return the next node.
      */
-    public ItemListNode getNext() {
+    public ListNodeModel<E> getNext() {
         _linkReads.increment();
         return _next;
     }
@@ -70,10 +67,8 @@ public final class ItemListNode {
      * Sets a new contained item.
      *
      * @param item an item to be contained.
-     *
-     * @see Item
      */
-    public void setItem(ItemModel item) {
+    public void setItem(E item) {
         _writes.increment();
         _item = item;
     }
@@ -83,13 +78,13 @@ public final class ItemListNode {
      *
      * @param node the next node.
      */
-    public void setNext(ItemListNode node) {
+    public void setNext(ListNodeModel<E> node) {
         _linkWrites.increment();
         _next = node;
     }
 
     @Override
     public String toString() {
-        return String.format("[item list node: %s]", _item);
+        return String.format("[list node model: %s]", _item);
     }
 }

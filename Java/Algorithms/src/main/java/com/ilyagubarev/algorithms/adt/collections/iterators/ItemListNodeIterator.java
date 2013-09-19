@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.ilyagubarev.algorithms.adt.ItemModel;
-import com.ilyagubarev.algorithms.adt.nodes.ItemListNode;
+import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 
 /**
  * Item linked list node iterator.
@@ -33,7 +33,7 @@ import com.ilyagubarev.algorithms.adt.nodes.ItemListNode;
  */
 public final class ItemListNodeIterator implements Iterator<ItemModel> {
 
-    private ItemListNode _next;
+    private ListNodeModel _next;
 
     /**
      * Creates a new instance of ItemNodeIterator.
@@ -42,7 +42,7 @@ public final class ItemListNodeIterator implements Iterator<ItemModel> {
      *
      * @see ItemListNode
      */
-    public ItemListNodeIterator(ItemListNode start) {
+    public ItemListNodeIterator(ListNodeModel start) {
         _next = start;
     }
 

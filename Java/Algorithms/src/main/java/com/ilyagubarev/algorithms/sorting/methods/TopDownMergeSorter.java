@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.sorting.methods;
 
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
-import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.meters.Registry;
 
 /**
@@ -38,7 +38,7 @@ public final class TopDownMergeSorter extends MergeSorter {
 
     @Override
     public void sort(ArrayModel target, ArrayModelFactory arrayFactory,
-            ItemNodeFactory nodeFactory, Registry recursions) {
+            NodeModelFactory nodeFactory, Registry recursions) {
         ArrayModel aux = arrayFactory.create(target.getSize());
         sort(target, 0, target.getSize() - 1, aux, recursions);
     }

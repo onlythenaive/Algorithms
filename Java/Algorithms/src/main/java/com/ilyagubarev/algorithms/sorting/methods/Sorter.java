@@ -17,7 +17,7 @@ package com.ilyagubarev.algorithms.sorting.methods;
 
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
-import com.ilyagubarev.algorithms.adt.nodes.ItemNodeFactory;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.meters.Registry;
 
 /**
@@ -57,5 +57,5 @@ public interface Sorter {
      * @see Registry
      */
     void sort(ArrayModel target, ArrayModelFactory arrayFactory,
-            ItemNodeFactory nodeFactory, Registry recursions);
+            NodeModelFactory nodeFactory, Registry recursions);
 }

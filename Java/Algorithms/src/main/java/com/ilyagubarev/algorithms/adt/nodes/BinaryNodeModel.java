@@ -15,29 +15,28 @@
  */
 package com.ilyagubarev.algorithms.adt.nodes;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.meters.Counter;
 
 /**
- * Item binary tree node.
+ * Binary tree node model.
  *
- * @version 1.02, 16 September 2013
+ * @version 1.03, 19 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemBinaryNode {
+public final class BinaryNodeModel<E> {
 
     private final Counter _reads;
     private final Counter _writes;
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
-    private ItemModel _item;
-    private ItemBinaryNode _leftChild;
-    private ItemBinaryNode _rightChild;
-    private ItemBinaryNode _parent;
+    private E _item;
+    private BinaryNodeModel<E> _leftChild;
+    private BinaryNodeModel<E> _rightChild;
+    private BinaryNodeModel<E> _parent;
 
-    ItemBinaryNode(ItemModel item, Counter reads, Counter writes,
+    BinaryNodeModel(E item, Counter reads, Counter writes,
             Counter linkReads, Counter linkWrites) {
         _item = item;
         _reads = reads;
@@ -50,10 +49,8 @@ public final class ItemBinaryNode {
      * Gets a contained item.
      *
      * @return contained item.
-     *
-     * @see Item
      */
-    public ItemModel getItem() {
+    public E getItem() {
         _reads.increment();
         return _item;
     }
@@ -63,7 +60,7 @@ public final class ItemBinaryNode {
      *
      * @return the left child node.
      */
-    public ItemBinaryNode getLeftChild() {
+    public BinaryNodeModel<E> getLeftChild() {
         _linkReads.increment();
         return _leftChild;
     }
@@ -74,7 +71,7 @@ public final class ItemBinaryNode {
      * @return the right child node.
      */
 
-    public ItemBinaryNode getRightChild() {
+    public BinaryNodeModel<E> getRightChild() {
         _linkReads.increment();
         return _rightChild;
     }
@@ -84,7 +81,7 @@ public final class ItemBinaryNode {
      *
      * @return the parent node.
      */
-    public ItemBinaryNode getParent() {
+    public BinaryNodeModel<E> getParent() {
         _linkReads.increment();
         return _parent;
     }
@@ -93,10 +90,8 @@ public final class ItemBinaryNode {
      * Sets a new contained item.
      *
      * @param item an item to be contained.
-     *
-     * @see Item
      */
-    public void setItem(ItemModel item) {
+    public void setItem(E item) {
         _writes.increment();
         _item = item;
     }
@@ -106,7 +101,7 @@ public final class ItemBinaryNode {
      *
      * @param node the left child node.
      */
-    public void setLeftChild(ItemBinaryNode node) {
+    public void setLeftChild(BinaryNodeModel<E> node) {
         _linkWrites.increment();
         _leftChild = node;
     }
@@ -116,7 +111,7 @@ public final class ItemBinaryNode {
      *
      * @param node the right child node.
      */
-    public void setRightChild(ItemBinaryNode node) {
+    public void setRightChild(BinaryNodeModel<E> node) {
         _linkWrites.increment();
         _rightChild = node;
     }
@@ -126,13 +121,13 @@ public final class ItemBinaryNode {
      *
      * @param node the parent node.
      */
-    public void setParent(ItemBinaryNode node) {
+    public void setParent(BinaryNodeModel<E> node) {
         _linkWrites.increment();
         _parent = node;
     }
 
     @Override
     public String toString() {
-        return String.format("[item binary node: %s]", _item);
+        return String.format("[binary node model: %s]", _item);
     }
 }
