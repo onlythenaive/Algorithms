@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt;
+package com.ilyagubarev.algorithms.adt.arrays;
 
 import com.ilyagubarev.algorithms.adt.meters.Counter;
 
 /**
- * Item array model for sorting/searching methods analysis.
+ * Array model for sorting / searching methods analysis.
  *
- * @version 1.03, 13 September 2013
+ * @version 1.04, 19 September 2013
  * @since 12 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemArray {
+public final class ArrayModel<E> {
 
-    private final Item[] _array;
+    private final E[] _data;
     private final Counter _reads;
     private final Counter _writes;
 
-    ItemArray(int size, Counter reads, Counter writes) {
-        _array = new Item[size];
+    ArrayModel(int size, Counter reads, Counter writes) {
+        _data = (E[]) new Object[size];
         _reads = reads;
         _writes = writes;
     }
@@ -42,20 +42,18 @@ public final class ItemArray {
      * @return array size.
      */
     public int getSize() {
-        return _array.length;
+        return _data.length;
     }
 
     /**
      * Gets an item at specified index.
      *
      * @param index item index.
-     * @return an instance of Item.
+     * @return array item.
      * @throws RuntimeException if specified index is illegal.
-     *
-     * @see Item
      */
-    public Item read(int index) {
-        Item result = _array[index];
+    public E read(int index) {
+        E result = _data[index];
         _reads.increment();
         return result;
     }
@@ -66,18 +64,16 @@ public final class ItemArray {
      * @param index item index.
      * @param item an item to be set.
      * @throws RuntimeException if specified index is illegal.
-     *
-     * @see Item
      */
-    public void write(int index, Item item) {
-        _array[index] = item;
+    public void write(int index, E item) {
+        _data[index] = item;
         _writes.increment();
     }
 
     @Override
     public String toString() {
         StringBuilder content = new StringBuilder();
-        for (Item item : _array) {
+        for (E item : _data) {
             content.append(String.format("%s, ", item));
         }
         return String.format("[item array: {%s}]", content);

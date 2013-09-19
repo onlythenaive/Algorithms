@@ -15,8 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
-import com.ilyagubarev.algorithms.adt.ItemArray;
-import com.ilyagubarev.algorithms.adt.ItemArrayFactory;
+import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
+import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.ItemNodeFactory;
 import com.ilyagubarev.algorithms.adt.meters.Registry;
 
@@ -37,12 +37,12 @@ public final class QuickSorter extends AbstractSorter {
     }
 
     @Override
-    public void sort(ItemArray target, ItemArrayFactory arrayFactory,
+    public void sort(ArrayModel target, ArrayModelFactory arrayFactory,
             ItemNodeFactory nodeFactory, Registry recursions) {
         sort(target, 0, target.getSize() - 1, recursions);
     }
 
-    private void sort(ItemArray target, int first, int last, Registry recs) {
+    private void sort(ArrayModel target, int first, int last, Registry recs) {
         if (last <= first) {
             return;
         }
@@ -55,7 +55,7 @@ public final class QuickSorter extends AbstractSorter {
         registerRecursiveReturn(recs);
     }
 
-    private int separate(ItemArray target, int first, int last) {
+    private int separate(ArrayModel target, int first, int last) {
         int i = first;
         int j = last + 1;
         int pivot = first;

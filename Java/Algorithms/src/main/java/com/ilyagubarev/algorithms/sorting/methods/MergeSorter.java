@@ -15,7 +15,7 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
-import com.ilyagubarev.algorithms.adt.ItemArray;
+import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 
 /**
  * Abstract merge method sorting implementation.
@@ -28,8 +28,8 @@ import com.ilyagubarev.algorithms.adt.ItemArray;
  */
 public abstract class MergeSorter extends AbstractSorter {
 
-    protected final void merge(ItemArray target, int leftFirst, int leftLast,
-            int rightLast, ItemArray aux) {
+    protected final void merge(ArrayModel target, int leftFirst, int leftLast,
+            int rightLast, ArrayModel aux) {
         for (int i = leftFirst; i <= rightLast; ++i) {
             aux.write(i, target.read(i));
         }

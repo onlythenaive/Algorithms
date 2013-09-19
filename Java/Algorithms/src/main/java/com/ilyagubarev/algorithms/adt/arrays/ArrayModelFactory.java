@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt;
+package com.ilyagubarev.algorithms.adt.arrays;
 
 import com.ilyagubarev.algorithms.adt.meters.Counter;
 import com.ilyagubarev.algorithms.adt.meters.Registry;
 
 /**
- * Item array allocator.
+ * Array model allocator.
  *
- * @version 1.01, 13 September 2013
+ * @version 1.02, 19 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemArrayFactory {
+public final class ArrayModelFactory {
 
     private final Registry _allocations;
     private final Counter _reads;
     private final Counter _writes;
 
     /**
-     * Creates a new instance of ItemArrayFactory.
+     * Creates a new instance of ArrayModelFactory.
      *
      * @param allocations a registry of allocations.
      * @param reads a counter of array read operations.
@@ -41,7 +41,7 @@ public final class ItemArrayFactory {
      * @see Counter
      * @see Registry
      */
-    public ItemArrayFactory(Registry allocations, Counter reads,
+    public ArrayModelFactory(Registry allocations, Counter reads,
             Counter writes) {
         if (allocations == null) {
             throw new NullPointerException("allocations registry is null");
@@ -58,19 +58,19 @@ public final class ItemArrayFactory {
     }
 
     /**
-     * Creates a new instance of ItemArray of specified size.
+     * Creates a new instance of ArrayModel of specified size.
      *
      * @param size a size of the array.
-     * @return a new instance of ItemArray.
+     * @return a new instance of ArrayModel.
      * @throws IllegalArgumentException is specified size is negative.
      *
-     * @see ItemArray
+     * @see ArrayModel
      */
-    public ItemArray create(int size) {
+    public <T> ArrayModel<T> create(int size) {
         if (size < 0) {
             throw new IllegalArgumentException("array size is negative");
         }
         _allocations.register(size);
-        return new ItemArray(size, _reads, _writes);
+        return new ArrayModel<T>(size, _reads, _writes);
     }
 }
