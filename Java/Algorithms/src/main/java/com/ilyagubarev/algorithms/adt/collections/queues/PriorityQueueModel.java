@@ -27,11 +27,12 @@ import com.ilyagubarev.algorithms.adt.iterators.BinaryNodeModelIterator;
  *
  * @see QueueModel
  *
- * @version 1.02, 19 September 2013
+ * @version 1.03, 20 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class PriorityQueueModel<E> implements QueueModel<E> {
+public final class PriorityQueueModel<E extends Comparable<E>>
+        implements QueueModel<E> {
 
     private final NodeModelFactory _factory;
 
@@ -55,18 +56,17 @@ public final class PriorityQueueModel<E> implements QueueModel<E> {
     @Override
     public E dequeue() {
         throwExceptionIfEmpty();
-            throw new UnsupportedOperationException();        
+        E result = _root.getItem();
+        _root.setItem(removeLeaf().getItem());
+        sink(_root);
+        _size--;
+        return result;
     }
 
     @Override
     public void enqueue(E item) {
-        BinaryNodeModel<E> node = _factory.createBinaryNode(item);
-        if (isEmpty()) {
-            _root = node;
-        } else {
-            throw new UnsupportedOperationException();        
-        }
         _size++;
+        surface(createLeaf(item));
     }
 
     @Override
@@ -88,6 +88,83 @@ public final class PriorityQueueModel<E> implements QueueModel<E> {
     @Override
     public Iterator<E> iterator() {
         return new BinaryNodeModelIterator<E>(_root, _factory);
+    }
+
+    private BinaryNodeModel<E> createLeaf(E item) {
+        BinaryNodeModel<E> result = _factory.createBinaryNode(item);
+        BinaryNodeModel<E> node = _root;
+        int items = 0;
+        int maxItems = 1;
+        while (items < _size) {
+            items = items + maxItems;
+            maxItems *= 2;
+        }
+        maxItems *= 2;
+        items = _size - items;
+        while (maxItems > 0) {
+            if (items > (maxItems / 2)) {
+                node = node.getRightChild();
+                items = items - maxItems / 2;
+            } else {
+                node = node.getLeftChild();
+            }
+            maxItems = maxItems / 2;
+        }
+        
+        if (node.getLeftChild() == null) {
+            node.setLeftChild(result);
+        } else {
+            node.setRightChild(result);
+        }
+        result.setParent(node);
+        return result;
+    }
+
+    private BinaryNodeModel<E> removeLeaf() {
+        throw new UnsupportedOperationException();
+    }
+
+    private void sink(BinaryNodeModel<E> node) {
+        BinaryNodeModel<E> leftChild = node.getLeftChild();
+        if (leftChild == null) {
+            return;
+        }
+        E item = node.getItem();
+        E leftItem = leftChild.getItem();
+        BinaryNodeModel<E> rightChild = node.getRightChild();
+        if (rightChild == null) {
+            if (leftItem.compareTo(item) > 0) {
+                leftChild.setItem(item);
+                node.setItem(leftItem);
+                sink(leftChild);
+            }
+        } else {
+            E rightItem = rightChild.getItem();
+            if (leftItem.compareTo(item) > 0 || rightItem.compareTo(item) > 0) {
+                if (leftItem.compareTo(rightItem) > 0) {
+                    leftChild.setItem(item);
+                    node.setItem(leftItem);
+                    sink(leftChild);
+                } else {
+                    rightChild.setItem(item);
+                    node.setItem(leftItem);
+                    sink(rightChild);
+                }
+            }
+        }
+    }
+
+    private void surface(BinaryNodeModel<E> node) {
+        BinaryNodeModel<E> parent = node.getParent();
+        if (parent != null) {
+            E item  = node.getItem();
+            E parentItem = parent.getItem();
+            if (item.compareTo(parentItem) > 0) {
+                parent.setItem(item);
+                node.setItem(parentItem);
+                surface(parent);
+            }
+        }
     }
 
     private void throwExceptionIfEmpty() {
