@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
+import java.util.Comparator;
+
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
@@ -25,7 +27,7 @@ import com.ilyagubarev.algorithms.adt.utils.Registry;
  *
  * @see MergeSorter
  *
- * @version 1.01, 15 September 2013
+ * @version 1.02, 20 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
@@ -37,14 +39,14 @@ public final class BottomUpMergeSorter extends MergeSorter {
     }
 
     @Override
-    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+    public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions) {
         ArrayModel aux = arrayFactory.create(target.getSize());
-        for (int subSize = 1; subSize < target.getSize(); subSize += subSize) {
-            for (int i = 0; i < target.getSize() - subSize; i += 2 * subSize) {
-                int rightLast = Math.min(i + 2 * subSize, target.getSize());
-                merge(target, i, i + subSize - 1, rightLast - 1, aux);
+        for (int sub = 1; sub < target.getSize(); sub += sub) {
+            for (int i = 0; i < target.getSize() - sub; i += 2 * sub) {
+                int rightLast = Math.min(i + 2 * sub, target.getSize());
+                merge(target, comparator, i, i + sub - 1, rightLast - 1, aux);
             }
         }
     }

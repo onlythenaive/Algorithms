@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting;
 
+import java.util.Comparator;
+
 import com.ilyagubarev.algorithms.sorting.methods.Sorter;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
@@ -25,7 +27,7 @@ import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
 /**
  * Sorting method analyses sandbox.
  *
- * @version 1.02, 15 September 2013
+ * @version 1.03, 20 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
@@ -36,11 +38,13 @@ public final class SorterSandbox {
      *
      * @param sorter sorting algorithm implementation.
      * @param target target array to be sorted.
+     * @param comparator an item comparator.
      * @param arrayFactory item arrays allocator.
      * @param nodeFactory item nodes provider.
      * @param recursions registry of recursive calls
      * @param stopwatch time consumption registry.
      *
+     * @see Comparator
      * @see ItemArray
      * @see ItemArrayFactory
      * @see ItemNodeFactory
@@ -48,12 +52,13 @@ public final class SorterSandbox {
      * @see Sorter
      * @see Stopwatch
      */
-    public static void run(Sorter sorter, ArrayModel target,
-            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
-            Registry recursions, Stopwatch stopwatch) {
+    public static <T> void run(Sorter sorter, ArrayModel<T> target,
+            Comparator<T> comparator, ArrayModelFactory arrayFactory,
+            NodeModelFactory nodeFactory, Registry recursions,
+            Stopwatch stopwatch) {
         sorter.prepare(target.getSize());
         stopwatch.start();
-        sorter.sort(target, arrayFactory, nodeFactory, recursions);
+        sorter.sort(target, comparator, arrayFactory, nodeFactory, recursions);
         stopwatch.stop();
     }
 

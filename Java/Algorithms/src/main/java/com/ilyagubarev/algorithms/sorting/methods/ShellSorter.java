@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
+import java.util.Comparator;
+
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
@@ -56,14 +58,14 @@ public final class ShellSorter extends AbstractSorter {
     }
 
     @Override
-    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+    public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions) {
         while (!_provider.isEmpty()) {
             int gap = _provider.getNext();
             for (int pivot = gap; pivot < target.getSize(); ++pivot) {
                 int i = pivot;
-                while (i >= gap && swapIfLess(target, i, i - gap)) {
+                while (i >= gap && swapIfLess(target, comparator, i, i - gap)) {
                     i = i - gap;
                 }
             }

@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
+import java.util.Comparator;
+
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
@@ -37,12 +39,12 @@ public final class InsertionSorter extends AbstractSorter {
     }
 
     @Override
-    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+    public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions) {
         for (int pivot = 1; pivot < target.getSize(); ++pivot) {
             int i = pivot;
-            while (i > 0 && swapIfLess(target, i, i - 1)) {
+            while (i > 0 && swapIfLess(target, comparator, i, i - 1)) {
                 --i;
             }
         }

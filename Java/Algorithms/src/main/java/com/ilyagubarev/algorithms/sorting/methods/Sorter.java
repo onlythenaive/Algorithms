@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
+import java.util.Comparator;
+
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
@@ -47,16 +49,18 @@ public interface Sorter {
      * Concrete sorting method implementation.
      *
      * @param target target array model to be sorted.
+     * @param comparator an item comparator.
      * @param arrayFactory array model factory.
      * @param nodeFactory node model factory.
      * @param recursions registry of recursive calls.
      *
      * @see ArrayModel
      * @see ArrayModelFactory
+     * @see Comparator
      * @see NodeModelFactory
      * @see Registry
      */
-    <T extends Comparable<T>> void sort(ArrayModel<T> target,
+    <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions);
 }

@@ -15,21 +15,25 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
+import java.util.Comparator;
+
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
+import com.ilyagubarev.algorithms.utils.CommonHelper;
 
 /**
  * Abstract merge method sorting implementation.
  *
  * @see AbstractSorting
  *
- * @version 1.01, 15 September 2013
+ * @version 1.02, 20 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
 public abstract class MergeSorter extends AbstractSorter {
 
-    protected final <T extends Comparable<T>> void merge(ArrayModel<T> target,
-            int leftFirst, int leftLast, int rightLast, ArrayModel<T> aux) {
+    protected final <T> void merge(ArrayModel<T> target,
+            Comparator<T> comparator, int leftFirst, int leftLast,
+            int rightLast, ArrayModel<T> aux) {
         for (int i = leftFirst; i <= rightLast; ++i) {
             aux.write(i, target.read(i));
         }
@@ -40,10 +44,16 @@ public abstract class MergeSorter extends AbstractSorter {
                 target.write(i, aux.read(right++));
             } else if (right > rightLast) {
                 target.write(i, aux.read(left++));
-            } else if (aux.read(right).compareTo(aux.read(left)) < 0) {
-                target.write(i, aux.read(right++));
             } else {
-                target.write(i, aux.read(left++));
+                T leftItem = aux.read(left);
+                T rightItem = aux.read(right);
+                if (CommonHelper.compare(comparator, rightItem, leftItem) < 0) {
+                    target.write(i, rightItem);
+                    right++;
+                } else {
+                    target.write(i, leftItem);
+                    left++;
+                }
             }
         }
     }

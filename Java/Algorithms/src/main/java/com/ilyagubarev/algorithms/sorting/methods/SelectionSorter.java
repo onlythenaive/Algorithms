@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
+import java.util.Comparator;
+
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
@@ -37,13 +39,13 @@ public final class SelectionSorter extends AbstractSorter {
     }
 
     @Override
-    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+    public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions) {
         for (int pivot = 0; pivot < target.getSize(); ++pivot) {
             int min = pivot;
             for (int i = pivot + 1; i < target.getSize(); ++i) {
-                min = less(target, i, min) ? i : min;
+                min = less(target, comparator, i, min) ? i : min;
             }
             swap(target, pivot, min);
         }        

@@ -15,6 +15,8 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
+import java.util.Comparator;
+
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
@@ -25,7 +27,7 @@ import com.ilyagubarev.algorithms.adt.utils.Registry;
  *
  * @see AbstractSorter
  *
- * @version 1.01, 16 September 2013
+ * @version 1.02, 20 September 2013
  * @since 16 September 2013
  * @author Ilya Gubarev
  */
@@ -37,38 +39,38 @@ public final class QuickSorter extends AbstractSorter {
     }
 
     @Override
-    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+    public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions) {
-        sort(target, 0, target.getSize() - 1, recursions);
+        sort(target, comparator, 0, target.getSize() - 1, recursions);
     }
 
-    private <T extends Comparable<T>> void sort(ArrayModel<T> target,
+    private <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             int first, int last, Registry recs) {
         if (last <= first) {
             return;
         }
-        int pivot = separate(target, 0, target.getSize() - 1);
+        int pivot = separate(target, comparator, 0, target.getSize() - 1);
         registerRecursiveCall(recs);
-        sort(target, first, pivot - 1, recs);
+        sort(target, comparator, first, pivot - 1, recs);
         registerRecursiveReturn(recs);
         registerRecursiveCall(recs);
-        sort(target, pivot + 1, last, recs);
+        sort(target, comparator, pivot + 1, last, recs);
         registerRecursiveReturn(recs);
     }
 
-    private <T extends Comparable<T>> int separate(ArrayModel<T> target,
+    private <T> int separate(ArrayModel<T> target, Comparator<T> comparator,
             int first, int last) {
         int i = first;
         int j = last + 1;
         int pivot = first;
         while (true) {
-            while (less(target, ++i, pivot)) {
+            while (less(target, comparator, ++i, pivot)) {
                 if (i == last) {
                     break;
                 }
             }
-            while (less(target, pivot, --j)) {
+            while (less(target, comparator, pivot, --j)) {
                 if (j == first) {
                     break;
                 }
