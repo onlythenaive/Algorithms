@@ -28,8 +28,8 @@ import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
  */
 public abstract class MergeSorter extends AbstractSorter {
 
-    protected final void merge(ArrayModel target, int leftFirst, int leftLast,
-            int rightLast, ArrayModel aux) {
+    protected final <T extends Comparable<T>> void merge(ArrayModel<T> target,
+            int leftFirst, int leftLast, int rightLast, ArrayModel<T> aux) {
         for (int i = leftFirst; i <= rightLast; ++i) {
             aux.write(i, target.read(i));
         }

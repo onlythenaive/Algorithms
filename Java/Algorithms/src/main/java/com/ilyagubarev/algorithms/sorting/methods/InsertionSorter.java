@@ -25,7 +25,7 @@ import com.ilyagubarev.algorithms.adt.utils.Registry;
  *
  * @see AbstractSorter
  *
- * @version 1.03, 14 September 2013
+ * @version 1.04, 20 September 2013
  * @since 11 September 2013
  * @author Ilya Gubarev
  */
@@ -37,8 +37,9 @@ public final class InsertionSorter extends AbstractSorter {
     }
 
     @Override
-    public void sort(ArrayModel target, ArrayModelFactory arrayFactory,
-            NodeModelFactory nodeFactory, Registry recursions) {
+    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
+            Registry recursions) {
         for (int pivot = 1; pivot < target.getSize(); ++pivot) {
             int i = pivot;
             while (i > 0 && swapIfLess(target, i, i - 1)) {

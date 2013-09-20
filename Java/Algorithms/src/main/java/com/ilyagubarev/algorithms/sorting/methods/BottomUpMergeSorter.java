@@ -37,8 +37,9 @@ public final class BottomUpMergeSorter extends MergeSorter {
     }
 
     @Override
-    public void sort(ArrayModel target, ArrayModelFactory arrayFactory,
-            NodeModelFactory nodeFactory, Registry recursions) {
+    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
+            Registry recursions) {
         ArrayModel aux = arrayFactory.create(target.getSize());
         for (int subSize = 1; subSize < target.getSize(); subSize += subSize) {
             for (int i = 0; i < target.getSize() - subSize; i += 2 * subSize) {

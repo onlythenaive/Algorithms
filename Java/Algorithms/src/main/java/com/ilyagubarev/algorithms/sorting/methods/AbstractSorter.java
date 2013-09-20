@@ -15,7 +15,6 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
 
@@ -24,7 +23,7 @@ import com.ilyagubarev.algorithms.adt.utils.Registry;
  *
  * @see Sorter
  *
- * @version 1.05, 15 September 2013
+ * @version 1.06, 20 September 2013
  * @since 07 September 2013
  * @author Ilya Gubarev
  */
@@ -38,28 +37,30 @@ public abstract class AbstractSorter implements Sorter {
     /**
      * Checks if the first item is less than the second.
      *
-     * @param target target array of items.
+     * @param target target array model.
      * @param first an index of the first item.
      * @param second an index of the second item.
      * @return true if the first item is less than the second.
      *
-     * @see ItemArray
+     * @see ArrayModel
      */
-    protected final boolean less(ArrayModel target, int first, int second) {
+    protected final <T extends Comparable<T>> boolean less(ArrayModel<T> target,
+            int first, int second) {
         return target.read(first).compareTo(target.read(second)) < 0;
     }
 
     /**
      * Exchanges items of specified indeces with each other.
      *
-     * @param target target array of items.
+     * @param target target array model.
      * @param first an index of the first item.
      * @param second an index of the second item.
      *
-     * @see ItemArray
+     * @see ArrayModel
      */
-    protected final void swap(ArrayModel target, int first, int second) {
-        ItemModel buffer = target.read(first);
+    protected final <T extends Comparable<T>> void swap(ArrayModel<T> target,
+            int first, int second) {
+        T buffer = target.read(first);
         target.write(first, target.read(second));
         target.write(second, buffer);
     }
@@ -67,17 +68,17 @@ public abstract class AbstractSorter implements Sorter {
     /**
      * Exchanges items with each other if the first is less than the second.
      *
-     * @param target target array of items.
+     * @param target target array model.
      * @param first an index of the first item.
      * @param second an index of the second item.
      * @return true is specified items are swapped.
      *
-     * @see ItemArray
-     * @see ItemHelper
+     * @see ArrayModel
      */
-    protected final boolean swapIfLess(ArrayModel target, int first, int second) {
-        ItemModel item1 = target.read(first);
-        ItemModel item2 = target.read(second);
+    protected final <T extends Comparable<T>> boolean swapIfLess(
+            ArrayModel<T> target, int first, int second) {
+        T item1 = target.read(first);
+        T item2 = target.read(second);
         if (item1.compareTo(item2) < 0) {
             target.write(first, item2);
             target.write(second, item1);

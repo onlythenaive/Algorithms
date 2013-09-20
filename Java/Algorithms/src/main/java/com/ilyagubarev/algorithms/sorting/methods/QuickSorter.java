@@ -37,12 +37,14 @@ public final class QuickSorter extends AbstractSorter {
     }
 
     @Override
-    public void sort(ArrayModel target, ArrayModelFactory arrayFactory,
-            NodeModelFactory nodeFactory, Registry recursions) {
+    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
+            Registry recursions) {
         sort(target, 0, target.getSize() - 1, recursions);
     }
 
-    private void sort(ArrayModel target, int first, int last, Registry recs) {
+    private <T extends Comparable<T>> void sort(ArrayModel<T> target,
+            int first, int last, Registry recs) {
         if (last <= first) {
             return;
         }
@@ -55,7 +57,8 @@ public final class QuickSorter extends AbstractSorter {
         registerRecursiveReturn(recs);
     }
 
-    private int separate(ArrayModel target, int first, int last) {
+    private <T extends Comparable<T>> int separate(ArrayModel<T> target,
+            int first, int last) {
         int i = first;
         int j = last + 1;
         int pivot = first;

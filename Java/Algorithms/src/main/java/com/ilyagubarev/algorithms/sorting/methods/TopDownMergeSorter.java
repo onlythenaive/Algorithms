@@ -37,14 +37,16 @@ public final class TopDownMergeSorter extends MergeSorter {
     }
 
     @Override
-    public void sort(ArrayModel target, ArrayModelFactory arrayFactory,
-            NodeModelFactory nodeFactory, Registry recursions) {
+    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
+            Registry recursions) {
         ArrayModel aux = arrayFactory.create(target.getSize());
         sort(target, 0, target.getSize() - 1, aux, recursions);
     }
 
-    private void sort(ArrayModel target, int leftFirst, int rightLast,
-            ArrayModel aux, Registry recursions) {
+    private <T extends Comparable<T>> void sort(ArrayModel<T> target,
+            int leftFirst, int rightLast, ArrayModel<T> aux,
+            Registry recursions) {
         if (rightLast <= leftFirst) {
             return;
         }

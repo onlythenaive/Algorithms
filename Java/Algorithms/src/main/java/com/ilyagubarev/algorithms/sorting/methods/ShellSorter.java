@@ -26,7 +26,7 @@ import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
  *
  * @see AbstractSorter
  *
- * @version 1.05, 15 September 2013
+ * @version 1.05, 20 September 2013
  * @since 11 September 2013
  * @author Ilya Gubarev
  */
@@ -56,8 +56,9 @@ public final class ShellSorter extends AbstractSorter {
     }
 
     @Override
-    public void sort(ArrayModel target, ArrayModelFactory arrayFactory,
-            NodeModelFactory nodeFactory, Registry recursions) {
+    public <T extends Comparable<T>> void sort(ArrayModel<T> target,
+            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
+            Registry recursions) {
         while (!_provider.isEmpty()) {
             int gap = _provider.getNext();
             for (int pivot = gap; pivot < target.getSize(); ++pivot) {

@@ -23,7 +23,7 @@ import com.ilyagubarev.algorithms.adt.utils.Registry;
 /**
  * Sorting algorithm common interface.
  *
- * @version 1.04, 15 September 2013
+ * @version 1.05, 20 September 2013
  * @since 10 September 2013
  * @author Ilya Gubarev
  */
@@ -46,16 +46,17 @@ public interface Sorter {
     /**
      * Concrete sorting method implementation.
      *
-     * @param target target array to be sorted.
-     * @param arrayFactory item arrays allocator.
-     * @param nodeFactory item nodes provider.
+     * @param target target array model to be sorted.
+     * @param arrayFactory array model factory.
+     * @param nodeFactory node model factory.
      * @param recursions registry of recursive calls.
      *
-     * @see ItemArray
-     * @see ItemArrayFactory
-     * @see ItemNodeFactory
+     * @see ArrayModel
+     * @see ArrayModelFactory
+     * @see NodeModelFactory
      * @see Registry
      */
-    void sort(ArrayModel target, ArrayModelFactory arrayFactory,
-            NodeModelFactory nodeFactory, Registry recursions);
+    <T extends Comparable<T>> void sort(ArrayModel<T> target,
+            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
+            Registry recursions);
 }
