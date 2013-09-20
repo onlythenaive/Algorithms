@@ -31,7 +31,7 @@ import com.ilyagubarev.algorithms.adt.iterators.BinaryNodeModelIterator;
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class PriorityQueueModel<E extends Comparable<E>>
+public final class PriorityLinkedQueueModel<E extends Comparable<E>>
         implements QueueModel<E> {
 
     private final NodeModelFactory _factory;
@@ -40,13 +40,13 @@ public final class PriorityQueueModel<E extends Comparable<E>>
     private BinaryNodeModel<E> _root;
     
     /**
-     * Creates a new instance of PriorityQueueModel.
+     * Creates a new instance of PriorityLinkedQueueModel.
      *
      * @param factory node model provider.
      *
      * @see NodeModelFactory
      */
-    public PriorityQueueModel(NodeModelFactory factory) {
+    public PriorityLinkedQueueModel(NodeModelFactory factory) {
         if (factory == null) {
             throw new NullPointerException("item nodes provider is null");
         }
@@ -57,8 +57,12 @@ public final class PriorityQueueModel<E extends Comparable<E>>
     public E dequeue() {
         throwExceptionIfEmpty();
         E result = _root.getItem();
-        _root.setItem(removeLeaf().getItem());
-        sink(_root);
+        if (_size == 1) {
+            _root = null;
+        } else {
+            _root.setItem(removeLeaf());
+            sink(_root);
+        }
         _size--;
         return result;
     }
@@ -66,7 +70,11 @@ public final class PriorityQueueModel<E extends Comparable<E>>
     @Override
     public void enqueue(E item) {
         _size++;
-        surface(createLeaf(item));
+        if (_size == 1) {
+            _root = _factory.createBinaryNode(item);
+        } else {
+            surface(createLeaf(item));
+        }
     }
 
     @Override
@@ -90,38 +98,53 @@ public final class PriorityQueueModel<E extends Comparable<E>>
         return new BinaryNodeModelIterator<E>(_root, _factory);
     }
 
-    private BinaryNodeModel<E> createLeaf(E item) {
-        BinaryNodeModel<E> result = _factory.createBinaryNode(item);
-        BinaryNodeModel<E> node = _root;
+    private BinaryNodeModel<E> getLeafParent() {
+        BinaryNodeModel<E> result = _root;
         int items = 0;
-        int maxItems = 1;
-        while (items < _size) {
-            items = items + maxItems;
-            maxItems *= 2;
+        int level = 0;
+        int levelMaxItems = 1;
+        while ((items + levelMaxItems) < _size) {
+            items += levelMaxItems;
+            levelMaxItems *= 2;
+            level++;
         }
-        maxItems *= 2;
-        items = _size - items;
-        while (maxItems > 0) {
-            if (items > (maxItems / 2)) {
-                node = node.getRightChild();
-                items = items - maxItems / 2;
+        int itemsOnLevel = _size - items;
+        while (level > 1) {
+            levelMaxItems /= 2;
+            if (itemsOnLevel > levelMaxItems) {
+                result = result.getRightChild();
+                itemsOnLevel -= levelMaxItems;
             } else {
-                node = node.getLeftChild();
+                result = result.getLeftChild();
             }
-            maxItems = maxItems / 2;
+            level--;
         }
-        
-        if (node.getLeftChild() == null) {
-            node.setLeftChild(result);
-        } else {
-            node.setRightChild(result);
-        }
-        result.setParent(node);
         return result;
     }
 
-    private BinaryNodeModel<E> removeLeaf() {
-        throw new UnsupportedOperationException();
+    private BinaryNodeModel<E> createLeaf(E item) {
+        BinaryNodeModel<E> result = _factory.createBinaryNode(item);
+        BinaryNodeModel<E> parent = getLeafParent();
+        if (parent.getLeftChild() == null) {
+            parent.setLeftChild(result);
+        } else {
+            parent.setRightChild(result);
+        }
+        result.setParent(parent);
+        return result;
+    }
+
+    private E removeLeaf() {
+        BinaryNodeModel<E> parent = getLeafParent();
+        BinaryNodeModel<E> result = parent.getRightChild();
+        if (result == null) {
+            result = parent.getLeftChild();
+            parent.setLeftChild(null);
+        } else {
+            parent.setRightChild(null);
+        }
+        result.setParent(null);
+        return result.getItem();
     }
 
     private void sink(BinaryNodeModel<E> node) {
@@ -147,7 +170,7 @@ public final class PriorityQueueModel<E extends Comparable<E>>
                     sink(leftChild);
                 } else {
                     rightChild.setItem(item);
-                    node.setItem(leftItem);
+                    node.setItem(rightItem);
                     sink(rightChild);
                 }
             }
