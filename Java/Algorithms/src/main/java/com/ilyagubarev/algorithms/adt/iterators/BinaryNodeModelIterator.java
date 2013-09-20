@@ -18,7 +18,10 @@ package com.ilyagubarev.algorithms.adt.iterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import com.ilyagubarev.algorithms.adt.collections.StackModel;
+import com.ilyagubarev.algorithms.adt.collections.stacks.SimpleStackModel;
 import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 
 /**
  * Iterator over binary tree node models.
@@ -26,11 +29,13 @@ import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
  * @see BinaryNodeModel
  * @see Iterator
  *
- * @version 1.03, 19 September 2013
+ * @version 1.04, 20 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
 public final class BinaryNodeModelIterator<E> implements Iterator<E> {
+
+    private final StackModel<BinaryNodeModel<E>> _passed;
 
     private BinaryNodeModel<E> _next;
 
@@ -38,14 +43,15 @@ public final class BinaryNodeModelIterator<E> implements Iterator<E> {
      * Creates a new instance of BinaryNodeModelIterator.
      *
      * @param root a root node.
+     * @param factory a node model factory.
      *
      * @see BinaryNodeModel
+     * @see NodeModelFactory
      */
-    public BinaryNodeModelIterator(BinaryNodeModel<E> root) {
-        _next = root;
-        while (_next.getLeftChild() != null) {
-            _next = _next.getLeftChild();
-        }
+    public BinaryNodeModelIterator(BinaryNodeModel<E> root,
+            NodeModelFactory factory) {
+        _passed = new SimpleStackModel<BinaryNodeModel<E>>(factory);
+        passToLeft(root);
     }
 
     @Override
@@ -58,11 +64,28 @@ public final class BinaryNodeModelIterator<E> implements Iterator<E> {
         if (!hasNext()) {
             throw new NoSuchElementException("iterator has no next element");
         }
-        throw new UnsupportedOperationException();
+        E result = _next.getItem();
+        BinaryNodeModel<E> node = _next.getRightChild();
+        if (node != null) {
+            passToLeft(node);            
+        } else {
+            while (!(_passed.isEmpty() || _next == _passed.pop())) {
+                _next = _next.getParent();
+            }
+        }
+        return result;
     }
 
     @Override
     public void remove() {
         throw new UnsupportedOperationException("removal is not supported");
+    }
+
+    private void passToLeft(BinaryNodeModel<E> node) {
+        while (node != null) {
+            _passed.push(node);
+            node = node.getLeftChild();
+        }
+        _next = _passed.pop();
     }
 }

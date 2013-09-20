@@ -87,7 +87,7 @@ public final class PriorityQueueModel<E> implements QueueModel<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new BinaryNodeModelIterator<E>(_root);
+        return new BinaryNodeModelIterator<E>(_root, _factory);
     }
 
     private void throwExceptionIfEmpty() {
