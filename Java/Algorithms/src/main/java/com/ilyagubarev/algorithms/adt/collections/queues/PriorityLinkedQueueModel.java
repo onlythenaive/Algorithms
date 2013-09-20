@@ -15,6 +15,7 @@
  */
 package com.ilyagubarev.algorithms.adt.collections.queues;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
 import com.ilyagubarev.algorithms.adt.collections.QueueModel;
@@ -31,9 +32,9 @@ import com.ilyagubarev.algorithms.adt.iterators.BinaryNodeModelIterator;
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class PriorityLinkedQueueModel<E extends Comparable<E>>
-        implements QueueModel<E> {
+public final class PriorityLinkedQueueModel<E> implements QueueModel<E> {
 
+    private final Comparator<E> _comparator;
     private final NodeModelFactory _factory;
 
     private int _size;
@@ -42,14 +43,17 @@ public final class PriorityLinkedQueueModel<E extends Comparable<E>>
     /**
      * Creates a new instance of PriorityLinkedQueueModel.
      *
+     * @param comparator an item comparator.
      * @param factory node model provider.
      *
      * @see NodeModelFactory
      */
-    public PriorityLinkedQueueModel(NodeModelFactory factory) {
+    public PriorityLinkedQueueModel(Comparator<E> comparator,
+            NodeModelFactory factory) {
         if (factory == null) {
             throw new NullPointerException("item nodes provider is null");
         }
+        _comparator = comparator;
         _factory = factory;
     }
 
@@ -122,6 +126,14 @@ public final class PriorityLinkedQueueModel<E extends Comparable<E>>
         return result;
     }
 
+    private int compare(E first, E second) {
+        if (_comparator != null) {
+            return _comparator.compare(first, second);
+        } else {
+            return ((Comparable) first).compareTo(second);
+        }
+    }
+
     private BinaryNodeModel<E> createLeaf(E item) {
         BinaryNodeModel<E> result = _factory.createBinaryNode(item);
         BinaryNodeModel<E> parent = getLeafParent();
@@ -156,15 +168,17 @@ public final class PriorityLinkedQueueModel<E extends Comparable<E>>
         E leftItem = leftChild.getItem();
         BinaryNodeModel<E> rightChild = node.getRightChild();
         if (rightChild == null) {
-            if (leftItem.compareTo(item) > 0) {
+            if (compare(leftItem, item) > 0) {
                 leftChild.setItem(item);
                 node.setItem(leftItem);
                 sink(leftChild);
             }
         } else {
             E rightItem = rightChild.getItem();
-            if (leftItem.compareTo(item) > 0 || rightItem.compareTo(item) > 0) {
-                if (leftItem.compareTo(rightItem) > 0) {
+            boolean leftIsGreater = compare(leftItem, item) > 0;
+            boolean rightIsGreater = compare(rightItem, item) > 0;
+            if (leftIsGreater || rightIsGreater) {
+                if (leftIsGreater) {
                     leftChild.setItem(item);
                     node.setItem(leftItem);
                     sink(leftChild);
@@ -182,7 +196,7 @@ public final class PriorityLinkedQueueModel<E extends Comparable<E>>
         if (parent != null) {
             E item  = node.getItem();
             E parentItem = parent.getItem();
-            if (item.compareTo(parentItem) > 0) {
+            if (compare(item, parentItem) > 0) {
                 parent.setItem(item);
                 node.setItem(parentItem);
                 surface(parent);
