@@ -17,7 +17,6 @@ package com.ilyagubarev.algorithms.adt.collections.stacks;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.collections.StackModel;
 import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;

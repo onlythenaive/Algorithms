@@ -17,7 +17,6 @@ package com.ilyagubarev.algorithms.adt.collections.queues;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.collections.QueueModel;
 import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
@@ -42,7 +41,7 @@ public final class PriorityQueueModel<E> implements QueueModel<E> {
     /**
      * Creates a new instance of PriorityQueueModel.
      *
-     * @param factory 
+     * @param factory node model provider.
      *
      * @see NodeModelFactory
      */

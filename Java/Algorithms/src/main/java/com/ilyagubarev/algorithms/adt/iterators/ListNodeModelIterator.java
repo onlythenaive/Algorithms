@@ -21,7 +21,7 @@ import java.util.NoSuchElementException;
 import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 
 /**
- * Linked list node model iterator.
+ * Iterator over linked list node models.
  *
  * @see Iterator
  * @see ListNodeModel

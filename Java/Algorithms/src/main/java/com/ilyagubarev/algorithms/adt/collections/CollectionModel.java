@@ -20,7 +20,7 @@ package com.ilyagubarev.algorithms.adt.collections;
  *
  * @see Iterable
  *
- * @version 1.03, 19 September 2013
+ * @version 1.02, 19 September 2013
  * @since 03 September 2013
  * @author Ilya Gubarev
  */

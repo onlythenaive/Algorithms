@@ -20,7 +20,7 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
 /**
  * Array model for sorting / searching methods analysis.
  *
- * @version 1.04, 19 September 2013
+ * @version 1.03, 19 September 2013
  * @since 12 September 2013
  * @author Ilya Gubarev
  */
@@ -76,6 +76,6 @@ public final class ArrayModel<E> {
         for (E item : _data) {
             content.append(String.format("%s, ", item));
         }
-        return String.format("[array model: {%s}]", content);
+        return String.format("[array : {%s}]", content);
     }
 }

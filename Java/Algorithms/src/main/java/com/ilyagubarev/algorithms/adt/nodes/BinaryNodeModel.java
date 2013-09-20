@@ -46,9 +46,9 @@ public final class BinaryNodeModel<E> {
     }
 
     /**
-     * Gets a contained item.
+     * Gets a stored item.
      *
-     * @return contained item.
+     * @return a stored item.
      */
     public E getItem() {
         _reads.increment();
@@ -87,9 +87,9 @@ public final class BinaryNodeModel<E> {
     }
 
     /**
-     * Sets a new contained item.
+     * Sets a new stored item.
      *
-     * @param item an item to be contained.
+     * @param item an item to be stored.
      */
     public void setItem(E item) {
         _writes.increment();
@@ -128,6 +128,6 @@ public final class BinaryNodeModel<E> {
 
     @Override
     public String toString() {
-        return String.format("[binary node model: %s]", _item);
+        return String.format("[binary node: %s]", _item);
     }
 }

@@ -19,7 +19,7 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
 
 /**
- * Array model provider.
+ * Array model factory.
  *
  * @version 1.02, 19 September 2013
  * @since 13 September 2013

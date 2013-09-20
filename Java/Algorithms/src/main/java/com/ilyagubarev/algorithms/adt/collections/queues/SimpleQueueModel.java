@@ -17,7 +17,6 @@ package com.ilyagubarev.algorithms.adt.collections.queues;
 
 import java.util.Iterator;
 
-import com.ilyagubarev.algorithms.adt.ItemModel;
 import com.ilyagubarev.algorithms.adt.collections.QueueModel;
 import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
@@ -26,7 +25,7 @@ import com.ilyagubarev.algorithms.adt.iterators.ListNodeModelIterator;
 /**
  * Simple ItemModel implementation based on list node models.
  *
- * @see ItemQueue
+ * @see QueueModel
  *
  * @version 1.02, 19 September 2013
  * @since 15 September 2013
@@ -43,7 +42,7 @@ public final class SimpleQueueModel<E> implements QueueModel<E> {
     /**
      * Creates a new instance of SimpleQueueModel.
      *
-     * @param factory 
+     * @param factory node model provider.
      *
      * @see NodeModelFactory
      */

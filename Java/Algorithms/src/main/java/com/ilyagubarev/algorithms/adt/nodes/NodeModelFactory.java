@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt.nodes;
 import com.ilyagubarev.algorithms.adt.utils.Counter;
 
 /**
- * Node model provider.
+ * Node model factory.
  *
  * @version 1.05, 19 September 2013
  * @since 13 September 2013
@@ -70,7 +70,7 @@ public final class NodeModelFactory {
     /**
      * Creates a new instance of BinaryNodeModel.
      *
-     * @param item an item to be contained in the node.
+     * @param item an item to be stored in the node.
      * @return a new instance of BinaryNodeModel.
      *
      * @see BinaryNodeModel
@@ -84,7 +84,7 @@ public final class NodeModelFactory {
     /**
      * Creates a new instance of ItemListNode.
      *
-     * @param item an item to be contained in the node.
+     * @param item an item to be stored in the node.
      * @return a new instance of ItemListNode.
      *
      * @see ListNodeModel

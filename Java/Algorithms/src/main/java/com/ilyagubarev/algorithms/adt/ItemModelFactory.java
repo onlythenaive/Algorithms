@@ -18,7 +18,7 @@ package com.ilyagubarev.algorithms.adt;
 import com.ilyagubarev.algorithms.adt.utils.Counter;
 
 /**
- * Item model provider.
+ * Item model factory.
  *
  * @version 1.04, 19 September 2013
  * @since 13 September 2013

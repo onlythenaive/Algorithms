@@ -20,7 +20,7 @@ package com.ilyagubarev.algorithms.adt.collections;
  *
  * @see CollectionModel
  *
- * @version 1.04, 19 September 2013
+ * @version 1.03, 19 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
@@ -30,8 +30,6 @@ public interface BagModel<E> extends CollectionModel<E> {
      * Adds a new item to the bag.
      *
      * @param item an item to be added.
-     *
-     * @see Item
      */
     void add(E item);
 }

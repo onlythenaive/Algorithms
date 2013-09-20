@@ -21,7 +21,7 @@ import java.util.NoSuchElementException;
 import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
 
 /**
- * Binary tree node model iterator.
+ * Iterator over binary tree node models.
  *
  * @see BinaryNodeModel
  * @see Iterator

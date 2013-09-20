@@ -44,9 +44,9 @@ public final class ListNodeModel<E> {
     }
 
     /**
-     * Gets a containing item.
+     * Gets a stored item.
      *
-     * @return contained item.
+     * @return a stored item.
      */
     public E getItem() {
         _reads.increment();
@@ -64,9 +64,9 @@ public final class ListNodeModel<E> {
     }
 
     /**
-     * Sets a new contained item.
+     * Sets a new stored item.
      *
-     * @param item an item to be contained.
+     * @param item an item to be stored.
      */
     public void setItem(E item) {
         _writes.increment();
@@ -85,6 +85,6 @@ public final class ListNodeModel<E> {
 
     @Override
     public String toString() {
-        return String.format("[list node model: %s]", _item);
+        return String.format("[list node: %s]", _item);
     }
 }

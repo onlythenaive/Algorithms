@@ -67,6 +67,6 @@ public final class ItemModel<E extends Comparable>
 
     @Override
     public String toString() {
-        return String.format("[item model: %s]", _data);
+        return String.format("[item: %s]", _data);
     }
 }
