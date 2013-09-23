@@ -15,95 +15,71 @@
  */
 package com.ilyagubarev.algorithms.analysis.sorting;
 
+import java.io.Serializable;
+
 /**
- * Task case for sorting method analyser.
+ * Sorting method test task specification.
  *
- * @version 1.01, 14 September 2013
+ * @see Serializable
+ *
+ * @version 1.02, 23 September 2013
  * @since 14 September 2013
  * @author Ilya Gubarev
  */
-public final class SortTask {
+public final class SortTask implements Serializable {
 
-    private final String _id;
     private final int _itemsCount;
-    private final ItemType _itemType;
     private final int _auxMemoryLimit;
     private final int _recursionLimit;
     private final int _timeLimit;
 
     /**
-     * 
+     * Creates a new instance of SortTask.
      *
-     * @param id
-     * @param itemsCount
-     * @param itemType
-     * @param auxMemoryLimit
-     * @param recursionLimit
-     * @param timeLimit 
-     *
-     * @see ItemType
+     * @param itemsCount target array size.
+     * @param auxMemoryLimit auxillary memory usage limit.
+     * @param recursionLimit recursive call depth limit.
+     * @param timeLimit time limit in milliseconds.
      */
-    public SortTask(String id, int itemsCount, ItemType itemType,
-            int auxMemoryLimit, int recursionLimit, int timeLimit) {
-        _id = id;
+    public SortTask(int itemsCount, int auxMemoryLimit, int recursionLimit,
+            int timeLimit) {
         _itemsCount = itemsCount;
-        _itemType = itemType;
         _auxMemoryLimit = auxMemoryLimit;
         _recursionLimit = recursionLimit;
         _timeLimit = timeLimit;
     }
 
     /**
-     * 
+     * Gets target array size.
      *
-     * @return 
-     */
-    public String getId() {
-        return _id;
-    }
-
-    /**
-     * 
-     *
-     * @return 
+     * @return target array size.
      */
     public int getItemsCount() {
         return _itemsCount;
     }
 
     /**
-     * 
+     * Gets auxillary memory usage limit.
      *
-     * @return 
-     *
-     * @see ItemType
-     */
-    public ItemType getItemType() {
-        return _itemType;
-    }
-
-    /**
-     * 
-     *
-     * @return 
+     * @return auxillary memory limit.
      */
     public int getAuxMemoryLimit() {
         return _auxMemoryLimit;
     }
 
     /**
-     * 
+     * Gets recursive call depth limit.
      *
-     * @return 
+     * @return recursion limit.
      */
     public int getRecursionLimit() {
         return _recursionLimit;
     }
 
     /**
-     * 
+     * Gets time limit in milliseconds.
      *
-     * @return 
+     * @return time limit.
      */
     public int getTimeLimit() {
         return _timeLimit;
