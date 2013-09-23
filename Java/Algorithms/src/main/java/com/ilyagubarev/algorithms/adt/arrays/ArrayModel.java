@@ -15,9 +15,9 @@
  */
 package com.ilyagubarev.algorithms.adt.arrays;
 
-import com.ilyagubarev.algorithms.adt.iterators.ArrayIterator;
 import java.util.Iterator;
 
+import com.ilyagubarev.algorithms.adt.iterators.ArrayIterator;
 import com.ilyagubarev.algorithms.adt.utils.Counter;
 
 /**
