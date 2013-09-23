@@ -20,7 +20,7 @@ import java.util.Iterator;
 import com.ilyagubarev.algorithms.adt.collections.StackModel;
 import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
-import com.ilyagubarev.algorithms.adt.iterators.ListNodeModelIterator;
+import com.ilyagubarev.algorithms.adt.iterators.ListNodeIterator;
 
 /**
  * Simple StackModel implementation based on list node models.
@@ -64,7 +64,7 @@ public final class SimpleStackModel<E> implements StackModel<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new ListNodeModelIterator<E>(_top);
+        return new ListNodeIterator<E>(_top);
     }
 
     @Override

@@ -24,13 +24,12 @@ import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
  * Iterator over linked list node models.
  *
  * @see Iterator
- * @see ListNodeModel
  *
  * @version 1.06, 19 September 2013
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ListNodeModelIterator<E> implements Iterator<E> {
+public final class ListNodeIterator<E> implements Iterator<E> {
 
     private ListNodeModel<E> _next;
 
@@ -41,7 +40,7 @@ public final class ListNodeModelIterator<E> implements Iterator<E> {
      *
      * @see ListNodeModel
      */
-    public ListNodeModelIterator(ListNodeModel<E> start) {
+    public ListNodeIterator(ListNodeModel<E> start) {
         _next = start;
     }
 

@@ -24,23 +24,22 @@ import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 
 /**
- * Iterator over binary tree node models.
+ * In order iterator over a tree based on binary node models.
  *
- * @see BinaryNodeModel
  * @see Iterator
  *
  * @version 1.04, 20 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class BinaryNodeModelIterator<E> implements Iterator<E> {
+public final class BinaryNodeInOrderIterator<E> implements Iterator<E> {
 
     private final StackModel<BinaryNodeModel<E>> _passed;
 
     private BinaryNodeModel<E> _next;
 
     /**
-     * Creates a new instance of BinaryNodeModelIterator.
+     * Creates a new instance of BinaryNodeInOrderIterator.
      *
      * @param root a root node.
      * @param factory a node model factory.
@@ -48,7 +47,7 @@ public final class BinaryNodeModelIterator<E> implements Iterator<E> {
      * @see BinaryNodeModel
      * @see NodeModelFactory
      */
-    public BinaryNodeModelIterator(BinaryNodeModel<E> root,
+    public BinaryNodeInOrderIterator(BinaryNodeModel<E> root,
             NodeModelFactory factory) {
         _passed = new SimpleStackModel<BinaryNodeModel<E>>(factory);
         passToLeft(root);

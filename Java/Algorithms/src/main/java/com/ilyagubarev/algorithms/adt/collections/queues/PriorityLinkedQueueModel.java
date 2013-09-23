@@ -21,7 +21,7 @@ import java.util.Iterator;
 import com.ilyagubarev.algorithms.adt.collections.QueueModel;
 import com.ilyagubarev.algorithms.adt.nodes.BinaryNodeModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
-import com.ilyagubarev.algorithms.adt.iterators.BinaryNodeModelIterator;
+import com.ilyagubarev.algorithms.adt.iterators.BinaryNodeInOrderIterator;
 
 /**
  * Priority ModelQueue implementation based on binary tree node model.
@@ -99,7 +99,7 @@ public final class PriorityLinkedQueueModel<E> implements QueueModel<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new BinaryNodeModelIterator<E>(_root, _factory);
+        return new BinaryNodeInOrderIterator<E>(_root, _factory);
     }
 
     private BinaryNodeModel<E> getLeafParent() {
