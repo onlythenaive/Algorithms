@@ -24,7 +24,7 @@ package com.ilyagubarev.algorithms.adt.collections;
  * @since 03 September 2013
  * @author Ilya Gubarev
  */
-public interface CollectionModel<E> extends Iterable<E> {
+public interface CollectionModel<T> extends Iterable<T> {
 
     /**
      * Gets current size of the collection.

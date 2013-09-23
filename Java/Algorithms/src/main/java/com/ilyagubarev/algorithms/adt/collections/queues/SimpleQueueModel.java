@@ -31,13 +31,13 @@ import com.ilyagubarev.algorithms.adt.iterators.ListNodeIterator;
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleQueueModel<E> implements QueueModel<E> {
+public final class SimpleQueueModel<T> implements QueueModel<T> {
 
     private final NodeModelFactory _factory;
 
     private int _size;
-    private ListNodeModel<E> _newest;
-    private ListNodeModel<E> _oldest;
+    private ListNodeModel<T> _newest;
+    private ListNodeModel<T> _oldest;
 
     /**
      * Creates a new instance of SimpleQueueModel.
@@ -64,17 +64,17 @@ public final class SimpleQueueModel<E> implements QueueModel<E> {
     }
 
     @Override
-    public E dequeue() {
+    public T dequeue() {
         throwExceptionIfEmpty();
-        E result = _oldest.getItem();
+        T result = _oldest.getItem();
         _oldest = _oldest.getNext();
         _size--;
         return result;
     }
 
     @Override
-    public void enqueue(E item) {
-        ListNodeModel<E> node = _factory.createListNode(item);
+    public void enqueue(T item) {
+        ListNodeModel<T> node = _factory.createListNode(item);
         if (isEmpty()) {
             _oldest = node;
         } else {
@@ -85,12 +85,12 @@ public final class SimpleQueueModel<E> implements QueueModel<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
-        return new ListNodeIterator<E>(_oldest);
+    public Iterator<T> iterator() {
+        return new ListNodeIterator<T>(_oldest);
     }
 
     @Override
-    public E poll() {
+    public T poll() {
         throwExceptionIfEmpty();
         return _oldest.getItem();
     }

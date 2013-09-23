@@ -24,17 +24,17 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ListNodeModel<E> {
+public final class ListNodeModel<T> {
 
     private final Counter _reads;
     private final Counter _writes;
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
-    private E _item;
-    private ListNodeModel<E> _next;
+    private T _item;
+    private ListNodeModel<T> _next;
 
-    ListNodeModel(E item, Counter reads, Counter writes, Counter linkReads,
+    ListNodeModel(T item, Counter reads, Counter writes, Counter linkReads,
             Counter linkWrites) {
         _item = item;
         _reads = reads;
@@ -48,7 +48,7 @@ public final class ListNodeModel<E> {
      *
      * @return a stored item.
      */
-    public E getItem() {
+    public T getItem() {
         _reads.increment();
         return _item;
     }
@@ -58,7 +58,7 @@ public final class ListNodeModel<E> {
      *
      * @return the next node.
      */
-    public ListNodeModel<E> getNext() {
+    public ListNodeModel<T> getNext() {
         _linkReads.increment();
         return _next;
     }
@@ -68,7 +68,7 @@ public final class ListNodeModel<E> {
      *
      * @param item an item to be stored.
      */
-    public void setItem(E item) {
+    public void setItem(T item) {
         _writes.increment();
         _item = item;
     }
@@ -78,7 +78,7 @@ public final class ListNodeModel<E> {
      *
      * @param node the next node.
      */
-    public void setNext(ListNodeModel<E> node) {
+    public void setNext(ListNodeModel<T> node) {
         _linkWrites.increment();
         _next = node;
     }

@@ -24,12 +24,12 @@ package com.ilyagubarev.algorithms.adt.collections;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface BagModel<E> extends CollectionModel<E> {
+public interface BagModel<T> extends CollectionModel<T> {
     
     /**
      * Adds a new item to the bag.
      *
      * @param item an item to be added.
      */
-    void add(E item);
+    void add(T item);
 }

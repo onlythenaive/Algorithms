@@ -24,19 +24,19 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class BinaryNodeModel<E> {
+public final class BinaryNodeModel<T> {
 
     private final Counter _reads;
     private final Counter _writes;
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
-    private E _item;
-    private BinaryNodeModel<E> _leftChild;
-    private BinaryNodeModel<E> _rightChild;
-    private BinaryNodeModel<E> _parent;
+    private T _item;
+    private BinaryNodeModel<T> _leftChild;
+    private BinaryNodeModel<T> _rightChild;
+    private BinaryNodeModel<T> _parent;
 
-    BinaryNodeModel(E item, Counter reads, Counter writes,
+    BinaryNodeModel(T item, Counter reads, Counter writes,
             Counter linkReads, Counter linkWrites) {
         _item = item;
         _reads = reads;
@@ -50,7 +50,7 @@ public final class BinaryNodeModel<E> {
      *
      * @return a stored item.
      */
-    public E getItem() {
+    public T getItem() {
         _reads.increment();
         return _item;
     }
@@ -60,7 +60,7 @@ public final class BinaryNodeModel<E> {
      *
      * @return the left child node.
      */
-    public BinaryNodeModel<E> getLeftChild() {
+    public BinaryNodeModel<T> getLeftChild() {
         _linkReads.increment();
         return _leftChild;
     }
@@ -71,7 +71,7 @@ public final class BinaryNodeModel<E> {
      * @return the right child node.
      */
 
-    public BinaryNodeModel<E> getRightChild() {
+    public BinaryNodeModel<T> getRightChild() {
         _linkReads.increment();
         return _rightChild;
     }
@@ -81,7 +81,7 @@ public final class BinaryNodeModel<E> {
      *
      * @return the parent node.
      */
-    public BinaryNodeModel<E> getParent() {
+    public BinaryNodeModel<T> getParent() {
         _linkReads.increment();
         return _parent;
     }
@@ -91,7 +91,7 @@ public final class BinaryNodeModel<E> {
      *
      * @param item an item to be stored.
      */
-    public void setItem(E item) {
+    public void setItem(T item) {
         _writes.increment();
         _item = item;
     }
@@ -101,7 +101,7 @@ public final class BinaryNodeModel<E> {
      *
      * @param node the left child node.
      */
-    public void setLeftChild(BinaryNodeModel<E> node) {
+    public void setLeftChild(BinaryNodeModel<T> node) {
         _linkWrites.increment();
         _leftChild = node;
     }
@@ -111,7 +111,7 @@ public final class BinaryNodeModel<E> {
      *
      * @param node the right child node.
      */
-    public void setRightChild(BinaryNodeModel<E> node) {
+    public void setRightChild(BinaryNodeModel<T> node) {
         _linkWrites.increment();
         _rightChild = node;
     }
@@ -121,7 +121,7 @@ public final class BinaryNodeModel<E> {
      *
      * @param node the parent node.
      */
-    public void setParent(BinaryNodeModel<E> node) {
+    public void setParent(BinaryNodeModel<T> node) {
         _linkWrites.increment();
         _parent = node;
     }

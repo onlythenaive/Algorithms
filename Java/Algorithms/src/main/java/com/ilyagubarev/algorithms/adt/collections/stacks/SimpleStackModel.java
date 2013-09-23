@@ -31,12 +31,12 @@ import com.ilyagubarev.algorithms.adt.iterators.ListNodeIterator;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleStackModel<E> implements StackModel<E> {
+public final class SimpleStackModel<T> implements StackModel<T> {
 
     private final NodeModelFactory _factory;
 
     private int _size;
-    private ListNodeModel<E> _top;
+    private ListNodeModel<T> _top;
 
     /**
      * Creates a new instance of SimpleStackModel.
@@ -63,28 +63,28 @@ public final class SimpleStackModel<E> implements StackModel<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
-        return new ListNodeIterator<E>(_top);
+    public Iterator<T> iterator() {
+        return new ListNodeIterator<T>(_top);
     }
 
     @Override
-    public E peek() {
+    public T peek() {
         throwExceptionIfEmpty();
         return _top.getItem();
     }
 
     @Override
-    public E pop() {
+    public T pop() {
         throwExceptionIfEmpty();
-        ListNodeModel<E> buffer = _top;
+        ListNodeModel<T> buffer = _top;
         _top = _top.getNext();
         --_size;
         return buffer.getItem();
     }
 
     @Override
-    public void push(E item) {
-        ListNodeModel<E> buffer = _top;
+    public void push(T item) {
+        ListNodeModel<T> buffer = _top;
         _top = _factory.createListNode(item);
         _top.setNext(buffer);
         ++_size;

@@ -31,9 +31,9 @@ import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class SimpleBagModel<E> implements BagModel<E> {
+public final class SimpleBagModel<T> implements BagModel<T> {
 
-    private final StackModel<E> _stack;
+    private final StackModel<T> _stack;
 
     /**
      * Creates a new instance of SimpleBagModel.
@@ -43,7 +43,7 @@ public final class SimpleBagModel<E> implements BagModel<E> {
      * @see NodeModelFactory
      */
     public SimpleBagModel(NodeModelFactory factory) {
-        _stack = new SimpleStackModel<E>(factory);
+        _stack = new SimpleStackModel<T>(factory);
     }
 
     @Override
@@ -57,12 +57,12 @@ public final class SimpleBagModel<E> implements BagModel<E> {
     }
 
     @Override
-    public void add(E item) {
+    public void add(T item) {
         _stack.push(item);
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public Iterator<T> iterator() {
         return _stack.iterator();
     }
 }

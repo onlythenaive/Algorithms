@@ -26,15 +26,15 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemModel<E extends Comparable>
-        implements Comparable<ItemModel<E>> {
+public final class ItemModel<T extends Comparable>
+        implements Comparable<ItemModel<T>> {
 
-    private final E _data;
+    private final T _data;
     private final Counter _comparisons;
     private final Counter _hashings;    
     private final Counter _tests;
 
-    ItemModel(E data, Counter comparisons, Counter hashings, Counter tests) {
+    ItemModel(T data, Counter comparisons, Counter hashings, Counter tests) {
         _data = data;
         _comparisons = comparisons;
         _hashings = hashings;
@@ -42,7 +42,7 @@ public final class ItemModel<E extends Comparable>
     }
 
     @Override
-    public int compareTo(ItemModel<E> item) {
+    public int compareTo(ItemModel<T> item) {
         _comparisons.increment();
         return _data.compareTo(item._data);
     }

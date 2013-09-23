@@ -29,9 +29,9 @@ import com.ilyagubarev.algorithms.adt.nodes.ListNodeModel;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public final class ListNodeIterator<E> implements Iterator<E> {
+public final class ListNodeIterator<T> implements Iterator<T> {
 
-    private ListNodeModel<E> _next;
+    private ListNodeModel<T> _next;
 
     /**
      * Creates a new instance of ListNodeModelIterator.
@@ -40,7 +40,7 @@ public final class ListNodeIterator<E> implements Iterator<E> {
      *
      * @see ListNodeModel
      */
-    public ListNodeIterator(ListNodeModel<E> start) {
+    public ListNodeIterator(ListNodeModel<T> start) {
         _next = start;
     }
 
@@ -50,9 +50,9 @@ public final class ListNodeIterator<E> implements Iterator<E> {
     }
 
     @Override
-    public E next() {
+    public T next() {
         if (hasNext()) {
-            E result = _next.getItem();
+            T result = _next.getItem();
             _next = _next.getNext();
             return result;
         } else {

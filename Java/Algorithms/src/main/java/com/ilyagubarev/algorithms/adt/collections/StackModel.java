@@ -24,7 +24,7 @@ package com.ilyagubarev.algorithms.adt.collections;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface StackModel<E> extends CollectionModel<E> {
+public interface StackModel<T> extends CollectionModel<T> {
 
     /**
      * Gets the latest pushed item.
@@ -32,7 +32,7 @@ public interface StackModel<E> extends CollectionModel<E> {
      * @return the latest pushed item.
      * @throws IllegalStateException if the stack is empty.
      */    
-    E peek();
+    T peek();
 
     /**
      * Gets the latest pushed item and removes it from the stack.
@@ -40,12 +40,12 @@ public interface StackModel<E> extends CollectionModel<E> {
      * @return the latest pushed item.
      * @throws IllegalStateException if the stack is empty.
      */    
-    E pop();
+    T pop();
 
     /**
      * Pushes down a new item into the stack.
      *
      * @param item an item to be pushed to the stack.
      */
-    void push(E item);
+    void push(T item);
 }

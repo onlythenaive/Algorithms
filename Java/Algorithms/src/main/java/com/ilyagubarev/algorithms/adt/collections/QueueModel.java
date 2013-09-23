@@ -24,7 +24,7 @@ package com.ilyagubarev.algorithms.adt.collections;
  * @since 02 September 2013
  * @author Ilya Gubarev
  */
-public interface QueueModel<E> extends CollectionModel<E> {
+public interface QueueModel<T> extends CollectionModel<T> {
 
     /**
      * Gets the oldest item in the queue.
@@ -32,14 +32,14 @@ public interface QueueModel<E> extends CollectionModel<E> {
      * @return the oldest item.
      * @throws IllegalStateException if the queue is empty.
      */
-    E dequeue();
+    T dequeue();
 
     /**
      * Adds a new item to the queue.
      *
      * @param item an item to be enqueued.
      */
-    void enqueue(E item);
+    void enqueue(T item);
 
     /**
      * Gets the oldest item and removes from the queue.
@@ -47,5 +47,5 @@ public interface QueueModel<E> extends CollectionModel<E> {
      * @return the oldest item.
      * @throws IllegalStateException if the queue is empty.
      */
-    E poll();
+    T poll();
 }

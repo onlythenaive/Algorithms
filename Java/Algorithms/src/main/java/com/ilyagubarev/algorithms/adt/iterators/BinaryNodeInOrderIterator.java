@@ -32,11 +32,11 @@ import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class BinaryNodeInOrderIterator<E> implements Iterator<E> {
+public final class BinaryNodeInOrderIterator<T> implements Iterator<T> {
 
-    private final StackModel<BinaryNodeModel<E>> _passed;
+    private final StackModel<BinaryNodeModel<T>> _passed;
 
-    private BinaryNodeModel<E> _next;
+    private BinaryNodeModel<T> _next;
 
     /**
      * Creates a new instance of BinaryNodeInOrderIterator.
@@ -47,9 +47,9 @@ public final class BinaryNodeInOrderIterator<E> implements Iterator<E> {
      * @see BinaryNodeModel
      * @see NodeModelFactory
      */
-    public BinaryNodeInOrderIterator(BinaryNodeModel<E> root,
+    public BinaryNodeInOrderIterator(BinaryNodeModel<T> root,
             NodeModelFactory factory) {
-        _passed = new SimpleStackModel<BinaryNodeModel<E>>(factory);
+        _passed = new SimpleStackModel<BinaryNodeModel<T>>(factory);
         passToLeft(root);
     }
 
@@ -59,12 +59,12 @@ public final class BinaryNodeInOrderIterator<E> implements Iterator<E> {
     }
 
     @Override
-    public E next() {
+    public T next() {
         if (!hasNext()) {
             throw new NoSuchElementException("iterator has no next element");
         }
-        E result = _next.getItem();
-        BinaryNodeModel<E> node = _next.getRightChild();
+        T result = _next.getItem();
+        BinaryNodeModel<T> node = _next.getRightChild();
         if (node != null) {
             passToLeft(node);            
         } else {
@@ -80,7 +80,7 @@ public final class BinaryNodeInOrderIterator<E> implements Iterator<E> {
         throw new UnsupportedOperationException("removal is not supported");
     }
 
-    private void passToLeft(BinaryNodeModel<E> node) {
+    private void passToLeft(BinaryNodeModel<T> node) {
         while (node != null) {
             _passed.push(node);
             node = node.getLeftChild();
