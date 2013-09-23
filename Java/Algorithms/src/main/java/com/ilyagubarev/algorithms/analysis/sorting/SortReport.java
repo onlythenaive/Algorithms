@@ -23,15 +23,24 @@ import java.io.Serializable;
  */
 public final class SortReport implements Serializable {
 
-    static SortReport create(SortReportId id, SortTask task) {
-        throw new UnsupportedOperationException();
-    }
+    private TestStatus _status;
+    private String _statusInfo;
+    private SortTask _task;
+    private String _sorterInfo;
+    private long _comparisons;
+    private long _hashings;
+    private long _tests;
+    private long _reads;
+    private long _writes;
+    private long _auxArrayAllocations;
+    private long _auxArrayAllocationMax;
+    private long _auxArrayAllocationTotal;
+    private long _auxReads;
+    private long _auxWrites;
+    private long _recursionMax;
+    private long _time;
 
-    private final SortReportId _id;
-    private final SortTask _task;
-
-    private SortReport(SortReportId id, SortTask task) {
-        _id = id;
-        _task = task;
+    private SortReport() {
+        
     }
 }
