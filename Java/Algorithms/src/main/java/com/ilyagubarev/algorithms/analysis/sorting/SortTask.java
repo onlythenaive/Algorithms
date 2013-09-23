@@ -22,7 +22,7 @@ package com.ilyagubarev.algorithms.analysis.sorting;
  * @since 14 September 2013
  * @author Ilya Gubarev
  */
-public final class SortAnalysisCase {
+public final class SortTask {
 
     private final String _id;
     private final int _itemsCount;
@@ -43,7 +43,7 @@ public final class SortAnalysisCase {
      *
      * @see ItemType
      */
-    public SortAnalysisCase(String id, int itemsCount, ItemType itemType,
+    public SortTask(String id, int itemsCount, ItemType itemType,
             int auxMemoryLimit, int recursionLimit, int timeLimit) {
         _id = id;
         _itemsCount = itemsCount;
