@@ -15,23 +15,28 @@
  */
 package com.ilyagubarev.algorithms.adt.arrays;
 
+import com.ilyagubarev.algorithms.adt.iterators.ArrayIterator;
+import java.util.Iterator;
+
 import com.ilyagubarev.algorithms.adt.utils.Counter;
 
 /**
  * Array model for sorting / searching methods analysis.
  *
- * @version 1.03, 19 September 2013
+ * @see Iterable
+ *
+ * @version 1.04, 23 September 2013
  * @since 12 September 2013
  * @author Ilya Gubarev
  */
-public final class ArrayModel<E> {
+public final class ArrayModel<T> implements Iterable<T> {
 
-    private final E[] _data;
+    private final T[] _data;
     private final Counter _reads;
     private final Counter _writes;
 
     ArrayModel(int size, Counter reads, Counter writes) {
-        _data = (E[]) new Object[size];
+        _data = (T[]) new Object[size];
         _reads = reads;
         _writes = writes;
     }
@@ -52,8 +57,8 @@ public final class ArrayModel<E> {
      * @return array item.
      * @throws RuntimeException if specified index is illegal.
      */
-    public E read(int index) {
-        E result = _data[index];
+    public T read(int index) {
+        T result = _data[index];
         _reads.increment();
         return result;
     }
@@ -65,15 +70,20 @@ public final class ArrayModel<E> {
      * @param item an item to be set.
      * @throws RuntimeException if specified index is illegal.
      */
-    public void write(int index, E item) {
+    public void write(int index, T item) {
         _data[index] = item;
         _writes.increment();
     }
 
     @Override
+    public Iterator<T> iterator() {
+        return new ArrayIterator<T>(this);
+    }
+
+    @Override
     public String toString() {
         StringBuilder content = new StringBuilder();
-        for (E item : _data) {
+        for (T item : _data) {
             content.append(String.format("%s, ", item));
         }
         return String.format("[array : {%s}]", content);
