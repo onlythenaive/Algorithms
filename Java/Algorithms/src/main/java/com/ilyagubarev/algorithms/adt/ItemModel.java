@@ -15,7 +15,6 @@
  */
 package com.ilyagubarev.algorithms.adt;
 
-import com.ilyagubarev.algorithms.adt.utils.Blocker;
 import com.ilyagubarev.algorithms.adt.utils.Counter;
 
 /**
@@ -23,22 +22,20 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
  *
  * @see Comparable
  *
- * @version 1.04, 19 September 2013
+ * @version 1.05, 24 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
-public final class ItemModel<T extends Comparable>
+public final class ItemModel<T extends Comparable> extends Model
         implements Comparable<ItemModel<T>> {
 
     private final T _data;
-    private final Blocker _blocker;
     private final Counter _comparisons;
     private final Counter _hashings;    
     private final Counter _tests;
 
     ItemModel(T data, Counter comparisons, Counter hashings, Counter tests) {
         _data = data;
-        _blocker = new Blocker();
         _comparisons = comparisons;
         _hashings = hashings;
         _tests = tests;
@@ -46,12 +43,14 @@ public final class ItemModel<T extends Comparable>
 
     @Override
     public int compareTo(ItemModel<T> item) {
+        throwExceptionIfDestructed();
         _comparisons.increment();
         return _data.compareTo(item._data);
     }
 
     @Override
     public boolean equals(Object object) {
+        throwExceptionIfDestructed();
         _tests.increment();
         if (object == null) {
             return false;
@@ -64,22 +63,19 @@ public final class ItemModel<T extends Comparable>
 
     @Override
     public int hashCode() {
+        throwExceptionIfDestructed();
         _hashings.increment();
         return _data.hashCode();
     }
 
     @Override
     public String toString() {
+        throwExceptionIfDestructed();
         return String.format("[item: %s]", _data);
     }
 
-    boolean free() {
-        return _blocker.activate();
-    }
-
-    private void throwExceptionIfBlocked()  {
-        if (_blocker.isActive()) {
-            throw new IllegalStateException("item is garbaged");
-        }
+    @Override
+    protected int getMemoryAllocation() {
+        return 1;
     }
 }

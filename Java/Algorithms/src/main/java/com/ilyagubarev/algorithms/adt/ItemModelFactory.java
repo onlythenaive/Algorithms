@@ -16,17 +16,18 @@
 package com.ilyagubarev.algorithms.adt;
 
 import com.ilyagubarev.algorithms.adt.utils.Counter;
+import com.ilyagubarev.algorithms.adt.utils.Registry;
 
 /**
  * Item model factory.
  *
- * @version 1.04, 19 September 2013
+ * @version 1.04, 24 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
 public final class ItemModelFactory {
 
-    private final Counter _creations;
+    private final Registry _allocations;
     private final Counter _comparisons;
     private final Counter _hashings;
     private final Counter _tests;
@@ -34,17 +35,18 @@ public final class ItemModelFactory {
     /**
      * Creates a new instance of ItemModelFactory.
      *
-     * @param creations a counter of item model creations.
+     * @param allocations a registry of memory allocations.
      * @param comparisons a counter of item model comparisons.
      * @param hashings a counter of item model hashings.
      * @param tests a counter of item model equality tests.
      *
      * @see Counter
+     * @see Registry
      */
-    public ItemModelFactory(Counter creations, Counter comparisons,
+    public ItemModelFactory(Registry allocations, Counter comparisons,
             Counter hashings, Counter tests) {
-        if (creations == null) {
-            throw new NullPointerException("creations counter is null");
+        if (allocations == null) {
+            throw new NullPointerException("allocations registry is null");
         }
         if (comparisons == null) {
             throw new NullPointerException("comparisons counter is null");
@@ -55,7 +57,7 @@ public final class ItemModelFactory {
         if (tests == null) {
             throw new NullPointerException("tests counter is null");
         }
-        _creations = creations;
+        _allocations = allocations;
         _comparisons = comparisons;
         _hashings = hashings;
         _tests = tests;
@@ -71,10 +73,12 @@ public final class ItemModelFactory {
      * @see ItemModel
      */
     public <T extends Comparable> ItemModel<T> create(T source) {
+        ItemModel<T> result;
         if (source == null) {
             throw new NullPointerException("source is null");
         }
-        _creations.increment();
-        return new ItemModel(source, _comparisons, _hashings, _tests);
+        result = new ItemModel(source, _comparisons, _hashings, _tests);
+        _allocations.register(result.getMemoryAllocation());
+        return result;
     }
 }
