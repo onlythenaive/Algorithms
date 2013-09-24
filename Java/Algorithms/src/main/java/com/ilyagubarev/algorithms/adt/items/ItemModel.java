@@ -22,6 +22,7 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
  * Item model to be used in various tests and analyses.
  *
  * @see Comparable
+ * @see Model
  *
  * @version 1.05, 24 September 2013
  * @since 13 September 2013

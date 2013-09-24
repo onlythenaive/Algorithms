@@ -81,4 +81,15 @@ public final class ItemModelFactory {
         _allocations.register(result.getMemoryAllocation());
         return result;
     }
+
+    /**
+     * Marks specified item as desctructed.
+     *
+     * @param array an item to be marked as destructed.
+     *
+     * @see ItemModel
+     */
+    public void desctruct(ItemModel item) {
+        _allocations.register(-item.getMemoryAllocation());
+    }
 }
