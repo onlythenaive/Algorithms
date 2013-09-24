@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ilyagubarev.algorithms.adt;
+package com.ilyagubarev.algorithms.adt.items;
 
+import com.ilyagubarev.algorithms.adt.Model;
 import com.ilyagubarev.algorithms.adt.utils.Counter;
 
 /**
