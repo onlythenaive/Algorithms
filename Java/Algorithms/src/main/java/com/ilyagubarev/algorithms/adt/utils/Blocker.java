@@ -45,7 +45,9 @@ public final class Blocker {
     /**
      * Activates the blocker.
      */
-    public void activate() {
+    public boolean activate() {
+        boolean result = _active != true;
         _active = true;
+        return result;
     }
 }
