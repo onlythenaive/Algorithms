@@ -21,7 +21,7 @@ import com.ilyagubarev.algorithms.adt.utils.Registry;
 /**
  * Array model factory.
  *
- * @version 1.02, 19 September 2013
+ * @version 1.03, 24 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
@@ -34,7 +34,7 @@ public final class ArrayModelFactory {
     /**
      * Creates a new instance of ArrayModelFactory.
      *
-     * @param allocations a registry of array model allocations.
+     * @param allocations a registry of memory allocations.
      * @param reads a counter of array read operations.
      * @param writes a counter of array write operations.
      *
@@ -67,10 +67,23 @@ public final class ArrayModelFactory {
      * @see ArrayModel
      */
     public <T> ArrayModel<T> create(int size) {
+        ArrayModel<T> result;
         if (size < 0) {
             throw new IllegalArgumentException("array size is negative");
         }
-        _allocations.register(size);
-        return new ArrayModel<T>(size, _reads, _writes);
+        result = new ArrayModel<T>(size, _reads, _writes);
+        _allocations.register(result.getMemoryAllocation());
+        return result;
+    }
+
+    /**
+     * Marks specified array as desctructed.
+     *
+     * @param array an array to be marked as destructed.
+     *
+     * @see ArrayModel
+     */
+    public void desctruct(ArrayModel array) {
+        _allocations.register(-array.getMemoryAllocation());
     }
 }

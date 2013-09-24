@@ -17,6 +17,7 @@ package com.ilyagubarev.algorithms.adt.arrays;
 
 import java.util.Iterator;
 
+import com.ilyagubarev.algorithms.adt.Model;
 import com.ilyagubarev.algorithms.adt.iterators.ArrayIterator;
 import com.ilyagubarev.algorithms.adt.utils.Counter;
 
@@ -24,12 +25,13 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
  * Array model for sorting / searching methods analysis.
  *
  * @see Iterable
+ * @see Model
  *
- * @version 1.04, 23 September 2013
+ * @version 1.05, 24 September 2013
  * @since 12 September 2013
  * @author Ilya Gubarev
  */
-public final class ArrayModel<T> implements Iterable<T> {
+public final class ArrayModel<T> extends Model implements Iterable<T> {
 
     private final T[] _data;
     private final Counter _reads;
@@ -47,6 +49,7 @@ public final class ArrayModel<T> implements Iterable<T> {
      * @return array size.
      */
     public int getSize() {
+        throwExceptionIfDestructed();
         return _data.length;
     }
 
@@ -58,6 +61,7 @@ public final class ArrayModel<T> implements Iterable<T> {
      * @throws RuntimeException if specified index is illegal.
      */
     public T read(int index) {
+        throwExceptionIfDestructed();
         T result = _data[index];
         _reads.increment();
         return result;
@@ -71,21 +75,29 @@ public final class ArrayModel<T> implements Iterable<T> {
      * @throws RuntimeException if specified index is illegal.
      */
     public void write(int index, T item) {
+        throwExceptionIfDestructed();
         _data[index] = item;
         _writes.increment();
     }
 
     @Override
     public Iterator<T> iterator() {
+        throwExceptionIfDestructed();
         return new ArrayIterator<T>(this);
     }
 
     @Override
     public String toString() {
+        throwExceptionIfDestructed();
         StringBuilder content = new StringBuilder();
         for (T item : _data) {
             content.append(String.format("%s, ", item));
         }
         return String.format("[array : {%s}]", content);
+    }
+
+    @Override
+    protected int getMemoryAllocation() {
+        return _data.length;
     }
 }
