@@ -20,39 +20,26 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
 /**
  * Binary tree node model.
  *
- * @version 1.03, 19 September 2013
+ * @see NodeModel
+ *
+ * @version 1.04, 24 September 2013
  * @since 15 September 2013
  * @author Ilya Gubarev
  */
-public final class BinaryNodeModel<T> {
+public final class BinaryNodeModel<T> extends NodeModel<T> {
 
-    private final Counter _reads;
-    private final Counter _writes;
     private final Counter _linkReads;
     private final Counter _linkWrites;
 
-    private T _item;
     private BinaryNodeModel<T> _leftChild;
     private BinaryNodeModel<T> _rightChild;
     private BinaryNodeModel<T> _parent;
 
     BinaryNodeModel(T item, Counter reads, Counter writes,
             Counter linkReads, Counter linkWrites) {
-        _item = item;
-        _reads = reads;
-        _writes = writes;
+        super(item, reads, writes);
         _linkReads = linkReads;
         _linkWrites = linkWrites;
-    }
-
-    /**
-     * Gets a stored item.
-     *
-     * @return a stored item.
-     */
-    public T getItem() {
-        _reads.increment();
-        return _item;
     }
 
     /**
@@ -61,6 +48,7 @@ public final class BinaryNodeModel<T> {
      * @return the left child node.
      */
     public BinaryNodeModel<T> getLeftChild() {
+        throwExceptionIfDestructed();
         _linkReads.increment();
         return _leftChild;
     }
@@ -72,6 +60,7 @@ public final class BinaryNodeModel<T> {
      */
 
     public BinaryNodeModel<T> getRightChild() {
+        throwExceptionIfDestructed();
         _linkReads.increment();
         return _rightChild;
     }
@@ -82,18 +71,9 @@ public final class BinaryNodeModel<T> {
      * @return the parent node.
      */
     public BinaryNodeModel<T> getParent() {
+        throwExceptionIfDestructed();
         _linkReads.increment();
         return _parent;
-    }
-
-    /**
-     * Sets a new stored item.
-     *
-     * @param item an item to be stored.
-     */
-    public void setItem(T item) {
-        _writes.increment();
-        _item = item;
     }
 
     /**
@@ -102,6 +82,7 @@ public final class BinaryNodeModel<T> {
      * @param node the left child node.
      */
     public void setLeftChild(BinaryNodeModel<T> node) {
+        throwExceptionIfDestructed();
         _linkWrites.increment();
         _leftChild = node;
     }
@@ -112,6 +93,7 @@ public final class BinaryNodeModel<T> {
      * @param node the right child node.
      */
     public void setRightChild(BinaryNodeModel<T> node) {
+        throwExceptionIfDestructed();
         _linkWrites.increment();
         _rightChild = node;
     }
@@ -122,12 +104,19 @@ public final class BinaryNodeModel<T> {
      * @param node the parent node.
      */
     public void setParent(BinaryNodeModel<T> node) {
+        throwExceptionIfDestructed();
         _linkWrites.increment();
         _parent = node;
     }
 
     @Override
     public String toString() {
-        return String.format("[binary node: %s]", _item);
+        throwExceptionIfDestructed();
+        return String.format("[binary node: %s]", getItem());
+    }
+
+    @Override
+    protected int getMemoryAllocation() {
+        return 4;
     }
 }

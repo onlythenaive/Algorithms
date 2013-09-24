@@ -21,7 +21,7 @@ import com.ilyagubarev.algorithms.adt.utils.Registry;
 /**
  * Node model factory.
  *
- * @version 1.05, 19 September 2013
+ * @version 1.06, 24 September 2013
  * @since 13 September 2013
  * @author Ilya Gubarev
  */
@@ -48,7 +48,7 @@ public final class NodeModelFactory {
     public NodeModelFactory(Registry allocations, Counter reads, Counter writes,
             Counter linkReads, Counter linkWrites) {
         if (allocations == null) {
-            throw new NullPointerException("creations counter is null");
+            throw new NullPointerException("allocation registry is null");
         }   
         if (reads == null) {
             throw new NullPointerException("reads counter is null");            
@@ -78,9 +78,10 @@ public final class NodeModelFactory {
      * @see BinaryNodeModel
      */
     public <T> BinaryNodeModel<T> createBinaryNode(T item) {
-        _allocations.register(4);
-        return new BinaryNodeModel<T>(item, _reads, _writes, _linkReads,
-                _linkWrites);
+        BinaryNodeModel<T> result = new BinaryNodeModel<T>(item, _reads,
+                _writes, _linkReads, _linkWrites);
+        _allocations.register(result.getMemoryAllocation());
+        return result;
     }
 
     /**
@@ -92,30 +93,20 @@ public final class NodeModelFactory {
      * @see ListNodeModel
      */
     public <T> ListNodeModel<T> createListNode(T item) {
-        _allocations.register(2);
-        return new ListNodeModel<T>(item, _reads, _writes, _linkReads,
-                _linkWrites);
+        ListNodeModel<T> result = new ListNodeModel<T>(item, _reads, _writes,
+                _linkReads, _linkWrites);
+        _allocations.register(result.getMemoryAllocation());
+        return result;
     }
 
     /**
-     * 
+     * Marks specified node as desctructed.
      *
-     * @param node 
+     * @param node a node to be marked as destructed.
      *
-     * @see BinaryNodeModel
+     * @see NodeModel
      */
-    public void free(BinaryNodeModel node) {
-        _allocations.register(-4);
-    }
-
-    /**
-     * 
-     *
-     * @param node 
-     *
-     * @see ListNodeModel
-     */
-    public void free(ListNodeModel node) {
-        _allocations.register(-2);
+    public void desctruct(NodeModel node) {
+        _allocations.register(-node.getMemoryAllocation());
     }
 }
