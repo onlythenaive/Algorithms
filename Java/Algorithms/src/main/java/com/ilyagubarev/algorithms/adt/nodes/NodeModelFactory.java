@@ -16,6 +16,7 @@
 package com.ilyagubarev.algorithms.adt.nodes;
 
 import com.ilyagubarev.algorithms.adt.utils.Counter;
+import com.ilyagubarev.algorithms.adt.utils.Registry;
 
 /**
  * Node model factory.
@@ -26,7 +27,7 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
  */
 public final class NodeModelFactory {
 
-    private final Counter _creations;
+    private final Registry _allocations;
     private final Counter _reads;
     private final Counter _writes;
     private final Counter _linkReads;
@@ -35,17 +36,18 @@ public final class NodeModelFactory {
     /**
      * Creates a new instance of NodeModelFactory.
      *
-     * @param creations a counter of node model creations.
+     * @param allocations a counter of memory allocations.
      * @param reads a counter of node model read operations.
      * @param writes a counter of node model write operations.
      * @param linkReads a counter of node model link read operations.
      * @param linkWrites a counter of node model link write operations.
      *
      * @see Counter
+     * @see Registry
      */
-    public NodeModelFactory(Counter creations, Counter reads, Counter writes,
+    public NodeModelFactory(Registry allocations, Counter reads, Counter writes,
             Counter linkReads, Counter linkWrites) {
-        if (creations == null) {
+        if (allocations == null) {
             throw new NullPointerException("creations counter is null");
         }   
         if (reads == null) {
@@ -60,7 +62,7 @@ public final class NodeModelFactory {
         if (linkWrites == null) {
             throw new NullPointerException("link writes counter is null");            
         }        
-        _creations = creations;
+        _allocations = allocations;
         _reads = reads;
         _writes = writes;
         _linkReads = linkReads;
@@ -76,7 +78,7 @@ public final class NodeModelFactory {
      * @see BinaryNodeModel
      */
     public <T> BinaryNodeModel<T> createBinaryNode(T item) {
-        _creations.increment();
+        _allocations.register(4);
         return new BinaryNodeModel<T>(item, _reads, _writes, _linkReads,
                 _linkWrites);
     }
@@ -90,8 +92,30 @@ public final class NodeModelFactory {
      * @see ListNodeModel
      */
     public <T> ListNodeModel<T> createListNode(T item) {
-        _creations.increment();
+        _allocations.register(2);
         return new ListNodeModel<T>(item, _reads, _writes, _linkReads,
                 _linkWrites);
+    }
+
+    /**
+     * 
+     *
+     * @param node 
+     *
+     * @see BinaryNodeModel
+     */
+    public void free(BinaryNodeModel node) {
+        _allocations.register(-4);
+    }
+
+    /**
+     * 
+     *
+     * @param node 
+     *
+     * @see ListNodeModel
+     */
+    public void free(ListNodeModel node) {
+        _allocations.register(-2);
     }
 }
