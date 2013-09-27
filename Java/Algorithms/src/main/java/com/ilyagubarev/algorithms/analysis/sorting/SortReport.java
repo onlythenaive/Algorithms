@@ -18,27 +18,28 @@ package com.ilyagubarev.algorithms.analysis.sorting;
 import java.io.Serializable;
 
 /**
+ * 
  *
  * @author gubarev
  */
 public final class SortReport implements Serializable {
 
-    private TestStatus _status;
-    private String _statusInfo;
-    private SortTask _task;
-    private String _sorterInfo;
-    private long _comparisons;
-    private long _hashings;
-    private long _tests;
-    private long _reads;
-    private long _writes;
-    private long _auxArrayAllocations;
-    private long _auxArrayAllocationMax;
-    private long _auxArrayAllocationTotal;
-    private long _auxReads;
-    private long _auxWrites;
-    private long _recursionMax;
-    private long _time;
+    private final TestStatus _status;
+    private final String _statusInfo;
+    private final SortTask _task;
+    private final String _sorterInfo;
+    private final long _comparisons;
+    private final long _hashings;
+    private final long _tests;
+    private final long _reads;
+    private final long _writes;
+    private final long _auxAllocations;
+    private final long _auxAllocationPeak;
+    private final long _auxAllocationTotal;
+    private final long _auxReads;
+    private final long _auxWrites;
+    private final long _recursionPeak;
+    private final long _time;
 
     private SortReport() {
         
