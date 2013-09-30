@@ -22,30 +22,43 @@ import java.io.Serializable;
  *
  * @see Serializable
  *
- * @version 1.02, 23 September 2013
+ * @version 1.03, 30 September 2013
  * @since 14 September 2013
  * @author Ilya Gubarev
  */
 public final class SortTask implements Serializable {
 
     private final int _itemsCount;
-    private final int _auxMemoryLimit;
-    private final int _recursionLimit;
-    private final int _timeLimit;
+    private final Integer _auxMemoryLimit;
+    private final Integer _recursionLimit;
+    private final Integer _timeLimit;
 
     /**
      * Creates a new instance of SortTask.
      *
-     * @param itemsCount target array size.
-     * @param auxMemoryLimit auxillary memory usage limit.
-     * @param recursionLimit recursive call depth limit.
-     * @param timeLimit time limit in milliseconds.
+     * @param itemsCount size of an array to be sorted.
+     * @param auxMemoryLimit auxillary memory usage limit (optional).
+     * @param recursionDepthLimit recursive call stack size limit (optional).
+     * @param timeLimit time limit in milliseconds (optional).
+     * @throws IllegalArgumentException if specified limits are illegal.
      */
-    public SortTask(int itemsCount, int auxMemoryLimit, int recursionLimit,
-            int timeLimit) {
+    public SortTask(int itemsCount, Integer auxMemoryLimit,
+            Integer recursionDepthLimit, Integer timeLimit) {
+        if (itemsCount < 0) {
+            throw new IllegalArgumentException("items count is negative");
+        }
+        if (auxMemoryLimit != null && auxMemoryLimit < 0) {
+            throw new IllegalArgumentException("aux memory limit is negative");
+        }
+        if (recursionDepthLimit != null && recursionDepthLimit < 0) {
+            throw new IllegalArgumentException("recursion limit is negative");
+        }
+        if (timeLimit != null && timeLimit < 0) {
+            throw new IllegalArgumentException("time limit is negative");
+        }
         _itemsCount = itemsCount;
         _auxMemoryLimit = auxMemoryLimit;
-        _recursionLimit = recursionLimit;
+        _recursionLimit = recursionDepthLimit;
         _timeLimit = timeLimit;
     }
 
@@ -63,7 +76,7 @@ public final class SortTask implements Serializable {
      *
      * @return auxillary memory limit.
      */
-    public int getAuxMemoryLimit() {
+    public Integer getAuxMemoryLimit() {
         return _auxMemoryLimit;
     }
 
@@ -72,7 +85,7 @@ public final class SortTask implements Serializable {
      *
      * @return recursion limit.
      */
-    public int getRecursionLimit() {
+    public Integer getRecursionLimit() {
         return _recursionLimit;
     }
 
@@ -81,7 +94,7 @@ public final class SortTask implements Serializable {
      *
      * @return time limit.
      */
-    public int getTimeLimit() {
+    public Integer getTimeLimit() {
         return _timeLimit;
     }
 
