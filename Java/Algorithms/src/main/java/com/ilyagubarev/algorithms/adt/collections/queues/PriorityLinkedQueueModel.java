@@ -62,7 +62,7 @@ public final class PriorityLinkedQueueModel<T> implements QueueModel<T> {
         throwExceptionIfEmpty();
         T result = _root.getItem();
         if (_size == 1) {
-            _root = null;
+            _factory.desctruct(_root);
         } else {
             _root.setItem(removeLeaf());
             sink(_root);
@@ -148,15 +148,16 @@ public final class PriorityLinkedQueueModel<T> implements QueueModel<T> {
 
     private T removeLeaf() {
         BinaryNodeModel<T> parent = getLeafParent();
-        BinaryNodeModel<T> result = parent.getRightChild();
-        if (result == null) {
-            result = parent.getLeftChild();
+        BinaryNodeModel<T> child = parent.getRightChild();
+        if (child == null) {
+            child = parent.getLeftChild();
             parent.setLeftChild(null);
         } else {
             parent.setRightChild(null);
         }
-        result.setParent(null);
-        return result.getItem();
+        T result = child.getItem();
+        _factory.desctruct(child);
+        return result;
     }
 
     private void sink(BinaryNodeModel<T> node) {

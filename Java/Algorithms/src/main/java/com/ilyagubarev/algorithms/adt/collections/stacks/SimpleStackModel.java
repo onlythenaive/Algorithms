@@ -77,8 +77,9 @@ public final class SimpleStackModel<T> implements StackModel<T> {
     public T pop() {
         throwExceptionIfEmpty();
         ListNodeModel<T> buffer = _top;
+        _factory.desctruct(_top);
         _top = _top.getNext();
-        --_size;
+        _size--;
         return buffer.getItem();
     }
 
@@ -87,7 +88,7 @@ public final class SimpleStackModel<T> implements StackModel<T> {
         ListNodeModel<T> buffer = _top;
         _top = _factory.createListNode(item);
         _top.setNext(buffer);
-        ++_size;
+        _size++;
     }
 
     private void throwExceptionIfEmpty() {

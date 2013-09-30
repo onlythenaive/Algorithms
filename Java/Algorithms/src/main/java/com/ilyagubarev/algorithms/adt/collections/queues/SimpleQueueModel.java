@@ -67,6 +67,7 @@ public final class SimpleQueueModel<T> implements QueueModel<T> {
     public T dequeue() {
         throwExceptionIfEmpty();
         T result = _oldest.getItem();
+        _factory.desctruct(_oldest);
         _oldest = _oldest.getNext();
         _size--;
         return result;
