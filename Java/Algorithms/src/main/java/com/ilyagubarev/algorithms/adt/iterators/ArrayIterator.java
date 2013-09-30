@@ -15,16 +15,17 @@
  */
 package com.ilyagubarev.algorithms.adt.iterators;
 
-import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 
 /**
  * Iterator over an array model.
  *
  * @see Iterator
  *
- * @version 1.01, 23 September 2013
+ * @version 1.01, 30 September 2013
  * @since 23 September 2013
  * @author Ilya Gubarev
  */

@@ -27,7 +27,7 @@ import com.ilyagubarev.algorithms.adt.utils.Counter;
  * @see Iterable
  * @see Model
  *
- * @version 1.05, 24 September 2013
+ * @version 1.05, 30 September 2013
  * @since 12 September 2013
  * @author Ilya Gubarev
  */
@@ -90,7 +90,7 @@ public final class ArrayModel<T> extends Model implements Iterable<T> {
     public String toString() {
         throwExceptionIfDestructed();
         StringBuilder content = new StringBuilder();
-        for (T item : _data) {
+        for (T item : this) {
             content.append(String.format("%s, ", item));
         }
         return String.format("[array : {%s}]", content);
