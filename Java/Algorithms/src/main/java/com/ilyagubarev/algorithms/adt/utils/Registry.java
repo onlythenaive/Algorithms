@@ -35,14 +35,14 @@ public final class Registry {
          * @param value a new registered value.
          * @param count registered values count.
          * @param total total value.
-         * @param maxTotal maximal total value.
-         * @param minTotal minimal total value.
+         * @param max maximal total value.
+         * @param min minimal total value.
          * @param averageValue average registered value.
          * @param maxValue maximal registered value.
          * @param minValue minimal registered value.
          */
-        void execute(double value, long count, double total, double maxTotal,
-                double minTotal, double averageValue, double maxValue,
+        void execute(double value, long count, double total, double max,
+                double min, double averageValue, double maxValue,
                 double minValue);
     }
 
