@@ -44,6 +44,7 @@ public final class TopDownMergeSorter extends MergeSorter {
             Registry recursions) {
         ArrayModel aux = arrayFactory.create(target.getSize());
         sort(target, comparator, 0, target.getSize() - 1, aux, recursions);
+        arrayFactory.desctruct(aux);
     }
 
     private <T> void sort(ArrayModel<T> target, Comparator<T> comparator,

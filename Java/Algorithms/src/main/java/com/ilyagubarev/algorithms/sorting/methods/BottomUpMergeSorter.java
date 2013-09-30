@@ -49,5 +49,6 @@ public final class BottomUpMergeSorter extends MergeSorter {
                 merge(target, comparator, i, i + sub - 1, rightLast - 1, aux);
             }
         }
+        arrayFactory.desctruct(aux);
     }
 }
