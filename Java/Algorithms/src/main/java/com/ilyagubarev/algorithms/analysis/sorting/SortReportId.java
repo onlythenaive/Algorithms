@@ -93,9 +93,4 @@ public final class SortReportId implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return String.format("[sort report for %s on %s]", _sorterId, _taskId);
-    }
 }
