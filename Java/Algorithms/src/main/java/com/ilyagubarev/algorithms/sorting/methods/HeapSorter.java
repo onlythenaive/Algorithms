@@ -35,7 +35,7 @@ public final class HeapSorter extends AbstractSorter {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException();
+        return "Heap based method";
     }
 
     @Override

@@ -34,8 +34,9 @@ import com.ilyagubarev.algorithms.utils.CommonHelper;
  */
 public final class PriorityQueueModel<T> implements QueueModel<T> {
 
-    private static final int INITIAL_CAPACITY = 16;
+    public static final int DEFAULT_INITIAL_CAPACITY = 16;
 
+    private final int _initialCapacity;
     private final Comparator<T> _comparator;
     private final ArrayModelFactory _factory;
 
@@ -45,16 +46,26 @@ public final class PriorityQueueModel<T> implements QueueModel<T> {
     /**
      * Creates a new instance of PriorityQueueModel.
      *
+     * @param initialCapacity queue initial capacity (null for default).
      * @param comparator item comparator (can be null if items are Comparable).
      * @param factory a factory of array models.
+     * @throws IllegalArgumentException if initial capacity is negative.
      *
      * @see ArrayModelFactory
      * @see Comparator
      */
-    public PriorityQueueModel(Comparator<T> comparator,
+    public PriorityQueueModel(Integer initialCapacity, Comparator<T> comparator,
             ArrayModelFactory factory) {
+        if (initialCapacity < 0) {
+            throw new IllegalArgumentException("initial capacity is negative");
+        }
         if (factory == null) {
             throw new NullPointerException("array model factory is null");
+        }
+        if (initialCapacity == null) {
+            _initialCapacity = DEFAULT_INITIAL_CAPACITY + 1;
+        } else {
+            _initialCapacity = initialCapacity + 1;
         }
         _comparator = comparator;
         _factory = factory;
@@ -101,16 +112,15 @@ public final class PriorityQueueModel<T> implements QueueModel<T> {
 
     private void assureRequiredSize() {
         if (_items == null) {
-            _items = _factory.create(INITIAL_CAPACITY + 1);
-        } else {
-            int size = _items.getSize() - 1;
-            if (_size > size) {
-                ArrayModel<T> items = _factory.create(size * 2 + 1);
-                for (int i = 0; i < _items.getSize(); i++) {
-                    items.write(i, _items.read(i));
-                }
-                _items = items;
+            _items = _factory.create(_initialCapacity);
+        }
+        int size = _items.getSize() - 1;
+        if (_size > size) {
+            ArrayModel<T> items = _factory.create(size * 2 + 1);
+            for (int i = 0; i < _items.getSize(); i++) {
+                items.write(i, _items.read(i));
             }
+            _items = items;
         }
     }
 
