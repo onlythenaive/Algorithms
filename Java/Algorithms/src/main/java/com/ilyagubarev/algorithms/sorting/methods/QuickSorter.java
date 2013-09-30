@@ -50,7 +50,7 @@ public final class QuickSorter extends AbstractSorter {
         if (last <= first) {
             return;
         }
-        int pivot = separate(target, comparator, 0, target.getSize() - 1);
+        int pivot = separate(target, comparator, first, last);
         registerRecursiveCall(recs);
         sort(target, comparator, first, pivot - 1, recs);
         registerRecursiveReturn(recs);
