@@ -22,7 +22,7 @@ import java.io.Serializable;
  *
  * @see Serializable
  *
- * @version 1.01, 23 September 2013
+ * @version 1.02, 30 September 2013
  * @since 23 September 2013
  * @author Ilya Gubarev
  */
@@ -69,8 +69,8 @@ public final class SortReportId implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + (_sorterId != null ? _sorterId.hashCode() : 0);
-        hash = 37 * hash + (_taskId != null ? _taskId.hashCode() : 0);
+        hash = 37 * hash + _sorterId.hashCode();
+        hash = 37 * hash + _taskId.hashCode();
         return hash;
     }
 
@@ -83,12 +83,12 @@ public final class SortReportId implements Serializable {
             return false;
         }
         SortReportId other = (SortReportId) object;
-        String sId = other._sorterId;
-        String tId = other._taskId;
-        if ((_sorterId == null) ? (sId != null) : !_sorterId.equals(sId)) {
+        String sorterId = other._sorterId;
+        String taskId = other._taskId;
+        if (!_sorterId.equals(sorterId)) {
             return false;
         }
-        if ((_taskId == null) ? (tId != null) : !_taskId.equals(tId)) {
+        if (!_taskId.equals(taskId)) {
             return false;
         }
         return true;
