@@ -28,7 +28,7 @@ import com.ilyagubarev.algorithms.utils.CommonHelper;
  *
  * @see QueueModel
  *
- * @version 1.01, 22 September 2013
+ * @version 1.02, 30 September 2013
  * @since 22 September 2013
  * @author Ilya Gubarev
  */
@@ -75,8 +75,8 @@ public final class PriorityQueueModel<T> implements QueueModel<T> {
     public T dequeue() {
         throwExceptionIfEmpty();
         T result = _items.read(1);
-        _items.write(1, _items.read(_size--));
-        _items.write(_size, null);
+        _items.write(1, _items.read(_size));
+        _items.write(_size--, null);
         sink(1);
         return result;
     }

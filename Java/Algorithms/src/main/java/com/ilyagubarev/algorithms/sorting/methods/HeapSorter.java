@@ -19,6 +19,7 @@ import java.util.Comparator;
 
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
+import com.ilyagubarev.algorithms.adt.collections.queues.PriorityQueueModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
 
@@ -27,7 +28,7 @@ import com.ilyagubarev.algorithms.adt.utils.Registry;
  *
  * @see AbstractSorter
  *
- * @version 1.01, 20 September 2013
+ * @version 1.02, 30 September 2013
  * @since 16 September 2013
  * @author Ilya Gubarev
  */
@@ -42,6 +43,13 @@ public final class HeapSorter extends AbstractSorter {
     public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions) {
-        throw new UnsupportedOperationException();
+        PriorityQueueModel<T> heap = new PriorityQueueModel<T>(target.getSize(),
+                comparator, arrayFactory);
+        for (T item : target) {
+            heap.enqueue(item);
+        }
+        for (int i = 0; i < target.getSize(); i++) {
+            target.write(i, heap.dequeue());
+        }
     }
 }
