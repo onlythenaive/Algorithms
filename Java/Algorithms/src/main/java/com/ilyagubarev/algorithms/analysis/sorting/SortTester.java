@@ -58,11 +58,13 @@ public final class SortTester {
         result = new HashMap<SortReportId, SortReport>();
         for (String taskId : tasks.keySet()) {
             final SortTask task = tasks.get(taskId);
-            Comparable[] sample = createSample(task.getItemsCount());
+            int itemsCount = task.getItemsCount();
+            Comparable[] sample = createSample(itemsCount);
+            Registry.OnRegisterHandler auxMemoryHandler = createRegistryHandler(task.getAuxMemoryLimit(), "auxillary memory limit exceeded");
+            Registry.OnRegisterHandler recursionHandler = createRegistryHandler(task.getRecursionLimit(), "recursion depth limit exceeded");
+            Stopwatch.OnCheckHandler timeHandler = createStopwatchHandler(task.getTimeLimit(), "time limit exceeded");
             for (String sorterId : sorters.keySet()) {
                 Sorter sorter = sorters.get(sorterId);
-                
-                // array model...
                 Counter comparisons = new Counter();
                 Counter hashings = new Counter();
                 Counter tests = new Counter();
@@ -76,43 +78,15 @@ public final class SortTester {
                 for (int i = 0; i < sample.length; i++) {
                     target.write(i, itemFactory.create(sample[i]));
                 }
-
-                // aux factories...
-                Registry auxAllocs = new Registry(0, new Registry.OnRegisterHandler() {
-                    public void execute(double value, long count, double total,
-                            double max, double min, double averageValue,
-                            double maxValue, double minValue) {
-                        if (max > task.getAuxMemoryLimit()) {
-                            throw new RuntimeException("auxillary memory allocation limit exceeded");
-                        }
-                    }
-                });
+                Registry auxAllocs = new Registry(0, auxMemoryHandler);
                 Counter auxReads = new Counter();
                 Counter auxWrites = new Counter();
                 ArrayModelFactory arrayFactory = new ArrayModelFactory(
                         auxAllocs, reads, writes);
                 NodeModelFactory nodeFactory = new NodeModelFactory(auxAllocs,
                         reads, writes, auxReads, auxWrites);
-                                
-                // additional...
-                Registry recursions = new Registry(0, new Registry.OnRegisterHandler() {
-                    public void execute(double value, long count, double total,
-                            double max, double min, double averageValue,
-                            double maxValue, double minValue) {
-                        if (max > task.getRecursionLimit()) {
-                            throw new RuntimeException("recursive call stack limit exceeded");
-                        }
-                    }
-                });
-                Stopwatch stopwatch = new Stopwatch(new Stopwatch.OnCheckHandler() {
-                    public void execute(boolean started, long elapsedTime) {
-                        if (elapsedTime > task.getTimeLimit()) {
-                            throw new RuntimeException("time limit exceeded");
-                        }
-                    }
-                });
-                
-                // run..
+                Registry recursions = new Registry(0, recursionHandler);
+                Stopwatch stopwatch = new Stopwatch(timeHandler);                
                 Exception exception = null;
                 try {
                     SorterSandbox.run(sorter, target, null, arrayFactory,
@@ -120,8 +94,6 @@ public final class SortTester {
                 } catch (Exception e) {
                     exception = e;
                 }
-                
-                // reporting...
                 SortReport report;
                 SortReportId id = new SortReportId(sorterId, taskId);
                 String sorterInfo = sorter.getInfo();
@@ -142,6 +114,42 @@ public final class SortTester {
                 }
                 result.put(id, report);
             }
+        }
+        return result;
+    }
+
+    private static Registry.OnRegisterHandler createRegistryHandler(
+            Integer limit, final String message) {
+        Registry.OnRegisterHandler result = null;
+        if (limit != null) {
+            final int value = limit;
+            result = new Registry.OnRegisterHandler() {
+                @Override
+                public void execute(double value, long count, double total,
+                        double max, double min, double averageValue,
+                        double maxValue, double minValue) {
+                    if (max > value) {
+                        throw new RuntimeException(message);
+                    } 
+                }
+            };
+        }
+        return result;
+    }
+
+    private static Stopwatch.OnCheckHandler createStopwatchHandler(
+            Integer limit, final String message) {
+        Stopwatch.OnCheckHandler result = null;
+        if (limit != null) {
+            final int value = limit;
+            result = new Stopwatch.OnCheckHandler() {
+                @Override
+                public void execute(boolean started, long elapsedTime) {
+                    if (elapsedTime > value) {
+                        throw new RuntimeException(message);
+                    } 
+                }
+            };
         }
         return result;
     }
