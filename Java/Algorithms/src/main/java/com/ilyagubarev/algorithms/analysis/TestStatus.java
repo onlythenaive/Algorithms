@@ -48,4 +48,9 @@ public enum TestStatus {
     public String getText() {
         return _text;
     }
+
+    @Override
+    public String toString() {
+        return _text;
+    }
 }
