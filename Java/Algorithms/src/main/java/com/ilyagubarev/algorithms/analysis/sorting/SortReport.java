@@ -41,7 +41,6 @@ public final class SortReport implements Serializable {
     private final long _writes;
     private final long _auxAllocs;
     private final long _auxAllocPeak;
-    private final long _auxAllocTotal;
     private final long _auxReads;
     private final long _auxWrites;
     private final long _recursionPeak;
@@ -61,7 +60,6 @@ public final class SortReport implements Serializable {
      * @param writes array write operations.
      * @param auxAllocs auxillary memory allocation operations.
      * @param auxAllocPeak auxillary memory allocation peak.
-     * @param auxAllocTotal auxillary memory allocation total.
      * @param auxReads auxillary memory write operations.
      * @param auxWrites auxillary memory write operations.
      * @param recursionPeak recursive call peak.
@@ -73,8 +71,7 @@ public final class SortReport implements Serializable {
     SortReport(TestStatus status, String statusInfo, SortTask task,
             String sorterInfo, long comparisons, long hashings, long tests,
             long reads, long writes, long auxAllocs, long auxAllocPeak,
-            long auxAllocTotal, long auxReads, long auxWrites,
-            long recursionPeak, long time) {
+            long auxReads, long auxWrites, long recursionPeak, long time) {
         _status = status;
         _statusInfo = statusInfo;
         _task = task;
@@ -86,7 +83,6 @@ public final class SortReport implements Serializable {
         _writes = writes;
         _auxAllocs = auxAllocs;
         _auxAllocPeak = auxAllocPeak;
-        _auxAllocTotal = auxAllocTotal;
         _auxReads = auxReads;
         _auxWrites = auxWrites;
         _recursionPeak = recursionPeak;
@@ -194,15 +190,6 @@ public final class SortReport implements Serializable {
      */
     public long getAuxAllocationPeak() {
         return _auxAllocPeak;
-    }
-
-    /**
-     * Gets auxillary memory allocation total.
-     *
-     * @return auxillary memory allocation total.
-     */
-    public long getAuxAllocationTotal() {
-        return _auxAllocTotal;
     }
 
     /**

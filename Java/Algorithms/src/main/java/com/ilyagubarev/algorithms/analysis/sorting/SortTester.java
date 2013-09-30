@@ -106,17 +106,16 @@ public final class SortTester {
                 if (exception != null) {
                     String statusInfo = exception.getLocalizedMessage();
                     report = new SortReport(TestStatus.FAILED, statusInfo, task,
-                            sorterInfo, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                            sorterInfo, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 } else {
                     report = new SortReport(TestStatus.PASSED, " ", task,
                             sorterInfo, comparisons.getValue(),
                             hashings.getValue(), tests.getValue(),
-                            reads.getValue(), writes.getValue(),
+                            reads.getValue(), writes.getValue() - sample.length,
                             auxAllocs.getValuesCount(),
-                            (long) auxAllocs.getMaxValue(),
-                            (long) auxAllocs.getTotal(),
+                            (long) auxAllocs.getMax(),
                             auxReads.getValue(), auxWrites.getValue(),
-                            (long) recursions.getMaxValue(),
+                            (long) recursions.getMax(),
                             stopwatch.getElapsedTime());
                 }
                 result.put(id, report);
