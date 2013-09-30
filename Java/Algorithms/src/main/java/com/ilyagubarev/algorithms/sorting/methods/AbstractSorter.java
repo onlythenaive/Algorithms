@@ -15,10 +15,11 @@
  */
 package com.ilyagubarev.algorithms.sorting.methods;
 
+import java.util.Comparator;
+
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
 import com.ilyagubarev.algorithms.utils.CommonHelper;
-import java.util.Comparator;
 
 /**
  * Sorting algorithm common implementation.
