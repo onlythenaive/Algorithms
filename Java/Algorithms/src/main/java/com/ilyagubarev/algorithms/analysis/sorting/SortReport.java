@@ -227,4 +227,25 @@ public final class SortReport implements Serializable {
     public long getTime() {
         return _time;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder state = new StringBuilder();
+        state.append(String.format("status: %s, ", _status));
+        state.append(String.format("short: %s, ", _statusInfo));
+        state.append(String.format("spec: %s, ", _task));
+        state.append(String.format("sorter: %s, ", _sorterInfo));
+        state.append(String.format("comparisons: %d, ", _comparisons));
+        state.append(String.format("hashings: %d, ", _hashings));
+        state.append(String.format("tests: %d, ", _tests));
+        state.append(String.format("reads: %d, ", _reads));
+        state.append(String.format("writes: %d, ", _writes));
+        state.append(String.format("aux allocations: %d, ", _auxAllocs));
+        state.append(String.format("aux allocation peak: %d, ", _auxAllocPeak));
+        state.append(String.format("aux reads: %d, ", _auxReads));
+        state.append(String.format("aux writes: %d, ", _auxWrites));
+        state.append(String.format("recursion peak: %d, ", _recursionPeak));
+        state.append(String.format("time: %d, ", _time));
+        return String.format("[sort report: {%s}]", state);
+    }
 }
