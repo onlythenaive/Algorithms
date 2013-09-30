@@ -16,21 +16,36 @@
 package com.ilyagubarev.algorithms.analysis.sorting;
 
 import java.util.Map;
+import java.util.HashMap;
+import java.util.Random;
 
+import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
+import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
+import com.ilyagubarev.algorithms.adt.items.ItemModel;
+import com.ilyagubarev.algorithms.adt.items.ItemModelFactory;
+import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
+import com.ilyagubarev.algorithms.adt.utils.Counter;
+import com.ilyagubarev.algorithms.adt.utils.Registry;
+import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
+import com.ilyagubarev.algorithms.analysis.TestStatus;
+import com.ilyagubarev.algorithms.sorting.SorterSandbox;
 import com.ilyagubarev.algorithms.sorting.methods.Sorter;
 
 /**
+ * Sorting method tester.
  *
- * @author gubarev
+ * @version 1.02, 30 September 2013
+ * @since 13 September 2013
+ * @author Ilya Gubarev
  */
 public final class SortTester {
 
     /**
-     * 
+     * Performs series of sorting method tests.
      *
-     * @param tasks
-     * @param sorters
-     * @return 
+     * @param tasks test task specifications.
+     * @param sorters sorting method implementations.
+     * @return test reports.
      *
      * @see Sorter
      * @see SortReport
@@ -39,7 +54,84 @@ public final class SortTester {
      */
     public static Map<SortReportId, SortReport> run(Map<String, SortTask> tasks,
             Map<String, Sorter> sorters) {
-        throw new UnsupportedOperationException();
+        Map<SortReportId, SortReport> result;
+        result = new HashMap<SortReportId, SortReport>();
+        for (String taskId : tasks.keySet()) {
+            SortTask task = tasks.get(taskId);
+            Comparable[] sample = createSample(task.getItemsCount());
+            for (String sorterId : sorters.keySet()) {
+                Sorter sorter = sorters.get(sorterId);
+                
+                // array model...
+                Counter comparisons = new Counter();
+                Counter hashings = new Counter();
+                Counter tests = new Counter();
+                ItemModelFactory itemFactory = new ItemModelFactory(
+                        new Registry(0), comparisons, hashings, tests);
+                Counter reads = new Counter();
+                Counter writes = new Counter();
+                ArrayModelFactory factory = new ArrayModelFactory(
+                        new Registry(0), reads, writes);
+                ArrayModel<ItemModel> target = factory.create(sample.length);
+                for (int i = 0; i < sample.length; i++) {
+                    target.write(i, itemFactory.create(sample[i]));
+                }
+
+                // aux factories...
+                Registry auxAllocs = new Registry(0);
+                Counter auxReads = new Counter();
+                Counter auxWrites = new Counter();
+                ArrayModelFactory arrayFactory = new ArrayModelFactory(
+                        auxAllocs, reads, writes);
+                NodeModelFactory nodeFactory = new NodeModelFactory(auxAllocs,
+                        reads, writes, auxReads, auxWrites);
+                                
+                // additional...
+                Registry recursions = new Registry(0);
+                Stopwatch stopwatch = new Stopwatch();
+                
+                // run..
+                Exception exception = null;
+                try {
+                    SorterSandbox.run(sorter, target, null, arrayFactory,
+                            nodeFactory, recursions, stopwatch);
+                } catch (Exception e) {
+                    exception = e;
+                }
+                
+                // reporting...
+                SortReport report;
+                SortReportId id = new SortReportId(sorterId, taskId);
+                String sorterInfo = sorter.getInfo();
+                if (exception != null) {
+                    String statusInfo = exception.getLocalizedMessage();
+                    report = new SortReport(TestStatus.FAILED, statusInfo, task,
+                            sorterInfo, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                } else {
+                    report = new SortReport(TestStatus.PASSED, " ", task,
+                            sorterInfo, comparisons.getValue(),
+                            hashings.getValue(), tests.getValue(),
+                            reads.getValue(), writes.getValue(),
+                            auxAllocs.getValuesCount(),
+                            (long) auxAllocs.getMaxValue(),
+                            (long) auxAllocs.getTotal(),
+                            auxReads.getValue(), auxWrites.getValue(),
+                            (long) recursions.getMaxValue(),
+                            stopwatch.getElapsedTime());
+                }
+                result.put(id, report);
+            }
+        }
+        return result;
+    }
+
+    private static Comparable[] createSample(int size) {
+        Comparable[] result = new Comparable[size];
+        Random random = new Random();
+        for (int i = 0; i < size; ++i) {
+            result[i] = random.nextInt();
+        }
+        return result;
     }
 
     private SortTester() {
