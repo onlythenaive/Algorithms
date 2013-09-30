@@ -84,4 +84,14 @@ public final class SortTask implements Serializable {
     public int getTimeLimit() {
         return _timeLimit;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder state = new StringBuilder();
+        state.append(String.format("items count: %s, ", _itemsCount));
+        state.append(String.format("aux memory limit: %s, ", _auxMemoryLimit));
+        state.append(String.format("recursion limit: %s, ", _recursionLimit));
+        state.append(String.format("time limit: %s", _timeLimit));
+        return String.format("[sort task: {%s}]", state);
+    }
 }
