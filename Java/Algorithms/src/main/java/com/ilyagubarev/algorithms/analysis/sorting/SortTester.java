@@ -57,7 +57,7 @@ public final class SortTester {
         Map<SortReportId, SortReport> result;
         result = new HashMap<SortReportId, SortReport>();
         for (String taskId : tasks.keySet()) {
-            SortTask task = tasks.get(taskId);
+            final SortTask task = tasks.get(taskId);
             Comparable[] sample = createSample(task.getItemsCount());
             for (String sorterId : sorters.keySet()) {
                 Sorter sorter = sorters.get(sorterId);
@@ -78,7 +78,16 @@ public final class SortTester {
                 }
 
                 // aux factories...
-                Registry auxAllocs = new Registry(0);
+                Registry auxAllocs = new Registry(0, new Registry.OnRegisterHandler() {
+                    public void execute(double value, long count, double total,
+                            double maxTotal, double minTotal,
+                            double averageValue, double maxValue,
+                            double minValue) {
+                        if (maxTotal > task.getAuxMemoryLimit()) {
+                            throw new RuntimeException("auxillary memory allocation limit exceeded");
+                        }
+                    }
+                });
                 Counter auxReads = new Counter();
                 Counter auxWrites = new Counter();
                 ArrayModelFactory arrayFactory = new ArrayModelFactory(
@@ -87,8 +96,23 @@ public final class SortTester {
                         reads, writes, auxReads, auxWrites);
                                 
                 // additional...
-                Registry recursions = new Registry(0);
-                Stopwatch stopwatch = new Stopwatch();
+                Registry recursions = new Registry(0, new Registry.OnRegisterHandler() {
+                    public void execute(double value, long count, double total,
+                            double maxTotal, double minTotal,
+                            double averageValue, double maxValue,
+                            double minValue) {
+                        if (maxTotal > task.getRecursionLimit()) {
+                            throw new RuntimeException("recursive call stack limit exceeded");
+                        }
+                    }
+                });
+                Stopwatch stopwatch = new Stopwatch(new Stopwatch.OnCheckHandler() {
+                    public void execute(boolean started, long elapsedTime) {
+                        if (elapsedTime > task.getTimeLimit()) {
+                            throw new RuntimeException("time limit exceeded");
+                        }
+                    }
+                });
                 
                 // run..
                 Exception exception = null;
