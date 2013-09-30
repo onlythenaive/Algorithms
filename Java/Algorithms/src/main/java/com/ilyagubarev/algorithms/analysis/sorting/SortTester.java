@@ -80,10 +80,9 @@ public final class SortTester {
                 // aux factories...
                 Registry auxAllocs = new Registry(0, new Registry.OnRegisterHandler() {
                     public void execute(double value, long count, double total,
-                            double maxTotal, double minTotal,
-                            double averageValue, double maxValue,
-                            double minValue) {
-                        if (maxTotal > task.getAuxMemoryLimit()) {
+                            double max, double min, double averageValue,
+                            double maxValue, double minValue) {
+                        if (max > task.getAuxMemoryLimit()) {
                             throw new RuntimeException("auxillary memory allocation limit exceeded");
                         }
                     }
@@ -98,10 +97,9 @@ public final class SortTester {
                 // additional...
                 Registry recursions = new Registry(0, new Registry.OnRegisterHandler() {
                     public void execute(double value, long count, double total,
-                            double maxTotal, double minTotal,
-                            double averageValue, double maxValue,
-                            double minValue) {
-                        if (maxTotal > task.getRecursionLimit()) {
+                            double max, double min, double averageValue,
+                            double maxValue, double minValue) {
+                        if (max > task.getRecursionLimit()) {
                             throw new RuntimeException("recursive call stack limit exceeded");
                         }
                     }
