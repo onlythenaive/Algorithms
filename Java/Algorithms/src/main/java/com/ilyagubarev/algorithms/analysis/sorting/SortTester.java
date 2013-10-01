@@ -91,6 +91,16 @@ public final class SortTester {
                 try {
                     SorterSandbox.run(sorter, target, null, arrayFactory,
                             nodeFactory, recursions, stopwatch);
+                    ItemModel item = target.read(0);
+                    ItemModel nextItem;
+                    for (int i = 1; i < target.getSize(); i++) {
+                        nextItem = target.read(i);
+                        if (nextItem.compareTo(item) < 0) {
+                            exception = new Exception("target array is not sorted");
+                            break;
+                        }
+                        item = nextItem;
+                    }
                 } catch (Exception e) {
                     exception = e;
                 }
@@ -98,14 +108,14 @@ public final class SortTester {
                 SortReportId id = new SortReportId(sorterId, taskId);
                 String sorterInfo = sorter.getInfo();
                 if (exception != null) {
-                    String statusInfo = exception.getLocalizedMessage();
+                    String statusInfo = exception.getMessage();
                     report = new SortReport(TestStatus.FAILED, statusInfo, task,
                             sorterInfo, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 } else {
-                    report = new SortReport(TestStatus.PASSED, " ", task,
+                    report = new SortReport(TestStatus.PASSED, "target array is sorted", task,
                             sorterInfo, comparisons.getValue(),
                             hashings.getValue(), tests.getValue(),
-                            reads.getValue(), writes.getValue() - sample.length,
+                            reads.getValue() - sample.length, writes.getValue() - sample.length,
                             auxAllocs.getValuesCount(),
                             (long) auxAllocs.getMax(),
                             auxReads.getValue(), auxWrites.getValue(),

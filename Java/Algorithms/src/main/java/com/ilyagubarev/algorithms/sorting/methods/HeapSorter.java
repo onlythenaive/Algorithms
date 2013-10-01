@@ -23,6 +23,7 @@ import com.ilyagubarev.algorithms.adt.collections.queues.PriorityQueueModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
 import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
+import com.ilyagubarev.algorithms.utils.CommonHelper;
 
 /**
  * Sorting algorithm implementation based on binary heap properties.
@@ -44,36 +45,53 @@ public final class HeapSorter extends AbstractSorter {
     public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions, Stopwatch stopwatch) {
-        for (int i = target.getSize() - 1; i > target.getSize() / 2; i--) {
-            surface(target, i, comparator, recursions);
-            stopwatch.check();
+        PriorityQueueModel<T> heap = new PriorityQueueModel<T>(target.getSize(),
+                comparator, arrayFactory);
+        for (T item : target) {
+            heap.enqueue(item);
+        }
+        for (int i = 0; i < target.getSize(); i++) {
+            target.write(i, heap.dequeue());
         }
     }
-
-    private <T> void surface(ArrayModel<T> target, int itemIndex,
-            Comparator<T> comparator, Registry recursions) {
-        int parent = itemIndex / 2;
-        if ((parent > 0) && (less(target, comparator, parent, itemIndex))) {
-            T buffer = target.read(itemIndex);
-            target.write(itemIndex, target.read(parent));
-            target.write(parent, buffer);
-            registerRecursiveCall(recursions);
-            surface(target, parent, comparator, recursions);
-            registerRecursiveReturn(recursions);
-        }
-    }
-}
 
 //    @Override
 //    public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
 //            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
 //            Registry recursions, Stopwatch stopwatch) {
-//        PriorityQueueModel<T> heap = new PriorityQueueModel<T>(target.getSize(),
-//                comparator, arrayFactory);
-//        for (T item : target) {
-//            heap.enqueue(item);
+//        for (int i = target.getSize() / 2; i >= 0; i--) {
+//            sink(target, i, target.getSize(), comparator, recursions);
+//            stopwatch.check();
 //        }
-//        for (int i = 0; i < target.getSize(); i++) {
-//            target.write(i, heap.dequeue());
+//        for (int i = target.getSize() - 1; i > 0; i--) {
+//            swap(target, 0, i);
+//            sink(target, 0, i, comparator, recursions);
+//            stopwatch.check();
 //        }
 //    }
+
+    private <T> void sink(ArrayModel<T> target, int itemIndex, int length,
+            Comparator<T> comparator, Registry recursions) {
+        int childIndex = itemIndex * 2 + 1;
+        if (childIndex >= length) {
+            return;
+        }
+        T child = target.read(childIndex);
+        int rightChildIndex = childIndex + 1;
+        if (rightChildIndex < length) {
+            T rightChild = target.read(rightChildIndex);
+            if (CommonHelper.compare(comparator, rightChild, child) > 0) {
+                childIndex = rightChildIndex;
+                child = rightChild;
+            }
+        }
+        T item = target.read(itemIndex);
+        if (CommonHelper.compare(comparator, item, child) < 0) {
+            target.write(itemIndex, child);
+            target.write(childIndex, item);
+            registerRecursiveCall(recursions);
+            sink(target, childIndex, length, comparator, recursions);
+            registerRecursiveReturn(recursions);
+        }
+    }
+}
