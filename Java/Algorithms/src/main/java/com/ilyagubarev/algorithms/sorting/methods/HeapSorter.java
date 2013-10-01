@@ -22,6 +22,7 @@ import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.collections.queues.PriorityQueueModel;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
+import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
 
 /**
  * Sorting algorithm implementation based on items heap.
@@ -42,7 +43,7 @@ public final class HeapSorter extends AbstractSorter {
     @Override
     public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
-            Registry recursions) {
+            Registry recursions, Stopwatch stopwatch) {
         PriorityQueueModel<T> heap = new PriorityQueueModel<T>(target.getSize(),
                 comparator, arrayFactory);
         for (T item : target) {

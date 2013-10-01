@@ -21,6 +21,7 @@ import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
+import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
 
 /**
  * Bottom-up merge method sorting algorithm implementation.
@@ -41,13 +42,14 @@ public final class BottomUpMergeSorter extends MergeSorter {
     @Override
     public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
-            Registry recursions) {
+            Registry recursions, Stopwatch stopwatch) {
         ArrayModel aux = arrayFactory.create(target.getSize());
         for (int sub = 1; sub < target.getSize(); sub += sub) {
             for (int i = 0; i < target.getSize() - sub; i += 2 * sub) {
                 int rightLast = Math.min(i + 2 * sub, target.getSize());
                 merge(target, comparator, i, i + sub - 1, rightLast - 1, aux);
             }
+            stopwatch.check();
         }
         arrayFactory.desctruct(aux);
     }

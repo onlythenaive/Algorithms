@@ -21,6 +21,7 @@ import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
+import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
 
 /**
  * Sorting algorithm implementation based on selection method.
@@ -41,13 +42,14 @@ public final class SelectionSorter extends AbstractSorter {
     @Override
     public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
-            Registry recursions) {
+            Registry recursions, Stopwatch stopwatch) {
         for (int pivot = 0; pivot < target.getSize(); ++pivot) {
             int min = pivot;
             for (int i = pivot + 1; i < target.getSize(); ++i) {
                 min = less(target, comparator, i, min) ? i : min;
             }
             swap(target, pivot, min);
+            stopwatch.check();
         }        
     }
 }

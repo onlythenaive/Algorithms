@@ -58,7 +58,8 @@ public final class SorterSandbox {
             Stopwatch stopwatch) {
         sorter.prepare(target.getSize());
         stopwatch.start();
-        sorter.sort(target, comparator, arrayFactory, nodeFactory, recursions);
+        sorter.sort(target, comparator, arrayFactory, nodeFactory,
+                recursions, stopwatch);
         stopwatch.stop();
     }
 

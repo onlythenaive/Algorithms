@@ -21,6 +21,7 @@ import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
+import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
 
 /**
  * Sorting algorithm common interface.
@@ -53,14 +54,16 @@ public interface Sorter {
      * @param arrayFactory array model factory.
      * @param nodeFactory node model factory.
      * @param recursions registry of recursive calls.
+     * @param stopwatch time consumption registry.
      *
      * @see ArrayModel
      * @see ArrayModelFactory
      * @see Comparator
      * @see NodeModelFactory
      * @see Registry
+     * @see Stopwatch
      */
     <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
-            Registry recursions);
+            Registry recursions, Stopwatch stopwatch);
 }

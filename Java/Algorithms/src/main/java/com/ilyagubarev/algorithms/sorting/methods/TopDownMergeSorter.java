@@ -21,6 +21,7 @@ import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
+import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
 
 /**
  * Top-down merge method sorting algorithm implementation.
@@ -41,25 +42,29 @@ public final class TopDownMergeSorter extends MergeSorter {
     @Override
     public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
-            Registry recursions) {
+            Registry recursions, Stopwatch stopwatch) {
         ArrayModel aux = arrayFactory.create(target.getSize());
-        sort(target, comparator, 0, target.getSize() - 1, aux, recursions);
+        sort(target, comparator, 0, target.getSize() - 1, aux, recursions,
+                stopwatch);
         arrayFactory.desctruct(aux);
     }
 
     private <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             int leftFirst, int rightLast, ArrayModel<T> aux,
-            Registry recursions) {
+            Registry recursions, Stopwatch stopwatch) {
         if (rightLast <= leftFirst) {
             return;
         }
         int leftLast = leftFirst + (rightLast - leftFirst) / 2;
         registerRecursiveCall(recursions);
-        sort(target, comparator, leftFirst, leftLast, aux, recursions);
+        sort(target, comparator, leftFirst, leftLast, aux, recursions,
+                stopwatch);
         registerRecursiveReturn(recursions);
         registerRecursiveCall(recursions);
-        sort(target, comparator, leftLast + 1, rightLast, aux, recursions);
+        sort(target, comparator, leftLast + 1, rightLast, aux, recursions,
+                stopwatch);
         registerRecursiveReturn(recursions);
         merge(target, comparator, leftFirst, leftLast, rightLast, aux);
+        stopwatch.check();
     }
 }

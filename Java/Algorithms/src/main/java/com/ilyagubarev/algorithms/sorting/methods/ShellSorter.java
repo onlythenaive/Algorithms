@@ -21,6 +21,7 @@ import com.ilyagubarev.algorithms.adt.arrays.ArrayModel;
 import com.ilyagubarev.algorithms.adt.arrays.ArrayModelFactory;
 import com.ilyagubarev.algorithms.adt.nodes.NodeModelFactory;
 import com.ilyagubarev.algorithms.adt.utils.Registry;
+import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
 import com.ilyagubarev.algorithms.sorting.utils.gapping.GapProvider;
 
 /**
@@ -60,7 +61,7 @@ public final class ShellSorter extends AbstractSorter {
     @Override
     public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
-            Registry recursions) {
+            Registry recursions, Stopwatch stopwatch) {
         while (!_provider.isEmpty()) {
             int gap = _provider.getNext();
             for (int pivot = gap; pivot < target.getSize(); ++pivot) {
@@ -68,6 +69,7 @@ public final class ShellSorter extends AbstractSorter {
                 while (i >= gap && swapIfLess(target, comparator, i, i - gap)) {
                     i = i - gap;
                 }
+                stopwatch.check();
             }
         }
     }
