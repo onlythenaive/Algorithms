@@ -25,11 +25,11 @@ import com.ilyagubarev.algorithms.adt.utils.Registry;
 import com.ilyagubarev.algorithms.adt.utils.Stopwatch;
 
 /**
- * Sorting algorithm implementation based on items heap.
+ * Sorting algorithm implementation based on binary heap properties.
  *
  * @see AbstractSorter
  *
- * @version 1.02, 30 September 2013
+ * @version 1.03, 01 October 2013
  * @since 16 September 2013
  * @author Ilya Gubarev
  */
@@ -44,13 +44,36 @@ public final class HeapSorter extends AbstractSorter {
     public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
             ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
             Registry recursions, Stopwatch stopwatch) {
-        PriorityQueueModel<T> heap = new PriorityQueueModel<T>(target.getSize(),
-                comparator, arrayFactory);
-        for (T item : target) {
-            heap.enqueue(item);
+        for (int i = target.getSize() - 1; i > target.getSize() / 2; i--) {
+            surface(target, i, comparator, recursions);
+            stopwatch.check();
         }
-        for (int i = 0; i < target.getSize(); i++) {
-            target.write(i, heap.dequeue());
+    }
+
+    private <T> void surface(ArrayModel<T> target, int itemIndex,
+            Comparator<T> comparator, Registry recursions) {
+        int parent = itemIndex / 2;
+        if ((parent > 0) && (less(target, comparator, parent, itemIndex))) {
+            T buffer = target.read(itemIndex);
+            target.write(itemIndex, target.read(parent));
+            target.write(parent, buffer);
+            registerRecursiveCall(recursions);
+            surface(target, parent, comparator, recursions);
+            registerRecursiveReturn(recursions);
         }
     }
 }
+
+//    @Override
+//    public <T> void sort(ArrayModel<T> target, Comparator<T> comparator,
+//            ArrayModelFactory arrayFactory, NodeModelFactory nodeFactory,
+//            Registry recursions, Stopwatch stopwatch) {
+//        PriorityQueueModel<T> heap = new PriorityQueueModel<T>(target.getSize(),
+//                comparator, arrayFactory);
+//        for (T item : target) {
+//            heap.enqueue(item);
+//        }
+//        for (int i = 0; i < target.getSize(); i++) {
+//            target.write(i, heap.dequeue());
+//        }
+//    }
